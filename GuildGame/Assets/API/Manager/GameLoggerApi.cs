@@ -1,6 +1,5 @@
 ﻿using System;
 using com.Halcyon.Core.Manager;
-using JetBrains.Annotations;
 
 namespace com.Halcyon.API.Manager
 {
@@ -10,7 +9,7 @@ namespace com.Halcyon.API.Manager
         {
         }
 
-        public static void Log(string message, ILogType logType = ILogType.Log, string? stackTrace = null,
+        public static void Log(string message, ILogType logType = ILogType.Log, string stackTrace = "",
             Exception? exception = null)
         {
             GameLogger.Log(message, logType, stackTrace, exception);

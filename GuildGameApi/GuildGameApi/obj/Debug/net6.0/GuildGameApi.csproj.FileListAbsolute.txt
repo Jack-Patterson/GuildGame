@@ -1,0 +1,15 @@
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\bin\Debug\net6.0\GuildGameApi.deps.json
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\bin\Debug\net6.0\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\bin\Debug\net6.0\GuildGameApi.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.AssemblyInfoInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.AssemblyInfo.cs
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.csproj.CoreCompileInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\refint\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\ref\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\bin\Debug\net6.0\UnityEngine.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\bin\Debug\net6.0\UnityEngine.xml
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.csproj.AssemblyReference.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\net6.0\GuildGameApi.csproj.CopyComplete

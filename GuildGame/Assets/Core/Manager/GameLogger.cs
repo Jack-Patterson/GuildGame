@@ -66,7 +66,7 @@ namespace com.Halcyon.Core.Manager
             Log(message, unityLogType, stackTrace, exception);
         }
 
-        internal static void Log(string message, LogType logType = LogType.Log, string? stackTrace = null, Exception? exception = null)
+        internal static void Log(string message, LogType logType = LogType.Log, string stackTrace = "", Exception? exception = null)
         {
             if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
             {
@@ -120,10 +120,10 @@ namespace com.Halcyon.Core.Manager
             File.AppendAllText(CurrentFilePath, message);
         }
 
-        private static string ConstructLogMessage(string message, string severity, string? stackTrace = null)
+        private static string ConstructLogMessage(string message, string severity, string stackTrace = "")
         {
             string currentTimeAsString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string logMessage = $"[{severity}][{currentTimeAsString}] {message}\n{(stackTrace != null && !stackTrace.Equals("") ? stackTrace : "")}";
+            string logMessage = $"[{severity}][{currentTimeAsString}] {message}\n{(!stackTrace.Equals("") ? stackTrace : "")}";
 
             return logMessage;
         }
