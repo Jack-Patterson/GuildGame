@@ -33,29 +33,30 @@ namespace com.Halcyon.Core.Modding
             {
                 Assembly assembly = Assembly.LoadFrom(path);
 
-                if (IsCSharpAssembly(assembly))
-                    continue;
+                if (!IsCSharpAssembly(assembly)) continue;
+                InitialiseAssembly(assembly);
+            }
+        }
 
-                foreach (Type type in assembly.GetTypes())
+        private static void InitialiseAssembly(Assembly assembly)
+        {
+            foreach (Type type in assembly.GetTypes())
+            {
+                if (!typeof(IMod).IsAssignableFrom(type)) continue;
+                IMod modInitScript = (IMod)Activator.CreateInstance(type);
+
+                try
                 {
-                    if (typeof(IMod).IsAssignableFrom(type))
-                    {
-                        IMod modInitScript = (IMod)Activator.CreateInstance(type);
-
-                        try
-                        {
-                            modInitScript.Initialise();
-                            GameLogger.Log($"Successfully initialised Mod {modInitScript.ModData.Name}");
-                        }
-                        catch (Exception e)
-                        {
-                            GameLogger.Log("Failed to initialise mod.", LogType.Error);
-                            GameLogger.LogException(e);
-                        }
-
-                        return;
-                    }
+                    modInitScript.Initialise();
+                    GameLogger.Log($"Successfully initialised Mod {modInitScript.ModData.Name}");
                 }
+                catch (Exception e)
+                {
+                    GameLogger.Log("Failed to initialise mod.", LogType.Error);
+                    GameLogger.LogException(e);
+                }
+
+                return;
             }
         }
 

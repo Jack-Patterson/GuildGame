@@ -6,7 +6,13 @@ namespace GuildGameTestMod;
 
 public class IntialiseClass: IMod
 {
-    public ModData ModData { get; set; }
+    private ModData _modData;
+
+    public ModData ModData
+    {
+        get => _modData;
+        set => _modData = value;
+    }
 
     public void Initialise()
     {

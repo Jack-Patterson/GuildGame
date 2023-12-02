@@ -34,11 +34,7 @@ namespace com.Halcyon.Core.Manager
             }
             
             GameLogger.Init();
-        }
-
-        private void Start()
-        {
-            ModsInitialiser.CollectAndInitialiseAllMods();
+            GameInitialiser.InitialGameStartup();
         }
 
         private void Update()
