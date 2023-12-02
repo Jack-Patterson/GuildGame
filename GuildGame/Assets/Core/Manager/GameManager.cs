@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using com.Halcyon.Core.Modding;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +9,6 @@ namespace com.Halcyon.Core.Manager
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-
-        [SerializeField] private int _testNum = 0;
         
         private void Awake()
         {
@@ -39,7 +38,7 @@ namespace com.Halcyon.Core.Manager
 
         private void Start()
         {
-            
+            ModsInitialiser.CollectAndInitialiseAllMods();
         }
 
         private void Update()

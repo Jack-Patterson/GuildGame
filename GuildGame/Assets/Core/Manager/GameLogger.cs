@@ -1,8 +1,9 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using com.Halcyon.API.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Manager
@@ -52,21 +53,13 @@ namespace com.Halcyon.Core.Manager
                     throw new ArgumentOutOfRangeException($"Argument is out of range of {nameof(logType)}. Initial Message:\n{message}");
             }
         }
-        
-        internal static void Log(string message)
+
+        internal static void LogException(Exception exception)
         {
-            Log(message, LogType.Log);
+            Log("", LogType.Exception, exception);
         }
 
-        internal static void Log(string message, ILogType logType = ILogType.Log, string? stackTrace = null,
-            Exception? exception = null)
-        {
-            LogType unityLogType = ConvertLogTypeToUnityLogType(logType);
-            
-            Log(message, unityLogType, stackTrace, exception);
-        }
-
-        internal static void Log(string message, LogType logType = LogType.Log, string stackTrace = "", Exception? exception = null)
+        internal static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
         {
             if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
             {
@@ -94,25 +87,6 @@ namespace com.Halcyon.Core.Manager
                 default:
                     throw new ArgumentOutOfRangeException($"Argument is out of range of {nameof(logType)}. Initial Message:\n{message}");
             }
-        }
-
-        private static LogType ConvertLogTypeToUnityLogType(ILogType logType)
-        {
-            switch (logType)
-            {
-                case ILogType.Log:
-                    return LogType.Log;
-                case ILogType.Assert:
-                    return LogType.Assert;
-                case ILogType.Exception:
-                    return LogType.Exception;
-                case ILogType.Error:
-                    return LogType.Error;
-                case ILogType.Warning:
-                    return LogType.Warning;
-            }
-
-            return LogType.Log;
         }
 
         private static void LogToFile(string message)

@@ -1,4 +1,4 @@
-using GuildGameApi;
+using com.Halcyon.API.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.API
@@ -8,7 +8,7 @@ namespace com.Halcyon.API
         // Start is called before the first frame update
         void Start()
         {
-            Class1.SayHello();
+            
         }
 
         // Update is called once per frame

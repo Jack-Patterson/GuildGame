@@ -14,6 +14,7 @@
     </ItemGroup>
 
 
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="PowerShell -ExecutionPolicy Bypass -File &quot;$(SolutionDir)GuildGameAPI/copyFileToAssets.ps1&quot;" />
     </Target>

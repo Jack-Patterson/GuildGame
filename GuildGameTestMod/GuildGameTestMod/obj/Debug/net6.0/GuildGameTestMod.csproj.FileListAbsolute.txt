@@ -1,0 +1,17 @@
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\GuildGameTestMod.deps.json
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\GuildGameTestMod.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\GuildGameTestMod.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\UnityEngine.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\GuildGameApi.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\net6.0\UnityEngine.xml
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.csproj.AssemblyReference.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.AssemblyInfoInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.AssemblyInfo.cs
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.csproj.CoreCompileInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.csproj.CopyComplete
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\refint\GuildGameTestMod.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\GuildGameTestMod.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\net6.0\ref\GuildGameTestMod.dll
