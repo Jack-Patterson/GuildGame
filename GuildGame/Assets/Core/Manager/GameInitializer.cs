@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using com.Halcyon.API.Core;
 using com.Halcyon.Core.Modding;
+using com.Halcyon.Core.Services.Serialization;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Manager
@@ -14,8 +16,10 @@ namespace com.Halcyon.Core.Manager
             GameLogger.Log("Beginning initial game startup.");
 
             ValidateAndCreateFolders();
-            ModsInitialiser.CollectAndInitialiseAllMods();
+            ModsInitializer.CollectAndInitialiseAllMods();
             HandleCommandLineArguments();
+            
+            GameState.GameParameters = new GameParameters(new JsonDataService());
         }
 
         private static void HandleCommandLineArguments()

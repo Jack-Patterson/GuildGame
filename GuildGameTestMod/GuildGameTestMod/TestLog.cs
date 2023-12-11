@@ -1,4 +1,4 @@
-﻿using com.Halcyon.API.Manager;
+﻿using com.Halcyon.API.Core.Logger;
 
 namespace GuildGameTestMod;
 

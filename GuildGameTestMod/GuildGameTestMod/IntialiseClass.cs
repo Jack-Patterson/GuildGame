@@ -1,5 +1,5 @@
-﻿using com.Halcyon.API.Manager;
-using com.Halcyon.API.Modding;
+﻿using com.Halcyon.API.Core.Logger;
+using com.Halcyon.API.Core.Modding;
 using UnityEngine;
 
 namespace GuildGameTestMod;

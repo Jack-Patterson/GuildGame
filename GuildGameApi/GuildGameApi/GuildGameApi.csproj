@@ -13,9 +13,7 @@
         </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Services\"/>
-    </ItemGroup>
+
 
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">

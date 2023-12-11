@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace com.Halcyon.Core.Modding
 {
-    public static class ModsInitialiser
+    public static class ModsInitializer
     {
         internal static void CollectAndInitialiseAllMods()
         {

@@ -20,7 +20,6 @@ namespace com.Halcyon.Core.Manager
             DontDestroyOnLoad(gameObject);
             
             
-            
             GameInitializer.InitialGameStartup();
         }
 
