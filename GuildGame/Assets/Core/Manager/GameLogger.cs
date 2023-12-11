@@ -14,6 +14,11 @@ namespace com.Halcyon.Core.Manager
 
         static GameLogger()
         {
+            if (!Directory.Exists(Constants.LogsFolderPath))
+            {
+                GameInitializer.CreateFolder(Constants.LogsFolderPath);
+            }
+            
             Application.logMessageReceived += LogToFile;
             
             int logFileCounter = UpdateLogFileCounter();

@@ -1,4 +1,4 @@
-﻿namespace com.Halcyon.API.Modding;
+﻿namespace com.Halcyon.API.Core.Modding;
 
 public interface IMod
 {

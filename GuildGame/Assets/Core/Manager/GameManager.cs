@@ -1,8 +1,4 @@
-using System;
-using System.IO;
-using com.Halcyon.Core.Modding;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace com.Halcyon.Core.Manager
 {
@@ -23,42 +19,23 @@ namespace com.Halcyon.Core.Manager
 
             DontDestroyOnLoad(gameObject);
             
-            if (!Directory.Exists(Constants.ModsFolderPath))
-            {
-                CreateFolder(Constants.ModsFolderPath);
-            }
             
-            if (!Directory.Exists(Constants.LogsFolderPath))
-            {
-                CreateFolder(Constants.LogsFolderPath);
-            }
             
-            GameLogger.Init();
-            GameInitialiser.InitialGameStartup();
+            GameInitializer.InitialGameStartup();
         }
 
         private void Update()
         {
-            if (Input.anyKey)
-            {
-                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
-                SceneManager.LoadScene(nextSceneIndex);
-            }
+            // if (Input.anyKey)
+            // {
+            //     int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            //     int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
+            //     SceneManager.LoadScene(nextSceneIndex);
+            // }
             
             // print(_testNum);
         }
 
-        private void CreateFolder(string path)
-        {
-            try
-            {
-                Directory.CreateDirectory(path);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error creating folder {path}: {e.Message}");
-            }
-        }
+        
     }
 }

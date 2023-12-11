@@ -8,15 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="UnityEngine">
-        <HintPath>..\..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.23f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
-      </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.23f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Services\"/>
     </ItemGroup>
 
 
-
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="PowerShell -ExecutionPolicy Bypass -File &quot;$(SolutionDir)GuildGameAPI/copyFileToAssets.ps1&quot;" />
+        <Exec Command="PowerShell -ExecutionPolicy Bypass -File &quot;$(SolutionDir)GuildGameAPI/copyFileToAssets.ps1&quot;"/>
     </Target>
 
 </Project>

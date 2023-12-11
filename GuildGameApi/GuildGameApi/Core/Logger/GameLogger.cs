@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.API.Manager;
+namespace com.Halcyon.API.Core.Logger;
 
-public static class GameLogger
+public class GameLogger
 {
     public static void Log(GameLoggerParameters loggerParameters)
     {
         Log(loggerParameters.Message, loggerParameters.LogType, loggerParameters.Exception);
     }
-    
+
     public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
     {
         switch (logType)

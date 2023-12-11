@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.API.Manager;
+namespace com.Halcyon.API.Core.Logger;
 
 public class GameLoggerParameters
 {

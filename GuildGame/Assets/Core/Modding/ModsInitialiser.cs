@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using com.Halcyon.API.Modding;
+using com.Halcyon.API.Core.Modding;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
