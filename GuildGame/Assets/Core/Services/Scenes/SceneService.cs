@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using com.Halcyon.API.Services.Scenes;
 using UnityEngine.SceneManagement;
 using Scene = com.Halcyon.API.Services.Scenes.Scene;
 
 namespace com.Halcyon.Core.Services.Scenes
 {
-    public class SceneService: ISceneService
+    public class SceneService : ISceneService
     {
         private List<Scene> _scenes;
 
