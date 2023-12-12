@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using com.Halcyon.API.Core;
+using com.Halcyon.Core.Manager;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -51,7 +52,8 @@ namespace com.Halcyon.Core.UI
         private void ContinueButtonAction()
         {
             print("Continue");
-            GameState.GameParameters.SceneService.ChangeToScene(1);
+            GameManager.Instance.GameParameters.GameState = GameState.GameBase;
+            GameManager.Instance.GameParameters.SceneService.ChangeToScene(1);
         }
 
         private void NewGameButtonAction()

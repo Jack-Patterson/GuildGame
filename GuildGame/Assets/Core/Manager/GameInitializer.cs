@@ -20,7 +20,7 @@ namespace com.Halcyon.Core.Manager
             ModsInitializer.CollectAndInitialiseAllMods();
             HandleCommandLineArguments();
             
-            GameState.GameParameters = new GameParameters(new JsonDataService(), new SceneService());
+            GameManager.Instance.GameParameters = new GameParameters(new JsonDataService(), new SceneService(), GameState.MainMenu);
         }
 
         private static void HandleCommandLineArguments()

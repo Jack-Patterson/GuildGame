@@ -1,7 +1,7 @@
 {
     "name": "Builder",
     "rootNamespace": "com.Halcyon",
-    "references": [],
+    "references": ["GUID:7c879d82b14f42f4ea853cd4cdc40883"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

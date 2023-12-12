@@ -1,8 +1,9 @@
+using com.Halcyon.API.Core;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Manager
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : GameManagerBase
     {
         public static GameManager Instance;
         
@@ -18,7 +19,6 @@ namespace com.Halcyon.Core.Manager
             }
 
             DontDestroyOnLoad(gameObject);
-            
             
             GameInitializer.InitialGameStartup();
         }
