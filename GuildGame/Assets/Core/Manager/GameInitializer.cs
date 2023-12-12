@@ -2,6 +2,7 @@
 using System.IO;
 using com.Halcyon.API.Core;
 using com.Halcyon.Core.Modding;
+using com.Halcyon.Core.Services.Scenes;
 using com.Halcyon.Core.Services.Serialization;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace com.Halcyon.Core.Manager
             ModsInitializer.CollectAndInitialiseAllMods();
             HandleCommandLineArguments();
             
-            GameState.GameParameters = new GameParameters(new JsonDataService());
+            GameState.GameParameters = new GameParameters(new JsonDataService(), new SceneService());
         }
 
         private static void HandleCommandLineArguments()

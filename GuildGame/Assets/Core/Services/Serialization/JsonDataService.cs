@@ -3,7 +3,7 @@ using System.IO;
 using com.Halcyon.API.Core;
 using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Services.Serialization
