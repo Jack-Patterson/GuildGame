@@ -119,6 +119,11 @@ namespace com.Halcyon.Core.Input
             _inputService.InvokeMenuPressStarted();
         }
 
+        private void OnToggleBuildPressed(InputAction.CallbackContext eventAction)
+        {
+            _inputService.InvokeToggleBuildStarted();
+        }
+
         private void OnEnable()
         {
             _playerInputs.PlayerControls.Enable();
@@ -139,6 +144,7 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.ToggleTimePause.started += OnTimeTogglePressed;
 
             _playerInputs.PlayerControls.Menu.started += OnMenuPressed;
+            _playerInputs.PlayerControls.ToggleBuild.started += OnToggleBuildPressed;
         }
 
         private void OnDisable()
@@ -162,6 +168,7 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.ToggleTimePause.started -= OnTimeTogglePressed;
 
             _playerInputs.PlayerControls.Menu.started -= OnMenuPressed;
+            _playerInputs.PlayerControls.ToggleBuild.started -= OnToggleBuildPressed;
 
             _playerInputs.PlayerControls.Disable();
         }

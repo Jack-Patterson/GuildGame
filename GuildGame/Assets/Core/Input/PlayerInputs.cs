@@ -143,6 +143,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c4d3ff2-8589-4cba-b0ed-91b8d4be3041"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -376,6 +385,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""MouseMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f7c70be-0f45-4bd4-ae55-30044fff9e41"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -397,6 +417,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_PlayerControls_Time3Speed = m_PlayerControls.FindAction("Time 3 Speed", throwIfNotFound: true);
         m_PlayerControls_ToggleTimePause = m_PlayerControls.FindAction("ToggleTimePause", throwIfNotFound: true);
         m_PlayerControls_MouseMove = m_PlayerControls.FindAction("MouseMove", throwIfNotFound: true);
+        m_PlayerControls_ToggleBuild = m_PlayerControls.FindAction("ToggleBuild", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -471,6 +492,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Time3Speed;
     private readonly InputAction m_PlayerControls_ToggleTimePause;
     private readonly InputAction m_PlayerControls_MouseMove;
+    private readonly InputAction m_PlayerControls_ToggleBuild;
     public struct PlayerControlsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -488,6 +510,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Time3Speed => m_Wrapper.m_PlayerControls_Time3Speed;
         public InputAction @ToggleTimePause => m_Wrapper.m_PlayerControls_ToggleTimePause;
         public InputAction @MouseMove => m_Wrapper.m_PlayerControls_MouseMove;
+        public InputAction @ToggleBuild => m_Wrapper.m_PlayerControls_ToggleBuild;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -536,6 +559,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @MouseMove.started += instance.OnMouseMove;
             @MouseMove.performed += instance.OnMouseMove;
             @MouseMove.canceled += instance.OnMouseMove;
+            @ToggleBuild.started += instance.OnToggleBuild;
+            @ToggleBuild.performed += instance.OnToggleBuild;
+            @ToggleBuild.canceled += instance.OnToggleBuild;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -579,6 +605,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @MouseMove.started -= instance.OnMouseMove;
             @MouseMove.performed -= instance.OnMouseMove;
             @MouseMove.canceled -= instance.OnMouseMove;
+            @ToggleBuild.started -= instance.OnToggleBuild;
+            @ToggleBuild.performed -= instance.OnToggleBuild;
+            @ToggleBuild.canceled -= instance.OnToggleBuild;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -611,5 +640,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnTime3Speed(InputAction.CallbackContext context);
         void OnToggleTimePause(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
+        void OnToggleBuild(InputAction.CallbackContext context);
     }
 }

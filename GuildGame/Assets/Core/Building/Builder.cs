@@ -20,6 +20,8 @@ namespace com.Halcyon.Core.Building
 
         private void Start()
         {
+            GameManager.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilder;
+
             _wallSnapping = new WallSnapping(wallPrefab, placeRaycast, wallLayer);
             _pointerHandler = new PointerHandler(pointer);
         }
@@ -59,7 +61,8 @@ namespace com.Halcyon.Core.Building
                     {
                         Debug.Log(
                             $"Point {_wallSnapping.CurrentPosition} Last Point {_wallSnapping.LastPosition} Instatitation Point {instantiationPoint}");
-                        bool shouldRotatePrefab = Math.Abs(instantiationPoint.x) != Math.Abs(_wallSnapping.CurrentPosition.x);
+                        bool shouldRotatePrefab =
+                            Math.Abs(instantiationPoint.x) != Math.Abs(_wallSnapping.CurrentPosition.x);
                         Quaternion rotation = Quaternion.Euler(0, shouldRotatePrefab ? 0 : 90, 0);
 
                         Instantiate(wallPrefab, instantiationPoint, rotation);
@@ -77,6 +80,20 @@ namespace com.Halcyon.Core.Building
 
             // _wallSnapping.CurrentPosition = _wallSnapping.PointToPosition();
             _pointerHandler.SetPointerPosition(_wallSnapping.CurrentPosition);
+        }
+
+        private void ToggleBuilder()
+        {
+            if (GameManager.Instance.GameParameters.GameState == GameState.Building)
+            {
+                GameLogger.Log("Disabling building mode.");
+                GameManager.Instance.GameParameters.GameState = GameState.GameBase;
+            }
+            else
+            {
+                GameLogger.Log("Enabling building mode.");
+                GameManager.Instance.GameParameters.GameState = GameState.Building;
+            }
         }
 
         private bool IsInBuildMode()

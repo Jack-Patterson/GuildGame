@@ -59,12 +59,12 @@ namespace com.Halcyon.Core.Manager
             }
         }
 
-        internal static void LogException(Exception exception)
+        public static void LogException(Exception exception)
         {
             Log("", LogType.Exception, exception);
         }
 
-        internal static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
+        public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
         {
             if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
             {

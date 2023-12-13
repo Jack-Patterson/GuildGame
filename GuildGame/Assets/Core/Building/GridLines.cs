@@ -4,12 +4,12 @@ namespace com.Halcyon.Core.Building
 {
     public class GridLines
     {
-        private int _spacing = 10;
-        private int _gridZ = 10;
-        private int _gridX = 10;
-
-        private Vector2 pos1 = new Vector2(50, 50);
-        private Vector2 pos2 = new Vector2(-50, -50);
+        // private int _spacing = 10;
+        // private int _gridZ = 10;
+        // private int _gridX = 10;
+        //
+        // private Vector2 pos1 = new Vector2(50, 50);
+        // private Vector2 pos2 = new Vector2(-50, -50);
 
         // private void Start()
         // {

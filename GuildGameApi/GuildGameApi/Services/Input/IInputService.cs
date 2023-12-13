@@ -17,13 +17,14 @@ namespace com.Halcyon.API.Services.Input
         event Action<float> Mouse3ScrollPerformed;
         event Action<Vector2> MouseMoveStarted;
 
-        event Action MenuPressStarted;
-
         event Action TimePausePressStarted;
         event Action TimeOneSpeedPressStarted;
         event Action TimeTwoSpeedPressStarted;
         event Action TimeThreeSpeedPressStarted;
         event Action TimeTogglePressStarted;
+        
+        event Action MenuPressStarted;
+        event Action ToggleBuildStarted;
 
         void InvokeMovePerformed(Vector2 value);
         void InvokeRotatePerformed(float value);
@@ -35,11 +36,12 @@ namespace com.Halcyon.API.Services.Input
         void InvokeMouse3PressEnded();
         void InvokeMouse3ScrollPerformed(Vector2 value);
         void InvokeMouseMoveStarted(Vector2 value);
-        void InvokeMenuPressStarted();
         void InvokeTimePausePressStarted();
         void InvokeTimeOneSpeedPressStarted();
         void InvokeTimeTwoSpeedPressStarted();
         void InvokeTimeThreeSpeedPressStarted();
         void InvokeTimeTogglePressStarted();
+        void InvokeMenuPressStarted();
+        void InvokeToggleBuildStarted();
     }
 }

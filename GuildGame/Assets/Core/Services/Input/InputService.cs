@@ -21,13 +21,14 @@ namespace com.Halcyon.Core.Services.Input
         public event Action<float>? Mouse3ScrollPerformed;
         public event Action<Vector2>? MouseMoveStarted;
 
-        public event Action? MenuPressStarted;
-
         public event Action? TimePausePressStarted;
         public event Action? TimeOneSpeedPressStarted;
         public event Action? TimeTwoSpeedPressStarted;
         public event Action? TimeThreeSpeedPressStarted;
         public event Action? TimeTogglePressStarted;
+        
+        public event Action? MenuPressStarted;
+        public event Action? ToggleBuildStarted;
 
         public void InvokeMovePerformed(Vector2 value)
         {
@@ -79,11 +80,6 @@ namespace com.Halcyon.Core.Services.Input
             MouseMoveStarted?.Invoke(value);
         }
 
-        public void InvokeMenuPressStarted()
-        {
-            MenuPressStarted?.Invoke();
-        }
-
         public void InvokeTimePausePressStarted()
         {
             TimePausePressStarted?.Invoke();
@@ -107,6 +103,16 @@ namespace com.Halcyon.Core.Services.Input
         public void InvokeTimeTogglePressStarted()
         {
             TimeTogglePressStarted?.Invoke();
+        }
+
+        public void InvokeMenuPressStarted()
+        {
+            MenuPressStarted?.Invoke();
+        }
+
+        public void InvokeToggleBuildStarted()
+        {
+            ToggleBuildStarted?.Invoke();
         }
     }
 }
