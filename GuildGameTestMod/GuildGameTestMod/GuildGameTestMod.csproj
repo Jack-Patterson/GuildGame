@@ -1,14 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <Reference Include="GuildGameApi">
-        <HintPath>..\..\GuildGameApi\GuildGameApi\bin\Debug\net6.0\GuildGameApi.dll</HintPath>
+        <HintPath>..\..\GuildGameApi\GuildGameApi\bin\Debug\netstandard2.1\GuildGameApi.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.23f1\Editor\Data\Managed\UnityEngine.dll</HintPath>

@@ -1,5 +1,6 @@
 ﻿using com.Halcyon.API.Core.Logger;
 using com.Halcyon.API.Services.Serialization;
+using UnityEngine;
 
 namespace GuildGameTestMod;
 
@@ -15,14 +16,14 @@ public class InputTest
         GameLogger.Log($"Mouse scrolling {f} from mod.");
     }
 
-    internal void OnMouseMove(SerializableVector2 v2)
+    internal void OnMouseMove(Vector2 v2)
     {
-        GameLogger.Log($"Mouse Moving {v2.GetUnityVector()} from mod.");
+        GameLogger.Log($"Mouse Moving {v2} from mod.");
     }
 
-    internal void OnMove(SerializableVector2 v2)
+    internal void OnMove(Vector2 v2)
     {
-        GameLogger.Log($"Moving to {v2.GetUnityVector()} from mod.");
+        GameLogger.Log($"Moving to {v2} from mod.");
     }
 
     internal void OnRotate(float f)

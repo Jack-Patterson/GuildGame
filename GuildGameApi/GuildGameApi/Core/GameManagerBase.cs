@@ -9,9 +9,6 @@ public class GameManagerBase : MonoBehaviour
     protected static GameManagerBase GManagerBase = null!;
     
     public static GameManagerBase Instance => GManagerBase;
-
-    public InputHandlerInstance InputHandlerInstance;
-    // protected static GameManagerBase BaseInstance = null!;
         
     protected void Awake()
     {

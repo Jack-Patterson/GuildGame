@@ -9,8 +9,6 @@ namespace com.Halcyon.Core.Services.Input
 {
     public class InputService : IInputService
     {
-        public List<InputHandlerInstance> _inputHandlerInstances { get; }
-
         public event Action<Vector2> MovePerformed;
         public event Action<float>? RotatePerformed;
 
@@ -73,7 +71,7 @@ namespace com.Halcyon.Core.Services.Input
 
         public void InvokeMouse3ScrollPerformed(Vector2 value)
         {
-            // Mouse3ScrollPerformed?.Invoke(value.y);
+            Mouse3ScrollPerformed?.Invoke(value.y);
         }
 
         public void InvokeMouseMoveStarted(Vector2 value)

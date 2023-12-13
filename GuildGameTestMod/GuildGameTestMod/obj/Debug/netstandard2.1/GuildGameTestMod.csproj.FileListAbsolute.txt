@@ -1,0 +1,15 @@
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.csproj.AssemblyReference.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.AssemblyInfoInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.AssemblyInfo.cs
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.csproj.CoreCompileInputs.cache
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\GuildGameTestMod.deps.json
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\GuildGameTestMod.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\GuildGameTestMod.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\GuildGameApi.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\UnityEngine.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\GuildGameApi.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\bin\Debug\netstandard2.1\UnityEngine.xml
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.csproj.CopyComplete
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameTestMod\GuildGameTestMod\obj\Debug\netstandard2.1\GuildGameTestMod.pdb

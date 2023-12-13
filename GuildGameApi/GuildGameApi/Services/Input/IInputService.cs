@@ -5,8 +5,6 @@ namespace com.Halcyon.API.Services.Input
 {
     public interface IInputService
     {
-        public List<InputHandlerInstance> _inputHandlerInstances { get; }
-        
         event Action<Vector2> MovePerformed;
         event Action<float> RotatePerformed;
 

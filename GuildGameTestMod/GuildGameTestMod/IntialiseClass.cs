@@ -1,6 +1,5 @@
 ﻿using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Modding;
-using com.Halcyon.API.Services.Input;
 using UnityEngine;
 
 namespace GuildGameTestMod;
@@ -24,7 +23,7 @@ public class IntialiseClass : IMod
 
         InputTest inputTest = new InputTest();
 
-        GameManagerBase.Instance.InputHandlerInstance = new InputHandlerInstance();
+        // GameManagerBase.Instance.InputHandlerInstance = new InputHandlerInstance();
         
         Debug.Log(GameManagerBase.Instance);
         Debug.Log(GameManagerBase.Instance.GameParameters);
