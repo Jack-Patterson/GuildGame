@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using com.Halcyon.API.Core;
 using com.Halcyon.Core.Modding;
+using com.Halcyon.Core.Services.Input;
 using com.Halcyon.Core.Services.Scenes;
 using com.Halcyon.Core.Services.Serialization;
 using UnityEngine;
@@ -10,17 +12,23 @@ namespace com.Halcyon.Core.Manager
 {
     public static class GameInitializer
     {
+        public static event Action GameInitializationComplete;
+
         internal static void InitialGameStartup()
         {
             GameLogger.Init();
 
             GameLogger.Log("Beginning initial game startup.");
 
+
             ValidateAndCreateFolders();
-            ModsInitializer.CollectAndInitialiseAllMods();
+            GameManager.Instance.GameParameters = new GameParameters(new JsonDataService(), new SceneService(),
+                new InputService(), GameState.MainMenu);
             HandleCommandLineArguments();
+
+            GameInitializationComplete?.Invoke();
             
-            GameManager.Instance.GameParameters = new GameParameters(new JsonDataService(), new SceneService(), GameState.MainMenu);
+            ModsInitializer.CollectAndInitialiseAllMods();
         }
 
         private static void HandleCommandLineArguments()

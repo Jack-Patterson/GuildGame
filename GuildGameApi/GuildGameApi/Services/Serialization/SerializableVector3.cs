@@ -1,41 +1,43 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.API.Services.Serialization;
-
-public class SerializableVector3
+namespace com.Halcyon.API.Services.Serialization
 {
-    public float x;
-    public float y;
-    public float z;
 
-    public SerializableVector3(Vector3 vector)
+    public class SerializableVector3
     {
-        x = vector.x;
-        y = vector.y;
-        z = vector.z;
-    }
-    
-    public Vector3 GetUnityVector() => new(x, y, z);
+        public float x;
+        public float y;
+        public float z;
 
-    public static List<SerializableVector3> GetSerializableListOfUnityVector3(List<Vector3> vList)
-    {
-        List<SerializableVector3> list = new List<SerializableVector3>(vList.Count);
-        foreach (Vector3 vector in vList)
+        public SerializableVector3(Vector3 vector)
         {
-            list.Add(new SerializableVector3(vector));
+            x = vector.x;
+            y = vector.y;
+            z = vector.z;
         }
 
-        return list;
-    }
+        public Vector3 GetUnityVector() => new(x, y, z);
 
-    public static List<Vector3> GetUnityVector3ListOfSerializable(List<SerializableVector3> vList)
-    {
-        List<Vector3> list = new List<Vector3>(vList.Count);
-        foreach (SerializableVector3 serializableVector in vList)
+        public static List<SerializableVector3> GetSerializableListOfUnityVector3(List<Vector3> vList)
         {
-            list.Add(serializableVector.GetUnityVector());
+            List<SerializableVector3> vectorList = new List<SerializableVector3>(vList.Count);
+            foreach (Vector3 vector in vList)
+            {
+                vectorList.Add(new SerializableVector3(vector));
+            }
+
+            return vectorList;
         }
 
-        return list;
+        public static List<Vector3> GetUnityVector3ListOfSerializable(List<SerializableVector3> vList)
+        {
+            List<Vector3> list = new List<Vector3>(vList.Count);
+            foreach (SerializableVector3 serializableVector in vList)
+            {
+                list.Add(serializableVector.GetUnityVector());
+            }
+
+            return list;
+        }
     }
 }
