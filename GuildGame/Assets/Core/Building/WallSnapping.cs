@@ -47,18 +47,18 @@ namespace com.Halcyon.Core.Building
             return (xMod5 == 0 && zMod10 == 0) || (xMod10 == 0 && zMod5 == 0);
         }
 
-        internal Vector3 PointToPosition()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 1000f, placeRaycast))
-            {
-                return SnapToGrid(hit.point);
-            }
-
-            return SnapToGrid(_lastPosition);
-        }
+        // internal Vector3 PointToPosition()
+        // {
+        //     // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     // RaycastHit hit;
+        //     //
+        //     // if (Physics.Raycast(ray, out hit, 1000f, placeRaycast))
+        //     // {
+        //     //     return SnapToGrid(hit.point);
+        //     // }
+        //     //
+        //     // return SnapToGrid(_lastPosition);
+        // }
 
         internal void ToggleIsDrawingWall()
         {

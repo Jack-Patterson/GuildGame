@@ -26,21 +26,21 @@ namespace com.Halcyon.Core.Building
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GameManager.Instance.GameParameters.GameState =
-                    GameManager.Instance.GameParameters.GameState == GameState.GameBase
-                        ? GameState.Building
-                        : GameState.GameBase;
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     GameManager.Instance.GameParameters.GameState =
+            //         GameManager.Instance.GameParameters.GameState == GameState.GameBase
+            //             ? GameState.Building
+            //             : GameState.GameBase;
+            // }
 
             if (!IsInBuildMode())
                 return;
 
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
-            {
-                _wallSnapping.ToggleIsDrawingWall();
-            }
+            // if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
+            // {
+            //     _wallSnapping.ToggleIsDrawingWall();
+            // }
 
             if (!Utils.ValidateVectorSameAsAnother(_wallSnapping.CurrentPosition, _wallSnapping.LastPosition))
             {
@@ -75,7 +75,7 @@ namespace com.Halcyon.Core.Building
             if (!IsInBuildMode())
                 return;
 
-            _wallSnapping.CurrentPosition = _wallSnapping.PointToPosition();
+            // _wallSnapping.CurrentPosition = _wallSnapping.PointToPosition();
             _pointerHandler.SetPointerPosition(_wallSnapping.CurrentPosition);
         }
 
