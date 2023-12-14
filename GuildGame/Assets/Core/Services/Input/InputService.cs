@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using System;
-using System.Collections.Generic;
 using com.Halcyon.API.Services.Input;
 using UnityEngine;
 
@@ -9,10 +8,11 @@ namespace com.Halcyon.Core.Services.Input
 {
     public class InputService : IInputService
     {
-        public event Action<Vector2> MovePerformed;
+        public event Action<Vector2>? MovePerformed;
         public event Action<float>? RotatePerformed;
 
         public event Action? Mouse1PressStarted;
+        public event Action? Mouse1PressPerformed;
         public event Action? Mouse1PressEnded;
         public event Action? Mouse2PressStarted;
         public event Action? Mouse2PressEnded;
@@ -20,13 +20,15 @@ namespace com.Halcyon.Core.Services.Input
         public event Action? Mouse3PressEnded;
         public event Action<float>? Mouse3ScrollPerformed;
         public event Action<Vector2>? MouseMoveStarted;
+        public event Action<Vector2>? MousePositionPerformed;
+        public event Action<Vector2>? MousePositionPerformedWithMouse1;
 
         public event Action? TimePausePressStarted;
         public event Action? TimeOneSpeedPressStarted;
         public event Action? TimeTwoSpeedPressStarted;
         public event Action? TimeThreeSpeedPressStarted;
         public event Action? TimeTogglePressStarted;
-        
+
         public event Action? MenuPressStarted;
         public event Action? ToggleBuildStarted;
 
@@ -43,6 +45,11 @@ namespace com.Halcyon.Core.Services.Input
         public void InvokeMouse1PressStarted()
         {
             Mouse1PressStarted?.Invoke();
+        }
+
+        public void InvokeMouse1PressPerformed()
+        {
+            Mouse1PressPerformed?.Invoke();
         }
 
         public void InvokeMouse1PressEnded()
@@ -78,6 +85,16 @@ namespace com.Halcyon.Core.Services.Input
         public void InvokeMouseMoveStarted(Vector2 value)
         {
             MouseMoveStarted?.Invoke(value);
+        }
+
+        public void InvokeMousePositionPerformed(Vector2 value)
+        {
+            MousePositionPerformed?.Invoke(value);
+        }
+        
+        public void InvokeMousePositionPerformedWithMouse1(Vector2 value)
+        {
+            MousePositionPerformedWithMouse1?.Invoke(value);
         }
 
         public void InvokeTimePausePressStarted()

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using com.Halcyon.API.Core;
 using com.Halcyon.Core.Manager;
-using UnityEditor;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Building
@@ -10,67 +10,33 @@ namespace com.Halcyon.Core.Building
     {
         [SerializeField] private GameObject pointer;
         [SerializeField] private GameObject wallPrefab;
+        [SerializeField] private GameObject wallPostPrefab;
         [SerializeField] private LayerMask placeRaycast;
         [SerializeField] private LayerMask wallLayer;
+        [SerializeField] [HideInInspector] private List<Floor> floors = new List<Floor>();
 
-        internal const float WallGridSize = 10f;
+        internal event Action BuilderGameStateEnabled;
+        internal event Action BuilderGameStateDisabled;
 
-        private WallSnapping _wallSnapping;
+        private const float WallGridSize = 10f;
+        private WallBuilder _wallBuilder;
         private PointerHandler _pointerHandler;
+
+        internal List<Floor> Floors
+        {
+            get => floors;
+            set => floors = value;
+        }
 
         private void Start()
         {
-            GameManager.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilder;
-
-            _wallSnapping = new WallSnapping(wallPrefab, placeRaycast, wallLayer);
+            _wallBuilder = new WallBuilder(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
             _pointerHandler = new PointerHandler(pointer);
-        }
 
-        private void Update()
-        {
-            // if (Input.GetKeyDown(KeyCode.Space))
-            // {
-            //     GameManager.Instance.GameParameters.GameState =
-            //         GameManager.Instance.GameParameters.GameState == GameState.GameBase
-            //             ? GameState.Building
-            //             : GameState.GameBase;
-            // }
+            GameManager.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
 
-            if (!IsInBuildMode())
-                return;
-
-            // if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
-            // {
-            //     _wallSnapping.ToggleIsDrawingWall();
-            // }
-
-            if (!Utils.ValidateVectorSameAsAnother(_wallSnapping.CurrentPosition, _wallSnapping.LastPosition))
-            {
-                if (_wallSnapping.IsDrawing)
-                {
-                    Vector3 instantiationPoint = (_wallSnapping.CurrentPosition + _wallSnapping.LastPosition) / 2;
-
-                    Collider[] colliders = Physics.OverlapSphere(
-                        new Vector3(instantiationPoint.x, instantiationPoint.y + 2f, instantiationPoint.z), 1f,
-                        wallLayer);
-
-                    bool shouldInstantiateWall = !CheckColliderArrayContainsScript<WallScript>(colliders);
-                    bool wallPositionValid = _wallSnapping.ValidateWallPlacePosition(instantiationPoint);
-
-                    if (shouldInstantiateWall && wallPositionValid)
-                    {
-                        Debug.Log(
-                            $"Point {_wallSnapping.CurrentPosition} Last Point {_wallSnapping.LastPosition} Instatitation Point {instantiationPoint}");
-                        bool shouldRotatePrefab =
-                            Math.Abs(instantiationPoint.x) != Math.Abs(_wallSnapping.CurrentPosition.x);
-                        Quaternion rotation = Quaternion.Euler(0, shouldRotatePrefab ? 0 : 90, 0);
-
-                        Instantiate(wallPrefab, instantiationPoint, rotation);
-                    }
-                }
-
-                _wallSnapping.LastPosition = _wallSnapping.CurrentPosition;
-            }
+            BuilderGameStateEnabled += OnBuilderGameStateEnabled;
+            BuilderGameStateDisabled += OnBuilderGameStateDisabled;
         }
 
         private void FixedUpdate()
@@ -78,63 +44,83 @@ namespace com.Halcyon.Core.Building
             if (!IsInBuildMode())
                 return;
 
-            // _wallSnapping.CurrentPosition = _wallSnapping.PointToPosition();
-            _pointerHandler.SetPointerPosition(_wallSnapping.CurrentPosition);
+            _wallBuilder.LastPosition = _wallBuilder.CurrentPosition;
+            _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
+            _pointerHandler.SetPointerPosition(_wallBuilder.CurrentPosition);
         }
 
-        private void ToggleBuilder()
+        internal void InstantiateBuilderPrefab(GameObject wallPrefab, Vector3 position, Quaternion rotation)
+        {
+            Instantiate(wallPrefab, position, rotation);
+        }
+
+        internal void GetFloors()
+        {
+            foreach (Transform child in transform)
+            {
+                Floor floor = child.GetComponent<Floor>();
+                if (!floors.Contains(floor))
+                    floors.Add(floor);
+            }
+        }
+
+        private void ToggleBuilderGameState()
         {
             if (GameManager.Instance.GameParameters.GameState == GameState.Building)
             {
                 GameLogger.Log("Disabling building mode.");
+
                 GameManager.Instance.GameParameters.GameState = GameState.GameBase;
+                BuilderGameStateDisabled?.Invoke();
             }
             else
             {
                 GameLogger.Log("Enabling building mode.");
+
                 GameManager.Instance.GameParameters.GameState = GameState.Building;
+                BuilderGameStateEnabled?.Invoke();
             }
+        }
+
+        private void OnBuilderGameStateEnabled()
+        {
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                _wallBuilder.UpdateCurrentMousePosition;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                _wallBuilder.DrawWall;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                _wallBuilder.DestroyWall;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted +=
+                _wallBuilder.ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded +=
+                _wallBuilder.ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted +=
+                _wallBuilder.ToggleIsDrawingWallDestruction;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded +=
+                _wallBuilder.ToggleIsDrawingWallDestruction;
+        }
+
+        private void OnBuilderGameStateDisabled()
+        {
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                _wallBuilder.UpdateCurrentMousePosition;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                _wallBuilder.DrawWall;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                _wallBuilder.DestroyWall;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted -=
+                _wallBuilder.ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded -=
+                _wallBuilder.ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted -=
+                _wallBuilder.ToggleIsDrawingWallDestruction;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded -=
+                _wallBuilder.ToggleIsDrawingWallDestruction;
         }
 
         private bool IsInBuildMode()
         {
             return GameManager.Instance.GameParameters.GameState == GameState.Building;
-        }
-
-        private bool CheckColliderArrayContainsScript<T>(Collider[] colliders)
-        {
-            foreach (Collider collider in colliders)
-            {
-                if (collider.GetComponent<T>() != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        [CustomEditor(typeof(Builder))]
-        public class BuilderEditor : Editor
-        {
-            public override void OnInspectorGUI()
-            {
-                DrawDefaultInspector();
-
-                Builder gridLines = (Builder)target;
-
-                if (GUILayout.Button("Generate Grid"))
-                {
-                    // gridLines.CreateGrid();
-                }
-
-                if (GUILayout.Button("Remove Grid"))
-                {
-                    // gridLines.ClearGrid();
-                }
-
-                Color c = EditorGUILayout.ColorField("Color", Color.white, new GUILayoutOption[] { });
-            }
         }
     }
 }

@@ -45,6 +45,11 @@ namespace com.Halcyon.Core.Input
         {
             _inputService.InvokeMouse1PressStarted();
         }
+        
+        private void OnMouse1PressPressed(InputAction.CallbackContext eventAction)
+        {
+            _inputService.InvokeMouse1PressPerformed();
+        }
 
         private void OnMouse1PressedEnded(InputAction.CallbackContext eventAction)
         {
@@ -81,6 +86,18 @@ namespace com.Halcyon.Core.Input
         {
             Vector2 mouseScrollAmount = eventAction.ReadValue<Vector2>();
             _inputService.InvokeMouse3ScrollPerformed(mouseScrollAmount);
+        }
+
+        private void OnMousePositionPerformed(InputAction.CallbackContext eventAction)
+        {
+            Vector2 mousePosition = eventAction.ReadValue<Vector2>();
+            _inputService.InvokeMousePositionPerformed(mousePosition);
+        }
+        
+        private void OnMousePositionPerformedWithMouse1(InputAction.CallbackContext eventAction)
+        {
+            Vector2 mousePosition = eventAction.ReadValue<Vector2>();
+            _inputService.InvokeMousePositionPerformedWithMouse1(mousePosition);
         }
 
         #endregion
@@ -132,10 +149,15 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.Rotate.performed += OnRotatePerformed;
 
             _playerInputs.PlayerControls.Mouse1Pressed.started += OnMouse1PressedStarted;
+            _playerInputs.PlayerControls.Mouse1Pressed.performed += OnMouse1PressPressed;
+            _playerInputs.PlayerControls.Mouse1Pressed.canceled += OnMouse1PressedEnded;
             _playerInputs.PlayerControls.Mouse2Pressed.started += OnMouse2PressedStarted;
+            _playerInputs.PlayerControls.Mouse2Pressed.canceled += OnMouse2PressedEnded;
             _playerInputs.PlayerControls.Mouse3Pressed.started += OnMouse3PressedStarted;
+            _playerInputs.PlayerControls.Mouse3Pressed.canceled += OnMouse3PressedEnded;
             _playerInputs.PlayerControls.Mouse3Scroll.performed += OnMouseScrollPerformed;
             _playerInputs.PlayerControls.MouseMove.started += OnMouseMoveStarted;
+            _playerInputs.PlayerControls.MousePosition.performed += OnMousePositionPerformed;
 
             _playerInputs.PlayerControls.TimePause.started += OnTimePausePressed;
             _playerInputs.PlayerControls.Time1Speed.started += OnTimeOnePressed;
@@ -160,6 +182,7 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.Mouse3Pressed.canceled -= OnMouse3PressedEnded;
             _playerInputs.PlayerControls.Mouse3Scroll.performed -= OnMouseScrollPerformed;
             _playerInputs.PlayerControls.MouseMove.started -= OnMouseMoveStarted;
+            _playerInputs.PlayerControls.MousePosition.performed -= OnMousePositionPerformed;
 
             _playerInputs.PlayerControls.TimePause.started -= OnTimePausePressed;
             _playerInputs.PlayerControls.Time1Speed.started -= OnTimeOnePressed;

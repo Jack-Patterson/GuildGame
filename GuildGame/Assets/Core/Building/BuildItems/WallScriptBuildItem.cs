@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Halcyon
+namespace com.Halcyon.Core.Building.BuildItems
 {
-    public class WallScript : MonoBehaviour
+    public class WallScriptBuildItem : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

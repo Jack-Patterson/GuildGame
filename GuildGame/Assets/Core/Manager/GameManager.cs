@@ -5,9 +5,9 @@ namespace com.Halcyon.Core.Manager
 {
     public class GameManager : GameManagerBase
     {
-        public static GameManager Instance => GameManagerBase.Instance as GameManager;
+        public new static GameManager Instance => GameManagerBase.Instance as GameManager;
         
-        private void Awake()
+        private new void Awake()
         {
             base.Awake();
             GameInitializer.InitialGameStartup();

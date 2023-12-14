@@ -1,7 +1,7 @@
 {
-    "name": "Builder",
+    "name": "BuilderItems",
     "rootNamespace": "com.Halcyon",
-    "references": ["GUID:7c879d82b14f42f4ea853cd4cdc40883","GUID:cb21bcaac82c53a429ee20569ea845ae"],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

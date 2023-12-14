@@ -13,4 +13,23 @@ public class Utils
     {
         return vector1 == vector2;
     }
+    
+    public static T GetComponentFromColliderArray<T>(Collider[] colliders)
+    {
+        foreach (Collider collider in colliders)
+        {
+            T objectToFind = collider.GetComponent<T>();
+            if (objectToFind != null)
+            {
+                return objectToFind;
+            }
+        }
+
+        return default!;
+    }
+    
+    public static T GetComponentFromColliderArray<T>(List<Collider> colliders)
+    {
+        return GetComponentFromColliderArray<T>(colliders.ToArray());
+    }
 }
