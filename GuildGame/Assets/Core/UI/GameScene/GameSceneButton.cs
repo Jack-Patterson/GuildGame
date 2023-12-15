@@ -2,14 +2,14 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace com.Halcyon.Core.UI
+namespace com.Halcyon.Core.UI.GameScene
 {
-    public class MainMenuButton : MonoBehaviour
+    public class GameSceneButton : MonoBehaviour
     {
-        [SerializeField] private MainMenuButtonTypes menuButtonType = MainMenuButtonTypes.Continue;
+        [SerializeField] private GameSceneButtonTypes menuButtonType = GameSceneButtonTypes.Save;
         private Button _button;
-
-        public MainMenuButtonTypes MenuButtonType => menuButtonType;
+        
+        public GameSceneButtonTypes MenuButtonType => menuButtonType;
         public Button Button => _button;
 
         internal void Initialize(UnityAction method)

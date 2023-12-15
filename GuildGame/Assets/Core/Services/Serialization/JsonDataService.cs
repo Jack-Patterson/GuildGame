@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace com.Halcyon.Core.Services.Serialization
 {
-    public class JsonDataService: IDataService
+    public class JsonDataService: ISerializationService
     {
         public bool SaveData<T>(T objectToSerialize, string relativeSaveLocation, bool encrypted = false)
         {

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using com.Halcyon.API.Core;
-using com.Halcyon.Core.Building.BuildItems;
+using com.Halcyon.API.Core.Building;
+using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -63,13 +65,13 @@ namespace com.Halcyon.Core.Building
                 return;
 
             Vector3 instantiationPoint = (CurrentPosition + LastPosition) / 2;
-            instantiationPoint.y = 5f;
+            instantiationPoint.y += 5f;
 
             Collider[] colliders = Physics.OverlapSphere(
                 new Vector3(instantiationPoint.x, instantiationPoint.y + 2f, instantiationPoint.z), 1f,
                 _wallLayer);
 
-            bool shouldInstantiateWall = Utils.GetComponentFromColliderArray<WallScriptBuildItem>(colliders) == null;
+            bool shouldInstantiateWall = Utils.GetComponentFromColliderArray<WallBuildItem>(colliders) == null;
             bool wallPositionValid = ValidateWallPlacePosition(instantiationPoint);
 
             if (shouldInstantiateWall && wallPositionValid)
@@ -91,7 +93,6 @@ namespace com.Halcyon.Core.Building
             Vector3 possiblePostPositionTwo = rotation.eulerAngles.y != 90f
                 ? new Vector3(wallPosition.x - 5f, wallPosition.y, wallPosition.z)
                 : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z - 5f);
-            ;
 
             Collider[] colliders = Physics.OverlapSphere(
                 new Vector3(possiblePostPositionOne.x, possiblePostPositionOne.y + 2f, possiblePostPositionOne.z), 1f,
@@ -123,7 +124,7 @@ namespace com.Halcyon.Core.Building
                 new Vector3(expectedObjectPosition.x, expectedObjectPosition.y + 2f, expectedObjectPosition.z), 1f,
                 _wallLayer);
 
-            WallScriptBuildItem wallToDestroy = Utils.GetComponentFromColliderArray<WallScriptBuildItem>(colliders);
+            WallBuildItem wallToDestroy = Utils.GetComponentFromColliderArray<WallBuildItem>(colliders);
             bool wallPositionValid = ValidateWallPlacePosition(expectedObjectPosition);
 
             if (wallToDestroy != null && wallPositionValid)

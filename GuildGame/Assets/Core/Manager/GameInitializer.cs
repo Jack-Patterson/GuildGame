@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.IO;
 using com.Halcyon.API.Core;
 using com.Halcyon.Core.Modding;

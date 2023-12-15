@@ -6,7 +6,7 @@ namespace com.Halcyon.API.Core;
 
 public class GameParameters
 {
-    private IDataService _jsonDataService;
+    private ISerializationService _jsonSerializationService;
     private ISceneService _sceneService;
     private IInputService _inputService;
     private GameState _gameState;
@@ -17,10 +17,10 @@ public class GameParameters
         set => _sceneService = value;
     }
 
-    public IDataService JsonDataService
+    public ISerializationService JsonSerializationService
     {
-        get => _jsonDataService;
-        set => _jsonDataService = value;
+        get => _jsonSerializationService;
+        set => _jsonSerializationService = value;
     }
     
     public IInputService InputService
@@ -35,9 +35,9 @@ public class GameParameters
         set => _gameState = value;
     }
 
-    public GameParameters(IDataService jsonDataService, ISceneService sceneService,  IInputService inputService, GameState gameState)
+    public GameParameters(ISerializationService jsonSerializationService, ISceneService sceneService,  IInputService inputService, GameState gameState)
     {
-        _jsonDataService = jsonDataService;
+        _jsonSerializationService = jsonSerializationService;
         _sceneService = sceneService;
         _inputService = inputService;
         _gameState = gameState;

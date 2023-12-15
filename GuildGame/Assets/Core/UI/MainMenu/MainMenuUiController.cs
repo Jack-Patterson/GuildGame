@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace com.Halcyon.Core.UI
+namespace com.Halcyon.Core.UI.MainMenu
 {
     public class MainMenuUiController : MonoBehaviour
     {

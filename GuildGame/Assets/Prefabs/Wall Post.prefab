@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5008278422797871397}
   - component: {fileID: 5008278422797871396}
   - component: {fileID: 5008278422797871395}
-  - component: {fileID: -4402568580274741176}
+  - component: {fileID: 4491747895251946624}
   m_Layer: 6
   m_Name: Wall Post
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5008278422797871394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5.5, z: 0}
-  m_LocalScale: {x: 1.1, y: 11, z: 1.1}
+  m_LocalScale: {x: 1.1, y: 10, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4402568580274741176
+--- !u!114 &4491747895251946624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,6 +107,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5008278422797871394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871f25388ba2b0d4a963bae087324de4, type: 3}
+  m_Script: {fileID: -1410292312, guid: 2ae4054b9475c4241abcd56e8991ce9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

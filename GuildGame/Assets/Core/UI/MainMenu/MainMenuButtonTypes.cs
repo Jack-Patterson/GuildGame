@@ -1,4 +1,4 @@
-﻿namespace com.Halcyon.Core.UI
+﻿namespace com.Halcyon.Core.UI.MainMenu
 {
     public enum MainMenuButtonTypes
     {
