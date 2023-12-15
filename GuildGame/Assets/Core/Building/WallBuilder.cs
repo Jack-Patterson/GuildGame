@@ -140,6 +140,9 @@ namespace com.Halcyon.Core.Building
 
             if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
             {
+                if (hit.collider.GetComponent<IBuilderItem>() != null)
+                    return SnapToGrid(_lastPosition);
+                    
                 return SnapToGrid(hit.point);
             }
 

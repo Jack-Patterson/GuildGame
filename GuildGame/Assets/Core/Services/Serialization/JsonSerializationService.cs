@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace com.Halcyon.Core.Services.Serialization
 {
-    public class JsonDataService: ISerializationService
+    public class JsonSerializationService: ISerializationService
     {
         public bool SaveData<T>(T objectToSerialize, string relativeSaveLocation, bool encrypted = false)
         {
@@ -20,7 +20,7 @@ namespace com.Halcyon.Core.Services.Serialization
                 {
                     if (File.Exists(path))
                     {
-                        GameLogger.Log($"File {relativeSaveLocation} already exists. Overwriting existing file.");
+                        GameManager.Instance.Logger.Log($"File {relativeSaveLocation} already exists. Overwriting existing file.");
                         File.Delete(path);
                     }
                     else
@@ -33,12 +33,12 @@ namespace com.Halcyon.Core.Services.Serialization
                     
                     File.WriteAllText(path, JsonConvert.SerializeObject(objectToSerializeConverted, Formatting.Indented));
                     
-                    GameLogger.Log($"Successfully saved all data to {relativeSaveLocation}");
+                    GameManager.Instance.Logger.Log($"Successfully saved all data to {relativeSaveLocation}");
                     return true;
                 }
                 catch (Exception e)
                 {
-                    GameLogger.LogException(e);
+                    GameManager.Instance.Logger.LogException(e);
                     return false;
                 }
         }
@@ -56,7 +56,7 @@ namespace com.Halcyon.Core.Services.Serialization
             {
                 T data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
                 
-                GameLogger.Log($"Successfully loaded all data from {relativeSaveLocation}");
+                GameManager.Instance.Logger.Log($"Successfully loaded all data from {relativeSaveLocation}");
                 return data;
             }
             catch (Exception)

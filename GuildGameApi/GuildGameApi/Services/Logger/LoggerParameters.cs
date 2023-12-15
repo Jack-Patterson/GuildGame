@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.API.Core.Logger;
+namespace com.Halcyon.API.Services.Logger;
 
-public class GameLoggerParameters
+public class LoggerParameters
 {
     private string _message;
     private LogType _logType;
@@ -26,7 +26,7 @@ public class GameLoggerParameters
         set => _exception = value;
     }
 
-    public GameLoggerParameters(string message, LogType logType = LogType.Log, Exception? exception = null)
+    public LoggerParameters(string message, LogType logType = LogType.Log, Exception? exception = null)
     {
         _message = message;
         _logType = logType;

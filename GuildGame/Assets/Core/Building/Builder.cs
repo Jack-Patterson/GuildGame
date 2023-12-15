@@ -26,7 +26,7 @@ namespace com.Halcyon.Core.Building
             base.Start();
             
             _wallBuilder = new WallBuilder(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
-            _pointerHandler = new PointerHandler(pointer);
+            _pointerHandler = new PointerHandler(pointer, this);
         }
 
         private void FixedUpdate()

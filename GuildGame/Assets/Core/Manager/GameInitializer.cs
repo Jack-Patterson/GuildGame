@@ -15,14 +15,14 @@ namespace com.Halcyon.Core.Manager
 
         internal static void InitialGameStartup()
         {
-            GameLogger.Init();
+            GameManager.Instance.Logger = new GameLogger();
+            GameManager.Instance.GameParameters = new GameParameters(new JsonSerializationService(), new SceneService(),
+                new InputService(), GameState.MainMenu);
 
-            GameLogger.Log("Beginning initial game startup.");
+            GameManager.Instance.Logger.Log("Beginning initial game startup.");
 
 
             ValidateAndCreateFolders();
-            GameManager.Instance.GameParameters = new GameParameters(new JsonDataService(), new SceneService(),
-                new InputService(), GameState.MainMenu);
             HandleCommandLineArguments();
 
             GameInitializationComplete?.Invoke();
@@ -38,7 +38,7 @@ namespace com.Halcyon.Core.Manager
             {
                 if (argument.Equals("-developerMode"))
                 {
-                    GameLogger.Log("Dev mode");
+                    GameManager.Instance.Logger.Log("Dev mode");
                 }
             }
         }
@@ -65,11 +65,11 @@ namespace com.Halcyon.Core.Manager
         {
             if (Directory.Exists(path))
             {
-                GameLogger.Log($"Folder {path.Split("/")[^1]} already exists.");
+                GameManager.Instance.Logger.Log($"Folder {path.Split("/")[^1]} already exists.");
                 return true;
             }
 
-            GameLogger.Log($"Folder {path.Split("/")[^1]} does not exist. Creating folder.", LogType.Warning);
+            GameManager.Instance.Logger.Log($"Folder {path.Split("/")[^1]} does not exist. Creating folder.", LogType.Warning);
             return false;
         }
 

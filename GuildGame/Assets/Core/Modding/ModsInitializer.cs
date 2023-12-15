@@ -11,7 +11,7 @@ namespace com.Halcyon.Core.Modding
     {
         internal static void CollectAndInitialiseAllMods()
         {
-            GameLogger.Log("Collecting and loading all mods.");
+            GameManager.Instance.Logger.Log("Collecting and loading all mods.");
             
             string[] assemblies = CollectAssemblies();
             
@@ -19,11 +19,11 @@ namespace com.Halcyon.Core.Modding
             {
                 LoadAssemblies(assemblies);
 
-                GameLogger.Log("Completed collecting and loading all mods.");
+                GameManager.Instance.Logger.Log("Completed collecting and loading all mods.");
             }
             else
             {
-                GameLogger.Log("No mods to load.");
+                GameManager.Instance.Logger.Log("No mods to load.");
             }
         }
 
@@ -48,12 +48,12 @@ namespace com.Halcyon.Core.Modding
                 try
                 {
                     modInitScript.Initialise();
-                    GameLogger.Log($"Successfully initialised Mod {modInitScript.ModData.Name}");
+                    GameManager.Instance.Logger.Log($"Successfully initialised Mod {modInitScript.ModData.Name}");
                 }
                 catch (Exception e)
                 {
-                    GameLogger.Log("Failed to initialise mod.", LogType.Error);
-                    GameLogger.LogException(e);
+                    GameManager.Instance.Logger.Log("Failed to initialise mod.", LogType.Error);
+                    GameManager.Instance.Logger.LogException(e);
                 }
 
                 return;
@@ -63,7 +63,7 @@ namespace com.Halcyon.Core.Modding
         private static string[] CollectAssemblies()
         {
             string[] assemblies = Directory.GetFiles(Constants.ModsFolderPath, "*.dll", SearchOption.AllDirectories);
-            GameLogger.Log($"Collected {assemblies.Length} mod assemblies.");
+            GameManager.Instance.Logger.Log($"Collected {assemblies.Length} mod assemblies.");
             
             return assemblies;
         }

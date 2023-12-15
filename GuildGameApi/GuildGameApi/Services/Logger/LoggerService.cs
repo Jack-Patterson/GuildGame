@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.API.Core.Logger;
+namespace com.Halcyon.API.Services.Logger;
 
-public class GameLogger
+public abstract class LoggerService
 {
-    public static void Log(GameLoggerParameters loggerParameters)
+    public void Log(LoggerParameters loggerParameters)
     {
         Log(loggerParameters.Message, loggerParameters.LogType, loggerParameters.Exception);
     }
 
-    public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
+    public void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
     {
+        if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
+        {
+            message += ".";
+        }
+        
         switch (logType)
         {
             case LogType.Log:
@@ -31,7 +36,7 @@ public class GameLogger
         }
     }
 
-    public static void LogException(Exception exception)
+    public void LogException(Exception exception)
     {
         Log("", LogType.Exception, exception);
     }

@@ -1,5 +1,5 @@
 ﻿using com.Halcyon.API.Core.Building.BuilderItem;
-using com.Halcyon.API.Core.Logger;
+using com.Halcyon.API.Services.Logger;
 using UnityEngine;
 
 namespace com.Halcyon.API.Core.Building;
@@ -12,8 +12,8 @@ public abstract class BuilderAbstract : MonoBehaviour
     [SerializeField] protected LayerMask placeRaycast;
     [SerializeField] protected LayerMask wallLayer;
 
-    protected event Action? BuilderGameStateEnabled;
-    protected event Action? BuilderGameStateDisabled;
+    public event Action? BuilderGameStateEnabled;
+    public event Action? BuilderGameStateDisabled;
     private List<IBuilderItem> _builderItems = new List<IBuilderItem>();
 
     public List<IBuilderItem> BuilderItems => _builderItems;
@@ -61,14 +61,14 @@ public abstract class BuilderAbstract : MonoBehaviour
     {
         if (GameManagerBase.Instance.GameParameters.GameState == GameState.Building)
         {
-            GameLogger.Log("Disabling building mode.");
+            GameManagerBase.Instance.Logger.Log("Disabling building mode.");
 
             GameManagerBase.Instance.GameParameters.GameState = GameState.GameBase;
             BuilderGameStateDisabled?.Invoke();
         }
         else
         {
-            GameLogger.Log("Enabling building mode.");
+            GameManagerBase.Instance.Logger.Log("Enabling building mode.");
 
             GameManagerBase.Instance.GameParameters.GameState = GameState.Building;
             BuilderGameStateEnabled?.Invoke();

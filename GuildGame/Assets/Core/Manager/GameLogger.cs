@@ -4,15 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using com.Halcyon.API.Services.Logger;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Manager
 {
-    public static class GameLogger
+    public class GameLogger : LoggerService
     {
-        private static readonly string CurrentFilePath;
+        private readonly string _currentFilePath;
 
-        static GameLogger()
+        public GameLogger()
         {
             if (!Directory.Exists(Constants.LogsFolderPath))
             {
@@ -22,15 +23,10 @@ namespace com.Halcyon.Core.Manager
             Application.logMessageReceived += LogToFile;
             
             int logFileCounter = UpdateLogFileCounter();
-            CurrentFilePath = ConstructCurrentFilePath(logFileCounter);
+            _currentFilePath = ConstructCurrentFilePath(logFileCounter);
         }
 
-        internal static void Init()
-        {
-            Log("Initialising Logger.");
-        }
-
-        private static void LogToFile(string message, string stackTrace, LogType logType)
+        private void LogToFile(string message, string stackTrace, LogType logType)
         {
             switch (logType)
             {
@@ -59,47 +55,12 @@ namespace com.Halcyon.Core.Manager
             }
         }
 
-        public static void LogException(Exception exception)
+        private void LogToFile(string message)
         {
-            Log("", LogType.Exception, exception);
+            File.AppendAllText(_currentFilePath, message);
         }
 
-        public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
-        {
-            if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
-            {
-                message += ".";
-            }
-            
-            switch (logType)
-            {
-                case LogType.Log:
-                    Debug.Log(message);
-                    
-                    break;
-                case LogType.Warning:
-                    Debug.LogWarning(message);
-
-                    break;
-                case LogType.Error:
-                    Debug.LogError(message);
-
-                    break;
-                case LogType.Exception:
-                    Debug.LogException(exception);
-
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException($"Argument is out of range of {nameof(logType)}. Initial Message:\n{message}");
-            }
-        }
-
-        private static void LogToFile(string message)
-        {
-            File.AppendAllText(CurrentFilePath, message);
-        }
-
-        private static string ConstructLogMessage(string message, string severity, string stackTrace = "")
+        private string ConstructLogMessage(string message, string severity, string stackTrace = "")
         {
             string currentTimeAsString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string logMessage = $"[{severity}][{currentTimeAsString}] {message}\n{(!stackTrace.Equals("") ? stackTrace : "")}";
@@ -107,7 +68,7 @@ namespace com.Halcyon.Core.Manager
             return logMessage;
         }
 
-        private static int UpdateLogFileCounter()
+        private int UpdateLogFileCounter()
         {
             string[] existingLogs = Directory.GetFiles(Constants.LogsFolderPath, "*_session_log.txt");
 
@@ -123,7 +84,7 @@ namespace com.Halcyon.Core.Manager
             }
         }
 
-        private static string ConstructCurrentFilePath(int logFileCounter)
+        private string ConstructCurrentFilePath(int logFileCounter)
         {
             string path = Path.Combine(Constants.LogsFolderPath, $"{logFileCounter:0000}_session_log.txt").Replace("\\", "/");
 
