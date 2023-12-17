@@ -54,7 +54,7 @@
                     "name": "Mouse3 Scroll",
                     "type": "PassThrough",
                     "id": "1471ea42-b403-433d-bfb2-a45b14f661de",
-                    "expectedControlType": "Delta",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -115,12 +115,12 @@
                 },
                 {
                     "name": "MouseMove",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "21a3ea35-b837-469f-9ea9-4d9026d37809",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "ToggleBuild",
@@ -242,9 +242,9 @@
                 {
                     "name": "",
                     "id": "17afde31-caf7-468e-a745-f01632b68f0f",
-                    "path": "<Mouse>/scroll",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "Normalize(min=-1,max=1)",
                     "groups": "",
                     "action": "Mouse3 Scroll",
                     "isComposite": false,

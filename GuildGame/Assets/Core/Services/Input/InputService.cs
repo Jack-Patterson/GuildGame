@@ -77,9 +77,9 @@ namespace com.Halcyon.Core.Services.Input
             Mouse3PressEnded?.Invoke();
         }
 
-        public void InvokeMouse3ScrollPerformed(Vector2 value)
+        public void InvokeMouse3ScrollPerformed(float value)
         {
-            Mouse3ScrollPerformed?.Invoke(value.y);
+            Mouse3ScrollPerformed?.Invoke(value);
         }
 
         public void InvokeMouseMoveStarted(Vector2 value)

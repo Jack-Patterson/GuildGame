@@ -135,17 +135,17 @@ namespace com.Halcyon.Core.Building
 
         internal Vector3 PointToPosition()
         {
-            Ray ray = Camera.main.ScreenPointToRay(_currentMousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
-            {
-                if (hit.collider.GetComponent<IBuilderItem>() != null)
-                    return SnapToGrid(_lastPosition);
-                    
-                return SnapToGrid(hit.point);
-            }
-
+            // Ray ray = Camera.main.ScreenPointToRay(_currentMousePosition);
+            // RaycastHit hit;
+            //
+            // if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
+            // {
+            //     if (hit.collider.GetComponent<IBuilderItem>() != null)
+            //         return SnapToGrid(_lastPosition);
+            //         
+            //     return SnapToGrid(hit.point);
+            // }
+            //
             return SnapToGrid(_lastPosition);
         }
 

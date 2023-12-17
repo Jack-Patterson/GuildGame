@@ -1,3 +1,4 @@
+using Cinemachine;
 using com.Halcyon.API.Core;
 
 namespace com.Halcyon.Core.Manager
@@ -5,6 +6,14 @@ namespace com.Halcyon.Core.Manager
     public class GameManager : GameManagerBase
     {
         public new static GameManager Instance => GameManagerBase.Instance as GameManager;
+
+        private CinemachineVirtualCamera _virtualCamera;
+
+        public CinemachineVirtualCamera VirtualCamera
+        {
+            get => _virtualCamera;
+            set => _virtualCamera = value;
+        }
 
         private new void Awake()
         {

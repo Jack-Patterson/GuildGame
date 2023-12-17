@@ -38,7 +38,7 @@ namespace com.Halcyon.API.Services.Input
         void InvokeMouse2PressEnded();
         void InvokeMouse3PressStarted();
         void InvokeMouse3PressEnded();
-        void InvokeMouse3ScrollPerformed(Vector2 value);
+        void InvokeMouse3ScrollPerformed(float value);
         void InvokeMouseMoveStarted(Vector2 value);
         void InvokeMousePositionPerformed(Vector2 value);
         void InvokeMousePositionPerformedWithMouse1(Vector2 value);

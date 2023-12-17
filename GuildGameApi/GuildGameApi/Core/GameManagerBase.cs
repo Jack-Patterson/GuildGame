@@ -13,6 +13,7 @@ public class GameManagerBase : MonoBehaviour
     private LoggerService _logger = null!;
     private BuilderAbstract _builder = null!;
     private IDataHolderService _dataHolder = null!;
+    // private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
     public static GameManagerBase Instance => _gManagerBase;
 

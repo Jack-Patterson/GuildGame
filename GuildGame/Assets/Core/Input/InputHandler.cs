@@ -84,7 +84,7 @@ namespace com.Halcyon.Core.Input
 
         private void OnMouseScrollPerformed(InputAction.CallbackContext eventAction)
         {
-            Vector2 mouseScrollAmount = eventAction.ReadValue<Vector2>();
+            float mouseScrollAmount = eventAction.ReadValue<float>();
             _inputService.InvokeMouse3ScrollPerformed(mouseScrollAmount);
         }
 
