@@ -22,9 +22,10 @@ public abstract class BuilderAbstract : MonoBehaviour
     {
         set => BuilderItems.Add(value);
     }
-    
+
     protected void Start()
     {
+        GameManagerBase.Instance.Builder = this;
         GameManagerBase.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
 
         BuilderGameStateEnabled += OnBuilderGameStateEnabled;

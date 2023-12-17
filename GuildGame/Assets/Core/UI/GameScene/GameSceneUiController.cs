@@ -46,14 +46,15 @@ namespace com.Halcyon.Core.UI.GameScene
 
         private void SaveAction()
         {
-            print(builder.SaveAction("builderitems"));
+            print(GameManager.Instance.DataHolder.SaveData("builderitems1"));
         }
         
         private void LoadAction()
         {
-            var items = builder.LoadAction<List<SerializableBuilderItem>>("builderitems");
+            var items = GameManager.Instance.DataHolder.LoadData("builderitems1");
             print(items);
-            SerializableBuilderItem.InstantiateItemsAndReferences(items, builder);
+            print(items.BuilderItems);
+            print(items.BuilderItems.Count);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using com.Halcyon.API.Core.Building;
+﻿using com.Halcyon.API.Core;
+using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using UnityEngine;
 
@@ -51,15 +52,14 @@ public class SerializableBuilderItem
         return newBuilderItems;
     }
 
-    public static List<IBuilderItem> InstantiateItemsAndReferences(List<SerializableBuilderItem> builderItems,
-        BuilderAbstract builder)
+    public static List<IBuilderItem> InstantiateItemsAndReferences(List<SerializableBuilderItem> builderItems)
     {
         List<IBuilderItem> newBuilderItems = new List<IBuilderItem>();
         foreach (SerializableBuilderItem builderItem in builderItems)
         {
-            GameObject prefab = builder.GetPrefabBasedOnType(builderItem.BuilderItemType);
+            GameObject prefab = GameManagerBase.Instance.Builder.GetPrefabBasedOnType(builderItem.BuilderItemType);
 
-            GameObject go = builder.InstantiateBuilderPrefab(prefab, builderItem.Position.GetUnityVector(),
+            GameObject go = GameManagerBase.Instance.Builder.InstantiateBuilderPrefab(prefab, builderItem.Position.GetUnityVector(),
                 builderItem.Rotation.GetUnityQuaternion());
 
             IBuilderItem builderItemInterface = go.GetComponent<IBuilderItem>();

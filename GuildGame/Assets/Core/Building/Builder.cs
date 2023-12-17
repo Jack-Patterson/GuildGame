@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using com.Halcyon.API.Core;
+﻿using System.Collections.Generic;
 using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
@@ -37,17 +35,6 @@ namespace com.Halcyon.Core.Building
             _wallBuilder.LastPosition = _wallBuilder.CurrentPosition;
             _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
             _pointerHandler.SetPointerPosition(_wallBuilder.CurrentPosition);
-        }
-
-        public bool SaveAction(string relativeLocation)
-        {
-            return GameManager.Instance.GameParameters.JsonSerializationService.SaveData(
-                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(BuilderItems), relativeLocation);
-        }
-
-        public T LoadAction<T>(string relativeLocation)
-        {
-            return GameManager.Instance.GameParameters.JsonSerializationService.LoadData<T>(relativeLocation);
         }
 
         internal void GetFloors()

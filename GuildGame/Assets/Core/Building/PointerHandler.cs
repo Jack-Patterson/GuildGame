@@ -23,7 +23,6 @@ namespace com.Halcyon.Core.Building
 
         private void TogglePointerVisibility()
         {
-            Debug.Log(pointer.activeSelf);
             pointer.SetActive(!pointer.activeSelf);
         }
     }

@@ -1,12 +1,11 @@
 using com.Halcyon.API.Core;
-using UnityEngine;
 
 namespace com.Halcyon.Core.Manager
 {
     public class GameManager : GameManagerBase
     {
         public new static GameManager Instance => GameManagerBase.Instance as GameManager;
-        
+
         private new void Awake()
         {
             base.Awake();
@@ -21,10 +20,8 @@ namespace com.Halcyon.Core.Manager
             //     int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
             //     SceneManager.LoadScene(nextSceneIndex);
             // }
-            
+
             // print(_testNum);
         }
-
-        
     }
 }
