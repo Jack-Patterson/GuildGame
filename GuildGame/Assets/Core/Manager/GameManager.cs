@@ -7,9 +7,9 @@ namespace com.Halcyon.Core.Manager
     {
         public new static GameManager Instance => GameManagerBase.Instance as GameManager;
 
-        private CinemachineVirtualCamera _virtualCamera;
+        private CinemachineFreeLook _virtualCamera;
 
-        public CinemachineVirtualCamera VirtualCamera
+        public CinemachineFreeLook VirtualCamera
         {
             get => _virtualCamera;
             set => _virtualCamera = value;

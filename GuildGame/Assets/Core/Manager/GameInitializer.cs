@@ -2,7 +2,9 @@
 using System.IO;
 using com.Halcyon.API.Core;
 using com.Halcyon.API.Services.DataHolder;
+using com.Halcyon.Core.Camera;
 using com.Halcyon.Core.Modding;
+using com.Halcyon.Core.Services.DataHolder;
 using com.Halcyon.Core.Services.Input;
 using com.Halcyon.Core.Services.Scenes;
 using com.Halcyon.Core.Services.Serialization;
@@ -18,6 +20,7 @@ namespace com.Halcyon.Core.Manager
         {
             GameManager.Instance.Logger = new GameLogger();
             GameManager.Instance.DataHolder = new DataHolder();
+            GameManager.Instance.CameraParameters = new CameraParameters();
             GameManager.Instance.GameParameters = new GameParameters(new JsonSerializationService(), new SceneService(),
                 new InputService(), GameState.MainMenu);
 
@@ -28,7 +31,7 @@ namespace com.Halcyon.Core.Manager
             HandleCommandLineArguments();
 
             GameInitializationComplete?.Invoke();
-            
+
             ModsInitializer.CollectAndInitialiseAllMods();
         }
 
@@ -71,7 +74,8 @@ namespace com.Halcyon.Core.Manager
                 return true;
             }
 
-            GameManager.Instance.Logger.Log($"Folder {path.Split("/")[^1]} does not exist. Creating folder.", LogType.Warning);
+            GameManager.Instance.Logger.Log($"Folder {path.Split("/")[^1]} does not exist. Creating folder.",
+                LogType.Warning);
             return false;
         }
 

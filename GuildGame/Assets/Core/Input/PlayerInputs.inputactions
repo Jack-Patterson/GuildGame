@@ -374,7 +374,7 @@
                 {
                     "name": "binding",
                     "id": "5cecd0b6-99ff-4705-9cf5-5fd3f8b42407",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

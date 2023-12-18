@@ -51,7 +51,7 @@ namespace com.Halcyon.Core.UI.GameScene
         
         private void LoadAction()
         {
-            var items = GameManager.Instance.DataHolder.LoadData("builderitems1");
+            GameManager.Instance.DataHolder = GameManager.Instance.DataHolder.LoadData("builderitems1");
         }
     }
 }

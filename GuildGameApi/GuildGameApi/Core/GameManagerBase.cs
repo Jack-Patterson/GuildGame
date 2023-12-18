@@ -1,4 +1,5 @@
 ﻿using com.Halcyon.API.Core.Building;
+using com.Halcyon.API.Core.Camera;
 using com.Halcyon.API.Services.DataHolder;
 using com.Halcyon.API.Services.Logger;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class GameManagerBase : MonoBehaviour
     private LoggerService _logger = null!;
     private BuilderAbstract _builder = null!;
     private IDataHolderService _dataHolder = null!;
+    private ICameraParameters _cameraParameters = null!;
     // private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
     public static GameManagerBase Instance => _gManagerBase;
@@ -33,6 +35,12 @@ public class GameManagerBase : MonoBehaviour
     {
         get => _dataHolder;
         set => _dataHolder = value;
+    }
+    
+    public ICameraParameters CameraParameters
+    {
+        get => _cameraParameters;
+        set => _cameraParameters = value;
     }
 
     public GameParameters GameParameters
