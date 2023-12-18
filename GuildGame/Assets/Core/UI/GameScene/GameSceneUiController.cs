@@ -46,12 +46,12 @@ namespace com.Halcyon.Core.UI.GameScene
 
         private void SaveAction()
         {
-            print(GameManager.Instance.DataHolder.SaveData("builderitems1"));
+            print(GameManager.Instance.DataHolder.SaveData("GameSaveTest"));
         }
         
         private void LoadAction()
         {
-            GameManager.Instance.DataHolder = GameManager.Instance.DataHolder.LoadData("builderitems1");
+            GameManager.Instance.DataHolder = GameManager.Instance.DataHolder.LoadData("GameSaveTest");
         }
     }
 }

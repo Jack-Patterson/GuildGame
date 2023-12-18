@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.Core.Manager;
@@ -6,17 +5,30 @@ using UnityEngine;
 
 namespace com.Halcyon.Core.Camera
 {
-    public class CameraController : MonoBehaviour
+    public class CameraHandler : MonoBehaviour
     {
         private CinemachineFreeLook Camera => GameManager.Instance.VirtualCamera;
+        private UnityEngine.Camera UnityEngineCamera => UnityEngine.Camera.main;
         private CameraParameters CameraParameter => GameManager.Instance.CameraParameters as CameraParameters;
+        private Vector2 _moveDirection = Vector2.zero;
 
         private void Awake()
         {
             GameInitializer.GameInitializationComplete += AssignCamera;
             GameInitializer.GameInitializationComplete += AssignCameraParameters;
             GameInitializer.GameInitializationComplete += () =>
+            {
                 GameManager.Instance.GameParameters.InputService.Mouse3ScrollPerformed += ZoomCamera;
+                GameManager.Instance.GameParameters.InputService.MovePerformed += UpdateMoveDirection;
+            };
+        }
+
+        private void Update()
+        {
+            if (_moveDirection != Vector2.zero)
+            {
+                MoveCamera();
+            }
         }
 
         private void AssignCamera()
@@ -38,19 +50,19 @@ namespace com.Halcyon.Core.Camera
             switch (value)
             {
                 case < 0:
-                    topNewRadius = Mathf.Clamp(CameraParameter.TopRigCurrent.Radius + 1f,
+                    topNewRadius = Mathf.Clamp(CameraParameter.TopRigCurrent.Radius + CameraParameter.ZoomSpeed,
                         CameraParameter.TopRigMinimum.Radius, CameraParameter.TopRigMaximum.Radius);
-                    middleNewRadius = Mathf.Clamp(CameraParameter.MiddleRigCurrent.Radius + 1f,
+                    middleNewRadius = Mathf.Clamp(CameraParameter.MiddleRigCurrent.Radius + CameraParameter.ZoomSpeed,
                         CameraParameter.MiddleRigMinimum.Radius, CameraParameter.MiddleRigMaximum.Radius);
-                    bottomNewRadius = Mathf.Clamp(CameraParameter.BottomRigCurrent.Radius + 1f,
+                    bottomNewRadius = Mathf.Clamp(CameraParameter.BottomRigCurrent.Radius + CameraParameter.ZoomSpeed,
                         CameraParameter.BottomRigMinimum.Radius, CameraParameter.BottomRigMaximum.Radius);
                     break;
                 case > 0:
-                    topNewRadius = Mathf.Clamp(CameraParameter.TopRigCurrent.Radius - 1f,
+                    topNewRadius = Mathf.Clamp(CameraParameter.TopRigCurrent.Radius - CameraParameter.ZoomSpeed,
                         CameraParameter.TopRigMinimum.Radius, CameraParameter.TopRigMaximum.Radius);
-                    middleNewRadius = Mathf.Clamp(CameraParameter.MiddleRigCurrent.Radius - 1f,
+                    middleNewRadius = Mathf.Clamp(CameraParameter.MiddleRigCurrent.Radius - CameraParameter.ZoomSpeed,
                         CameraParameter.MiddleRigMinimum.Radius, CameraParameter.MiddleRigMaximum.Radius);
-                    bottomNewRadius = Mathf.Clamp(CameraParameter.BottomRigCurrent.Radius - 1f,
+                    bottomNewRadius = Mathf.Clamp(CameraParameter.BottomRigCurrent.Radius - CameraParameter.ZoomSpeed,
                         CameraParameter.BottomRigMinimum.Radius, CameraParameter.BottomRigMaximum.Radius);
                     break;
                 default:
@@ -62,6 +74,33 @@ namespace com.Halcyon.Core.Camera
                 new RigParameters(CameraParameter.MiddleRigCurrent.Height, middleNewRadius);
             CameraParameter.BottomRigCurrent =
                 new RigParameters(CameraParameter.BottomRigCurrent.Height, bottomNewRadius);
+        }
+
+        private void MoveCamera()
+        {
+            print(_moveDirection);
+
+            float moveDirectionX, moveDirectionZ;
+
+            if (_moveDirection.x > 0) moveDirectionX = 1f;
+            else if (_moveDirection.x < 0) moveDirectionX = -1f;
+            else moveDirectionX = 0f;
+
+            if (_moveDirection.y > 0) moveDirectionZ = 1f;
+            else if (_moveDirection.y < 0) moveDirectionZ = -1f;
+            else moveDirectionZ = 0f;
+
+            Transform mainCamera = UnityEngineCamera.transform;
+            Vector3 movement = mainCamera.forward * moveDirectionZ + mainCamera.right * moveDirectionX;
+            movement.y = 0f;
+            movement.Normalize();
+            
+            Camera.Follow.Translate(movement * (CameraParameter.MoveSpeed * Time.deltaTime));
+        }
+
+        private void UpdateMoveDirection(Vector2 value)
+        {
+            _moveDirection = value;
         }
     }
 }

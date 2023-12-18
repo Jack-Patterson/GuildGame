@@ -13,4 +13,7 @@ public interface ICameraParameters
     RigParameters TopRigCurrent { get; set; }
     RigParameters MiddleRigCurrent { get; set; }
     RigParameters BottomRigCurrent { get; set; }
+    
+    float MoveSpeed { get; set; }
+    float ZoomSpeed { get; set; }
 }

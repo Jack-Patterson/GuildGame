@@ -6,13 +6,28 @@ namespace com.Halcyon.Core.Camera
 {
     public class CameraParameters : ICameraParameters
     {
-        public RigParameters TopRigMinimum => new RigParameters(15f, 1f);
-        public RigParameters MiddleRigMinimum => new RigParameters(8f, 7f);
-        public RigParameters BottomRigMinimum => new RigParameters(1f, 7f);
+        public RigParameters TopRigMinimum => new RigParameters(40f, 1f);
+        public RigParameters MiddleRigMinimum => new RigParameters(12f, 7f);
+        public RigParameters BottomRigMinimum => new RigParameters(5f, 9f);
 
-        public RigParameters TopRigMaximum => new RigParameters(15f, 51f);
-        public RigParameters MiddleRigMaximum => new RigParameters(8f, 57f);
-        public RigParameters BottomRigMaximum => new RigParameters(1f, 57f);
+        public RigParameters TopRigMaximum => new RigParameters(40f, 51f);
+        public RigParameters MiddleRigMaximum => new RigParameters(12f, 57f);
+        public RigParameters BottomRigMaximum => new RigParameters(5f, 57f);
+
+        private float _moveSpeed = 5f;
+        private float _zoomSpeed = 1f;
+
+        public float MoveSpeed
+        {
+            get => _moveSpeed;
+            set => _moveSpeed = value;
+        }
+
+        public float ZoomSpeed
+        {
+            get => _zoomSpeed;
+            set => _zoomSpeed = value;
+        }
 
         public RigParameters TopRigCurrent
         {
