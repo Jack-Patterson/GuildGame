@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using com.Halcyon.API.Core.Camera;
+using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
 
 namespace com.Halcyon.Core.Camera
@@ -17,6 +18,9 @@ namespace com.Halcyon.Core.Camera
         private float _moveSpeed = 5f;
         private float _zoomSpeed = 1f;
 
+        private SerializableVector2 _cameraBoundsPositive = new SerializableVector2(50f, 50f);
+        private SerializableVector2 _cameraBoundsNegative = new SerializableVector2(-50f, -50f);
+
         public float MoveSpeed
         {
             get => _moveSpeed;
@@ -27,6 +31,18 @@ namespace com.Halcyon.Core.Camera
         {
             get => _zoomSpeed;
             set => _zoomSpeed = value;
+        }
+
+        public SerializableVector2 CameraBoundsPositive
+        {
+            get => _cameraBoundsPositive;
+            set => _cameraBoundsPositive = value;
+        }
+
+        public SerializableVector2 CameraBoundsNegative
+        {
+            get => _cameraBoundsNegative;
+            set => _cameraBoundsNegative = value;
         }
 
         public RigParameters TopRigCurrent

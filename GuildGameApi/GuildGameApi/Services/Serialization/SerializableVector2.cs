@@ -12,7 +12,13 @@ public class SerializableVector2
         x = vector.x;
         y = vector.y;
     }
-    
+
+    public SerializableVector2(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
     public Vector2 GetUnityVector() => new(x, y);
 
     public static List<SerializableVector2> GetSerializableListOfUnityVector2(List<Vector2> vList)
