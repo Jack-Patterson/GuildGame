@@ -74,12 +74,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Mouse3 Scroll"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""1471ea42-b403-433d-bfb2-a45b14f661de"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1,max=1)"",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Menu"",
@@ -266,7 +266,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""id"": ""17afde31-caf7-468e-a745-f01632b68f0f"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
-                    ""processors"": ""Normalize(min=-1,max=1)"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Mouse3 Scroll"",
                     ""isComposite"": false,
