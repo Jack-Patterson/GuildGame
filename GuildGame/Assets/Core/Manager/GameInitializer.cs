@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using com.Halcyon.API.Core;
-using com.Halcyon.API.Services.DataHolder;
 using com.Halcyon.Core.Camera;
 using com.Halcyon.Core.Modding;
 using com.Halcyon.Core.Services.DataHolder;

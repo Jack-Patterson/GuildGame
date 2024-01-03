@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GuildGameApi</name>
+    </assembly>
+    <members>
+        <member name="M:com.Halcyon.API.Services.Logger.LoggerService.Log(System.String,UnityEngine.LogType,System.Exception)">
+            <summary>
+            Test
+            </summary>
+            <param name="message"></param>
+            <param name="logType"></param>
+            <param name="exception"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:com.Halcyon.API.Services.Logger.LoggerService.LogException(System.Exception)">
+            <summary>
+            Test
+            </summary>
+            <param name="exception"></param>
+        </member>
+    </members>
+</doc>

@@ -9,12 +9,12 @@ namespace com.Halcyon.Core.Modding
 {
     public static class ModsInitializer
     {
-        internal static void CollectAndInitialiseAllMods()
+        public static void CollectAndInitialiseAllMods()
         {
             GameManager.Instance.Logger.Log("Collecting and loading all mods.");
-            
+
             string[] assemblies = CollectAssemblies();
-            
+
             if (assemblies.Length > 0)
             {
                 LoadAssemblies(assemblies);
@@ -64,7 +64,7 @@ namespace com.Halcyon.Core.Modding
         {
             string[] assemblies = Directory.GetFiles(Constants.ModsFolderPath, "*.dll", SearchOption.AllDirectories);
             GameManager.Instance.Logger.Log($"Collected {assemblies.Length} mod assemblies.");
-            
+
             return assemblies;
         }
 
@@ -79,7 +79,7 @@ namespace com.Halcyon.Core.Modding
             {
                 types = ex.Types;
             }
-            
+
             return types != null && types.Length > 0;
         }
     }

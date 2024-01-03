@@ -8,6 +8,14 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile></DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile></DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <Reference Include="UnityEngine">
             <HintPath>..\..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2021.3.23f1\Editor\Data\Managed\UnityEngine.dll</HintPath>

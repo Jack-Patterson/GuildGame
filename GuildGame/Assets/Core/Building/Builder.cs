@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using com.Halcyon.API.Core.Building;
-using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace com.Halcyon.Core.Building
             if (!IsInBuildMode())
                 return;
 
-            _wallBuilder.LastPosition = _wallBuilder.CurrentPosition;
+            _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);
             _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
             _pointerHandler.SetPointerPosition(_wallBuilder.CurrentPosition);
         }

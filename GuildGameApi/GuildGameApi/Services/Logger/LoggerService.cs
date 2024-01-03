@@ -9,6 +9,13 @@ public abstract class LoggerService
         Log(loggerParameters.Message, loggerParameters.LogType, loggerParameters.Exception);
     }
 
+    /// <summary>
+    /// Test
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="logType"></param>
+    /// <param name="exception"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
     {
         if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
@@ -36,6 +43,11 @@ public abstract class LoggerService
         }
     }
 
+    public void Log(object message, LogType logType = LogType.Log, Exception? exception = null)
+    {
+        Log(message.ToString(), logType, exception);
+    }
+    
     public void LogException(Exception exception)
     {
         Log("", LogType.Exception, exception);

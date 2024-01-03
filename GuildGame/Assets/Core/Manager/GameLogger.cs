@@ -19,9 +19,9 @@ namespace com.Halcyon.Core.Manager
             {
                 GameInitializer.CreateFolder(Constants.LogsFolderPath);
             }
-            
+
             Application.logMessageReceived += LogToFile;
-            
+
             int logFileCounter = UpdateLogFileCounter();
             _currentFilePath = ConstructCurrentFilePath(logFileCounter);
         }
@@ -32,7 +32,7 @@ namespace com.Halcyon.Core.Manager
             {
                 case LogType.Log:
                     LogToFile(ConstructLogMessage(message, "Normal"));
-                    
+
                     break;
                 case LogType.Warning:
                     LogToFile(ConstructLogMessage(message, "Warning"));
@@ -51,7 +51,8 @@ namespace com.Halcyon.Core.Manager
 
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Argument is out of range of {nameof(logType)}. Initial Message:\n{message}");
+                    throw new ArgumentOutOfRangeException(
+                        $"Argument is out of range of {nameof(logType)}. Initial Message:\n{message}");
             }
         }
 
@@ -63,7 +64,8 @@ namespace com.Halcyon.Core.Manager
         private string ConstructLogMessage(string message, string severity, string stackTrace = "")
         {
             string currentTimeAsString = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string logMessage = $"[{severity}][{currentTimeAsString}] {message}\n{(!stackTrace.Equals("") ? stackTrace : "")}";
+            string logMessage =
+                $"[{severity}][{currentTimeAsString}] {message}\n{(!stackTrace.Equals("") ? stackTrace : "")}";
 
             return logMessage;
         }
@@ -86,7 +88,8 @@ namespace com.Halcyon.Core.Manager
 
         private string ConstructCurrentFilePath(int logFileCounter)
         {
-            string path = Path.Combine(Constants.LogsFolderPath, $"{logFileCounter:0000}_session_log.txt").Replace("\\", "/");
+            string path = Path.Combine(Constants.LogsFolderPath, $"{logFileCounter:0000}_session_log.txt")
+                .Replace("\\", "/");
 
             return path;
         }

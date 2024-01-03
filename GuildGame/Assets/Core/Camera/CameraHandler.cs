@@ -78,8 +78,6 @@ namespace com.Halcyon.Core.Camera
 
         private void MoveCamera()
         {
-            print(_moveDirection);
-
             float moveDirectionX, moveDirectionZ;
 
             if (_moveDirection.x > 0) moveDirectionX = 1f;
@@ -94,7 +92,7 @@ namespace com.Halcyon.Core.Camera
             Vector3 movement = mainCamera.forward * moveDirectionZ + mainCamera.right * moveDirectionX;
             movement.y = 0f;
             movement.Normalize();
-            
+
             Camera.Follow.Translate(movement * (CameraParameter.MoveSpeed * Time.deltaTime));
         }
 

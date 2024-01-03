@@ -14915,7 +14915,7 @@ GameObject:
   - component: {fileID: 461553507}
   - component: {fileID: 461553506}
   - component: {fileID: 461553505}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26858,7 +26858,7 @@ MonoBehaviour:
   wallPostPrefab: {fileID: 5008278422797871394, guid: 998c428233d82d942be7aa93f9664dc6, type: 3}
   placeRaycast:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 8
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -30447,7 +30447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_CollectObjects: 0
+  m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -43552,7 +43552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 8
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2

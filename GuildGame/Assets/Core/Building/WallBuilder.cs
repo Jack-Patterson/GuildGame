@@ -60,12 +60,61 @@ namespace com.Halcyon.Core.Building
 
         internal void DrawWall(Vector2 vector)
         {
-            if (!_isDrawingCreation || Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition) ||
-                GameManager.Instance.GameParameters.GameState != GameState.Building)
+            if (!IsDrawingCreation || GameManager.Instance.GameParameters.GameState != GameState.Building ||
+                Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
+
+            // if (Vector3.Distance(CurrentPosition, LastPosition) != WallGridSize)
+            // {
+            //     Vector3 positionDifference = CurrentPosition - LastPosition;
+            //
+            //     GameManager.Instance.Logger.Log("Current " + CurrentPosition);
+            //     GameManager.Instance.Logger.Log("Last " + LastPosition);
+            //     GameManager.Instance.Logger.Log("Difference " + positionDifference);
+            //     // original is z -30
+            //
+            //     if (Math.Abs(positionDifference.x) != 0f)
+            //     {
+            //         float amountToRectify = Math.Abs(positionDifference.x) - WallGridSize;
+            //
+            //         if (positionDifference.x < -WallGridSize)
+            //         {
+            //             LastPosition = new Vector3(LastPosition.x - amountToRectify, LastPosition.y, LastPosition.z);
+            //         }
+            //         else if (positionDifference.x > WallGridSize)
+            //         {
+            //             LastPosition = new Vector3(LastPosition.x + amountToRectify, LastPosition.y, LastPosition.z);
+            //         }
+            //         else
+            //         {
+            //             GameManager.Instance.Logger.Log("Somehow got here x axis");
+            //         }
+            //     }
+            //
+            //     if (Math.Abs(positionDifference.z) != 0f)
+            //     {
+            //         float amountToRectify = Math.Abs(positionDifference.z) - WallGridSize;
+            //
+            //         if (positionDifference.z < -WallGridSize)
+            //         {
+            //             LastPosition = new Vector3(LastPosition.x, LastPosition.y, LastPosition.z - amountToRectify);
+            //         }
+            //         else if (positionDifference.z > WallGridSize)
+            //         {
+            //             LastPosition = new Vector3(LastPosition.x, LastPosition.y, LastPosition.z + amountToRectify);
+            //         }
+            //         else
+            //         {
+            //             GameManager.Instance.Logger.Log("Somehow got here z axis");
+            //         }
+            //     }
+            // }
 
             Vector3 instantiationPoint = (CurrentPosition + LastPosition) / 2;
             instantiationPoint.y += 5f;
+            
+            bool shouldRotatePrefab = Math.Abs(instantiationPoint.x) != Math.Abs(CurrentPosition.x);
+            Quaternion rotation = Quaternion.Euler(0, shouldRotatePrefab ? 0 : 90, 0);
 
             Collider[] colliders = Physics.OverlapSphere(
                 new Vector3(instantiationPoint.x, instantiationPoint.y + 2f, instantiationPoint.z), 1f,
@@ -76,9 +125,6 @@ namespace com.Halcyon.Core.Building
 
             if (shouldInstantiateWall && wallPositionValid)
             {
-                bool shouldRotatePrefab = Math.Abs(instantiationPoint.x) != Math.Abs(CurrentPosition.x);
-                Quaternion rotation = Quaternion.Euler(0, shouldRotatePrefab ? 0 : 90, 0);
-
                 _builder.InstantiateBuilderPrefab(_wallPrefab, instantiationPoint, rotation);
 
                 PlacePost(instantiationPoint, rotation);
@@ -137,15 +183,15 @@ namespace com.Halcyon.Core.Building
         {
             Ray ray = UnityEngine.Camera.main.ScreenPointToRay(_currentMousePosition);
             RaycastHit hit;
-            
+
             if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
             {
                 if (hit.collider.GetComponent<IBuilderItem>() != null)
                     return SnapToGrid(_lastPosition);
-                    
+
                 return SnapToGrid(hit.point);
             }
-            
+
             return SnapToGrid(_lastPosition);
         }
 
@@ -174,7 +220,7 @@ namespace com.Halcyon.Core.Building
             return (xMod5 == 0 && zMod10 == 0) || (xMod10 == 0 && zMod5 == 0);
         }
 
-        private Vector3 SnapToGrid(Vector3 position)
+        internal Vector3 SnapToGrid(Vector3 position)
         {
             float x = Mathf.Round(position.x / WallGridSize) * WallGridSize;
             float z = Mathf.Round(position.z / WallGridSize) * WallGridSize;
