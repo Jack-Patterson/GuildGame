@@ -22,13 +22,14 @@ namespace com.Halcyon.Core.Services.Serialization
             get => _serializableBuilderItems;
             set => _serializableBuilderItems = value;
         }
-    
+
         public SerializableDataHolder()
         {
             _serializableBuilderItems = new List<SerializableBuilderItem>();
         }
-    
-        public SerializableDataHolder(List<SerializableBuilderItem> serializableBuilderItems, CameraParameters cameraParameters)
+
+        public SerializableDataHolder(List<SerializableBuilderItem> serializableBuilderItems,
+            CameraParameters cameraParameters)
         {
             _serializableBuilderItems = serializableBuilderItems;
             _cameraParameters = cameraParameters;
@@ -42,10 +43,12 @@ namespace com.Halcyon.Core.Services.Serialization
 
         public SerializableDataHolder(DataHolder.DataHolder dataHolder)
         {
-            _serializableBuilderItems = SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.BuilderItems);
+            _serializableBuilderItems =
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.BuilderItems);
             _cameraParameters = dataHolder.CameraParameters as CameraParameters;
         }
 
-        public DataHolder.DataHolder ToDataHolder() => new DataHolder.DataHolder(SerializableBuilderItems, _cameraParameters as ICameraParameters);
+        public DataHolder.DataHolder ToDataHolder() =>
+            new DataHolder.DataHolder(SerializableBuilderItems, _cameraParameters as ICameraParameters);
     }
 }

@@ -23,6 +23,11 @@ public abstract class BuilderAbstract : MonoBehaviour
         set => BuilderItems.Add(value);
     }
 
+    private void OnDisable()
+    {
+        BuilderGameStateDisabled?.Invoke();
+    }
+
     protected void Start()
     {
         GameManagerBase.Instance.Builder = this;
@@ -53,10 +58,7 @@ public abstract class BuilderAbstract : MonoBehaviour
         return null!;
     }
 
-    protected bool IsInBuildMode()
-    {
-        return GameManagerBase.Instance.GameParameters.GameState == GameState.Building;
-    }
+    protected bool IsInBuildMode() => GameManagerBase.Instance.GameParameters.GameState == GameState.Building;
 
     protected void ToggleBuilderGameState()
     {
