@@ -14,6 +14,8 @@ public abstract class BuilderAbstract : MonoBehaviour
 
     public event Action? BuilderGameStateEnabled;
     public event Action? BuilderGameStateDisabled;
+    // public event Action? BuilderGameStateEnabled;
+    // public event Action? BuilderGameStateDisabled;
     private List<IBuilderItem> _builderItems = new List<IBuilderItem>();
 
     public List<IBuilderItem> BuilderItems => _builderItems;

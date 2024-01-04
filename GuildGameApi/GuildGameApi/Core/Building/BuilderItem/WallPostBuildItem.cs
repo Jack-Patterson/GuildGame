@@ -2,7 +2,7 @@
 
 namespace com.Halcyon.API.Core.Building.BuilderItem;
 
-public class WallPostBuildItem : MonoBehaviour, IBuilderItem
+public class WallPostBuildItem : MonoBehaviour, IWallBuilderItem
 {
     private BuilderItemType _builderItemType = BuilderItemType.WallPost;
 

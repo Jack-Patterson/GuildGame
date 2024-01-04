@@ -9,6 +9,7 @@ namespace com.Halcyon.Core.Builder
     {
         [SerializeField] [HideInInspector] private List<Floor> floors = new List<Floor>();
         
+        private WallBuilderOld _wallBuilderOld;
         private WallBuilder _wallBuilder;
         private PointerHandler _pointerHandler;
 
@@ -22,7 +23,8 @@ namespace com.Halcyon.Core.Builder
         {
             base.Start();
             
-            _wallBuilder = new WallBuilder(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
+            _wallBuilderOld = new WallBuilderOld(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
+            _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
             _pointerHandler = new PointerHandler(pointer, this);
         }
 
@@ -31,9 +33,9 @@ namespace com.Halcyon.Core.Builder
             if (!IsInBuildMode())
                 return;
 
-            _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);
-            _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
-            _pointerHandler.SetPointerPosition(_wallBuilder.CurrentPosition);
+            _wallBuilderOld.LastPosition = _wallBuilderOld.SnapToGrid(_wallBuilderOld.CurrentPosition);
+            _wallBuilderOld.CurrentPosition = _wallBuilderOld.PointToPosition();
+            _pointerHandler.SetPointerPosition(_wallBuilderOld.CurrentPosition);
         }
 
         internal void GetFloors()
@@ -50,10 +52,10 @@ namespace com.Halcyon.Core.Builder
         {
             GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
                 _wallBuilder.UpdateCurrentMousePosition;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                _wallBuilder.DrawWall;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                _wallBuilder.DestroyWall;
+            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+            //     _wallBuilder.DrawWall;
+            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+            //     _wallBuilder.DestroyWall;
             GameManager.Instance.GameParameters.InputService.Mouse1PressStarted +=
                 _wallBuilder.ToggleIsDrawingWallCreation;
             GameManager.Instance.GameParameters.InputService.Mouse1PressEnded +=
@@ -68,10 +70,10 @@ namespace com.Halcyon.Core.Builder
         {
             GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
                 _wallBuilder.UpdateCurrentMousePosition;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                _wallBuilder.DrawWall;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                _wallBuilder.DestroyWall;
+            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+            //     _wallBuilder.Create(this, new List<GameObject> {wallPrefab, wallPostPrefab});
+            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+            //     _wallBuilder.DestroyWall;
             GameManager.Instance.GameParameters.InputService.Mouse1PressStarted -=
                 _wallBuilder.ToggleIsDrawingWallCreation;
             GameManager.Instance.GameParameters.InputService.Mouse1PressEnded -=
