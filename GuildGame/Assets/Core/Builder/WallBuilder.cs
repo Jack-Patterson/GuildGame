@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 using com.Halcyon.API.Core;
-using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace com.Halcyon.Core.Building
+namespace com.Halcyon.Core.Builder
 {
     public class WallBuilder
     {
@@ -17,7 +15,7 @@ namespace com.Halcyon.Core.Building
 
         private GameObject _wallPrefab;
         private GameObject _wallPostPrefab;
-        private Builder _builder;
+        private Core.Builder.Builder _builder;
         private Vector3 _currentPosition = Vector3.zero;
         private Vector3 _lastPosition = Vector3.zero;
         private Vector2 _currentMousePosition = Vector2.zero;
@@ -49,7 +47,7 @@ namespace com.Halcyon.Core.Building
         }
 
         public WallBuilder(GameObject wallPrefab, GameObject wallPostPrefab, LayerMask placeRaycast,
-            LayerMask wallLayer, Builder builder)
+            LayerMask wallLayer, Core.Builder.Builder builder)
         {
             _wallPrefab = wallPrefab;
             _wallPostPrefab = wallPostPrefab;
@@ -63,52 +61,6 @@ namespace com.Halcyon.Core.Building
             if (!IsDrawingCreation || GameManager.Instance.GameParameters.GameState != GameState.Building ||
                 Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
-
-            // if (Vector3.Distance(CurrentPosition, LastPosition) != WallGridSize)
-            // {
-            //     Vector3 positionDifference = CurrentPosition - LastPosition;
-            //
-            //     GameManager.Instance.Logger.Log("Current " + CurrentPosition);
-            //     GameManager.Instance.Logger.Log("Last " + LastPosition);
-            //     GameManager.Instance.Logger.Log("Difference " + positionDifference);
-            //     // original is z -30
-            //
-            //     if (Math.Abs(positionDifference.x) != 0f)
-            //     {
-            //         float amountToRectify = Math.Abs(positionDifference.x) - WallGridSize;
-            //
-            //         if (positionDifference.x < -WallGridSize)
-            //         {
-            //             LastPosition = new Vector3(LastPosition.x - amountToRectify, LastPosition.y, LastPosition.z);
-            //         }
-            //         else if (positionDifference.x > WallGridSize)
-            //         {
-            //             LastPosition = new Vector3(LastPosition.x + amountToRectify, LastPosition.y, LastPosition.z);
-            //         }
-            //         else
-            //         {
-            //             GameManager.Instance.Logger.Log("Somehow got here x axis");
-            //         }
-            //     }
-            //
-            //     if (Math.Abs(positionDifference.z) != 0f)
-            //     {
-            //         float amountToRectify = Math.Abs(positionDifference.z) - WallGridSize;
-            //
-            //         if (positionDifference.z < -WallGridSize)
-            //         {
-            //             LastPosition = new Vector3(LastPosition.x, LastPosition.y, LastPosition.z - amountToRectify);
-            //         }
-            //         else if (positionDifference.z > WallGridSize)
-            //         {
-            //             LastPosition = new Vector3(LastPosition.x, LastPosition.y, LastPosition.z + amountToRectify);
-            //         }
-            //         else
-            //         {
-            //             GameManager.Instance.Logger.Log("Somehow got here z axis");
-            //         }
-            //     }
-            // }
 
             Vector3 instantiationPoint = (CurrentPosition + LastPosition) / 2;
             instantiationPoint.y += 5f;

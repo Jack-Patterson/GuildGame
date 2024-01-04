@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace com.Halcyon.Core.Building
+namespace com.Halcyon.Core.Builder
 {
     public class GridLines
     {
-        private Builder _builder;
+        private Core.Builder.Builder _builder;
         
         private readonly int _spacing = 10;
 
-        public GridLines(Builder builder)
+        public GridLines(Core.Builder.Builder builder)
         {
             _builder = builder;
         }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.Core.Building
+namespace com.Halcyon.Core.Builder
 {
     public class Floor: MonoBehaviour
     {

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace com.Halcyon.Core.Building
+namespace com.Halcyon.Core.Builder
 {
     public class PointerHandler
     {
-        private GameObject pointer;
-        private Builder _builder;
+        private readonly GameObject _pointer;
+        private Core.Builder.Builder _builder;
 
-        public PointerHandler(GameObject pointer, Builder builder)
+        public PointerHandler(GameObject pointer, Core.Builder.Builder builder)
         {
-            this.pointer = pointer;
+            _pointer = pointer;
             _builder = builder;
 
             _builder.BuilderGameStateEnabled += TogglePointerVisibility;
@@ -18,12 +18,12 @@ namespace com.Halcyon.Core.Building
 
         internal void SetPointerPosition(Vector3 position)
         {
-            pointer.transform.position = position;
+            _pointer.transform.position = position;
         }
 
         private void TogglePointerVisibility()
         {
-            pointer.SetActive(!pointer.activeSelf);
+            _pointer.SetActive(!_pointer.activeSelf);
         }
     }
 }
