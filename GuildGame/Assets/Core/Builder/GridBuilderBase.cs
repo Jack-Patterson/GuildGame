@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Builder
 {
-    internal abstract class GridBuilderBase
+    internal abstract class GridBuilderBase : BuilderSubscriberItem
     {
         private readonly LayerMask _placeRaycast;
         private readonly LayerMask _wallLayer;
@@ -62,14 +63,14 @@ namespace com.Halcyon.Core.Builder
         
         internal Vector3 PointToPosition()
         {
-            Ray ray = UnityEngine.Camera.main.ScreenPointToRay(_currentMousePosition);
+            Ray ray = UnityEngine.Camera.main.ScreenPointToRay(CurrentMousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
             {
                 if (hit.collider.GetComponent<IBuilderItem>() != null)
                     return SnapToGrid(LastPosition);
-
+                GameLogger.Log(("Hitting position", hit.point));
                 return SnapToGrid(hit.point);
             }
 
@@ -94,18 +95,26 @@ namespace com.Halcyon.Core.Builder
             _isDrawingDestruction = !_isDrawingDestruction;
         }
 
-        // public void DrawEvent(Vector2 vector)
-        // {
-        //     Draw(GameManager.Instance.Builder as Builder, new List<GameObject> {wallPrefab, wallPostPrefab});
-        // }
+        internal void DrawEvent(Vector2 vector)
+        {
+            Builder builder = GameManager.Instance.Builder as Builder;
+            Draw(builder, builder!.GetPrefabs(this));
+            GameLogger.Log(vector);
+        }
+        
+        internal void DestroyEvent(Vector2 vector)
+        {
+            Builder builder = GameManager.Instance.Builder as Builder;
+            Destroy(builder);
+        }
         
         internal void UpdateCurrentMousePosition(Vector2 value)
         {
             _currentMousePosition = value;
         }
 
-        public abstract void Draw(Builder builder, List<GameObject> prefabToUse);
-        public abstract void Create(Builder builder, List<GameObject> prefabToUse);
-        public abstract void Destroy(Builder builder);
+        protected abstract void Draw(Builder builder, List<GameObject> prefabToUse);
+        protected abstract void Create(Builder builder, List<GameObject> prefabToUse);
+        protected abstract void Destroy(Builder builder);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using com.Halcyon.API.Core;
+using com.Halcyon.Core.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Builder
@@ -13,19 +15,60 @@ namespace com.Halcyon.Core.Builder
         {
         }
 
-        public override void Draw(Builder builder, List<GameObject> prefabToUse)
+        protected override void Draw(Builder builder, List<GameObject> prefabToUse)
+        {
+            if (!IsDrawingCreation || GameManager.Instance.GameParameters.GameState != GameState.Building ||
+                Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
+                return;
+            
+            GameLogger.Log((prefabToUse.Count, prefabToUse[0], prefabToUse[1]));
+        }
+
+        protected override void Create(Builder builder, List<GameObject> prefabToUse)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void Create(Builder builder, List<GameObject> prefabToUse)
+        protected override void Destroy(Builder builder)
         {
-            throw new System.NotImplementedException();
+            GameLogger.Log("destroying");
         }
 
-        public override void Destroy(Builder builder)
+        protected override void OnBuilderGameStateEnabled()
         {
-            throw new System.NotImplementedException();
+            GameLogger.Log("called");
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                UpdateCurrentMousePosition;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                DrawEvent;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                DestroyEvent;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted +=
+                ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded +=
+                ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted +=
+                ToggleIsDrawingWallDestruction;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded +=
+                ToggleIsDrawingWallDestruction;
+        }
+
+        protected override void OnBuilderGameStateDisabled()
+        {
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                UpdateCurrentMousePosition;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                DrawEvent;
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                DestroyEvent;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted -=
+                ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded -=
+                ToggleIsDrawingWallCreation;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted -=
+                ToggleIsDrawingWallDestruction;
+            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded -=
+                ToggleIsDrawingWallDestruction;
         }
     }
 }

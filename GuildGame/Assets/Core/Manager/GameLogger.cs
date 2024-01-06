@@ -26,6 +26,26 @@ namespace com.Halcyon.Core.Manager
             _currentFilePath = ConstructCurrentFilePath(logFileCounter);
         }
 
+        public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
+        {
+            GameManager.Instance.Logger.Log(message, logType, exception);
+        }
+        
+        public static void Log(object message, LogType logType = LogType.Log, Exception? exception = null)
+        {
+            GameManager.Instance.Logger.Log(message, logType, exception);
+        }
+        
+        public static void Log(LoggerParameters loggerParameters)
+        {
+            GameManager.Instance.Logger.Log(loggerParameters);
+        }
+        
+        public static void LogException(Exception exception)
+        {
+            GameManager.Instance.Logger.LogException(exception);
+        }
+
         private void LogToFile(string message, string stackTrace, LogType logType)
         {
             switch (logType)

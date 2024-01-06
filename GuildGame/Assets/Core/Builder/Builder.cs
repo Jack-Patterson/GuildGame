@@ -33,9 +33,10 @@ namespace com.Halcyon.Core.Builder
             if (!IsInBuildMode())
                 return;
 
-            _wallBuilderOld.LastPosition = _wallBuilderOld.SnapToGrid(_wallBuilderOld.CurrentPosition);
-            _wallBuilderOld.CurrentPosition = _wallBuilderOld.PointToPosition();
-            _pointerHandler.SetPointerPosition(_wallBuilderOld.CurrentPosition);
+            _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);
+            _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
+            print(_wallBuilder.CurrentPosition);
+            _pointerHandler.Position = _wallBuilder.CurrentPosition;
         }
 
         internal void GetFloors()
@@ -48,40 +49,15 @@ namespace com.Halcyon.Core.Builder
             }
         }
 
-        protected override void OnBuilderGameStateEnabled()
+        internal List<GameObject> GetPrefabs(GridBuilderBase gridBuilder)
         {
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                _wallBuilder.UpdateCurrentMousePosition;
-            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-            //     _wallBuilder.DrawWall;
-            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-            //     _wallBuilder.DestroyWall;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted +=
-                _wallBuilder.ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded +=
-                _wallBuilder.ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted +=
-                _wallBuilder.ToggleIsDrawingWallDestruction;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded +=
-                _wallBuilder.ToggleIsDrawingWallDestruction;
-        }
+            switch (gridBuilder)
+            {
+                case WallBuilder:
+                    return new List<GameObject> { wallPrefab, wallPostPrefab };
+            }
 
-        protected override void OnBuilderGameStateDisabled()
-        {
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                _wallBuilder.UpdateCurrentMousePosition;
-            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-            //     _wallBuilder.Create(this, new List<GameObject> {wallPrefab, wallPostPrefab});
-            // GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-            //     _wallBuilder.DestroyWall;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted -=
-                _wallBuilder.ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded -=
-                _wallBuilder.ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted -=
-                _wallBuilder.ToggleIsDrawingWallDestruction;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded -=
-                _wallBuilder.ToggleIsDrawingWallDestruction;
+            return null;
         }
     }
 }

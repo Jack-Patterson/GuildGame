@@ -5,9 +5,15 @@ namespace com.Halcyon.Core.Builder
     public class PointerHandler
     {
         private readonly GameObject _pointer;
-        private Core.Builder.Builder _builder;
+        private Builder _builder;
 
-        public PointerHandler(GameObject pointer, Core.Builder.Builder builder)
+        internal Vector3 Position
+        {
+            get => _pointer.transform.position;
+            set => _pointer.transform.position = value;
+        }
+
+        public PointerHandler(GameObject pointer, Builder builder)
         {
             _pointer = pointer;
             _builder = builder;
@@ -16,13 +22,10 @@ namespace com.Halcyon.Core.Builder
             _builder.BuilderGameStateDisabled += TogglePointerVisibility;
         }
 
-        internal void SetPointerPosition(Vector3 position)
-        {
-            _pointer.transform.position = position;
-        }
-
         private void TogglePointerVisibility()
         {
+            if (_pointer == null) return;
+            
             _pointer.SetActive(!_pointer.activeSelf);
         }
     }

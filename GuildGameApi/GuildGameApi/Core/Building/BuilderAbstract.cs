@@ -14,8 +14,6 @@ public abstract class BuilderAbstract : MonoBehaviour
 
     public event Action? BuilderGameStateEnabled;
     public event Action? BuilderGameStateDisabled;
-    // public event Action? BuilderGameStateEnabled;
-    // public event Action? BuilderGameStateDisabled;
     private List<IBuilderItem> _builderItems = new List<IBuilderItem>();
 
     public List<IBuilderItem> BuilderItems => _builderItems;
@@ -34,9 +32,6 @@ public abstract class BuilderAbstract : MonoBehaviour
     {
         GameManagerBase.Instance.Builder = this;
         GameManagerBase.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
-
-        BuilderGameStateEnabled += OnBuilderGameStateEnabled;
-        BuilderGameStateDisabled += OnBuilderGameStateDisabled;
     }
 
     public GameObject InstantiateBuilderPrefab(GameObject wallPrefab, Vector3 position, Quaternion rotation)
@@ -80,7 +75,13 @@ public abstract class BuilderAbstract : MonoBehaviour
         }
     }
 
-    protected abstract void OnBuilderGameStateEnabled();
-
-    protected abstract void OnBuilderGameStateDisabled();
+    internal void SubscribeActionToGameStateEnabled(Action action)
+    {
+        BuilderGameStateEnabled += action;
+    }
+    
+    internal void SubscribeActionToGameStateDisabled(Action action)
+    {
+        BuilderGameStateDisabled += action;
+    }
 }

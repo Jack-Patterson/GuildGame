@@ -170,6 +170,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Value"",
+                    ""id"": ""220e7678-4df3-49fa-a378-9994550e2d0c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -418,7 +427,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""63f58a7d-5724-4130-99c3-80cc3a702a67"",
-                    ""path"": ""<Mouse>/position"",
+                    ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -458,6 +467,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition&Mouse1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""549a89f4-0176-4c22-97fb-a46e2fe0ecb4"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -482,6 +502,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_PlayerControls_ToggleBuild = m_PlayerControls.FindAction("ToggleBuild", throwIfNotFound: true);
         m_PlayerControls_MousePosition = m_PlayerControls.FindAction("MousePosition", throwIfNotFound: true);
         m_PlayerControls_MousePositionMouse1 = m_PlayerControls.FindAction("MousePosition&Mouse1", throwIfNotFound: true);
+        m_PlayerControls_Newaction = m_PlayerControls.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -559,6 +580,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_ToggleBuild;
     private readonly InputAction m_PlayerControls_MousePosition;
     private readonly InputAction m_PlayerControls_MousePositionMouse1;
+    private readonly InputAction m_PlayerControls_Newaction;
     public struct PlayerControlsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -579,6 +601,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @ToggleBuild => m_Wrapper.m_PlayerControls_ToggleBuild;
         public InputAction @MousePosition => m_Wrapper.m_PlayerControls_MousePosition;
         public InputAction @MousePositionMouse1 => m_Wrapper.m_PlayerControls_MousePositionMouse1;
+        public InputAction @Newaction => m_Wrapper.m_PlayerControls_Newaction;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -636,6 +659,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @MousePositionMouse1.started += instance.OnMousePositionMouse1;
             @MousePositionMouse1.performed += instance.OnMousePositionMouse1;
             @MousePositionMouse1.canceled += instance.OnMousePositionMouse1;
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
         }
 
         private void UnregisterCallbacks(IPlayerControlsActions instance)
@@ -688,6 +714,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @MousePositionMouse1.started -= instance.OnMousePositionMouse1;
             @MousePositionMouse1.performed -= instance.OnMousePositionMouse1;
             @MousePositionMouse1.canceled -= instance.OnMousePositionMouse1;
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
         }
 
         public void RemoveCallbacks(IPlayerControlsActions instance)
@@ -723,5 +752,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnToggleBuild(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMousePositionMouse1(InputAction.CallbackContext context);
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.AI;
 namespace com.Halcyon.API.Core.Character;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public abstract class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : ExtendedMonoBehaviour
 {
     private CharacterClass _characterClass = CharacterClass.None;
     protected NavMeshAgent NavMeshAgent = null!;
