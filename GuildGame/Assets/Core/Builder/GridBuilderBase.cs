@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using com.Halcyon.API.Core.Building;
+using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
@@ -47,6 +47,8 @@ namespace com.Halcyon.Core.Builder
             get => _isDrawingDestruction;
             set => _isDrawingDestruction = value;
         }
+
+        protected bool IsBuildModeEnabled => GameManager.Instance.GameParameters.GameState == GameState.Building;
         
         protected GridBuilderBase(LayerMask placeRaycast, LayerMask wallLayer)
         {
@@ -70,7 +72,7 @@ namespace com.Halcyon.Core.Builder
             {
                 if (hit.collider.GetComponent<IBuilderItem>() != null)
                     return SnapToGrid(LastPosition);
-                GameLogger.Log(("Hitting position", hit.point));
+                // GameLogger.Log(("Hitting position", hit.point));
                 return SnapToGrid(hit.point);
             }
 

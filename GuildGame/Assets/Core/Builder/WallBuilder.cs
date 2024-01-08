@@ -17,7 +17,7 @@ namespace com.Halcyon.Core.Builder
 
         protected override void Draw(Builder builder, List<GameObject> prefabToUse)
         {
-            if (!IsDrawingCreation || GameManager.Instance.GameParameters.GameState != GameState.Building ||
+            if (!IsDrawingCreation || !IsBuildModeEnabled ||
                 Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
             
@@ -31,12 +31,15 @@ namespace com.Halcyon.Core.Builder
 
         protected override void Destroy(Builder builder)
         {
+            if (!IsDrawingDestruction || !IsBuildModeEnabled)
+                return;
+            
             GameLogger.Log("destroying");
         }
 
-        protected override void OnBuilderGameStateEnabled()
+        public override void SubscribeGridBuildMethods()
         {
-            GameLogger.Log("called");
+            GameLogger.Log("Enabled");
             GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
                 UpdateCurrentMousePosition;
             GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
@@ -50,24 +53,6 @@ namespace com.Halcyon.Core.Builder
             GameManager.Instance.GameParameters.InputService.Mouse2PressStarted +=
                 ToggleIsDrawingWallDestruction;
             GameManager.Instance.GameParameters.InputService.Mouse2PressEnded +=
-                ToggleIsDrawingWallDestruction;
-        }
-
-        protected override void OnBuilderGameStateDisabled()
-        {
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                UpdateCurrentMousePosition;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                DrawEvent;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
-                DestroyEvent;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted -=
-                ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded -=
-                ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted -=
-                ToggleIsDrawingWallDestruction;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded -=
                 ToggleIsDrawingWallDestruction;
         }
     }

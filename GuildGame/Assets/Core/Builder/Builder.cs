@@ -8,7 +8,7 @@ namespace com.Halcyon.Core.Builder
     public class Builder : BuilderAbstract
     {
         [SerializeField] [HideInInspector] private List<Floor> floors = new List<Floor>();
-        
+
         private WallBuilderOld _wallBuilderOld;
         private WallBuilder _wallBuilder;
         private PointerHandler _pointerHandler;
@@ -22,9 +22,10 @@ namespace com.Halcyon.Core.Builder
         private new void Start()
         {
             base.Start();
-            
+
             _wallBuilderOld = new WallBuilderOld(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
+            _wallBuilder.SubscribeGridBuildMethods();
             _pointerHandler = new PointerHandler(pointer, this);
         }
 
@@ -35,7 +36,7 @@ namespace com.Halcyon.Core.Builder
 
             _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);
             _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
-            print(_wallBuilder.CurrentPosition);
+            // print(_wallBuilder.CurrentPosition);
             _pointerHandler.Position = _wallBuilder.CurrentPosition;
         }
 

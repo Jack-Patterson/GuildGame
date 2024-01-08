@@ -73,14 +73,4 @@ public abstract class BuilderAbstract : MonoBehaviour
             BuilderGameStateEnabled?.Invoke();
         }
     }
-
-    internal void SubscribeActionToGameStateEnabled(Action action)
-    {
-        BuilderGameStateEnabled += action;
-    }
-    
-    internal void SubscribeActionToGameStateDisabled(Action action)
-    {
-        BuilderGameStateDisabled += action;
-    }
 }

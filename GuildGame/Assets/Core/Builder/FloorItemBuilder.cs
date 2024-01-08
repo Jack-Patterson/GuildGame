@@ -28,12 +28,7 @@ namespace com.Halcyon.Core.Builder
             throw new System.NotImplementedException();
         }
 
-        protected override void OnBuilderGameStateEnabled()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void OnBuilderGameStateDisabled()
+        public override void SubscribeGridBuildMethods()
         {
             throw new System.NotImplementedException();
         }

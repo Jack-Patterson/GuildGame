@@ -4,8 +4,9 @@ public abstract class BuilderSubscriberItem
 {
     protected BuilderSubscriberItem()
     {
-        GameManagerBase.Instance.Builder.SubscribeActionToGameStateEnabled(OnBuilderGameStateEnabled);
-        GameManagerBase.Instance.Builder.SubscribeActionToGameStateEnabled(OnBuilderGameStateDisabled);
+        GameManagerBase.Instance.Logger.Log(GameManagerBase.Instance.Builder);
+        GameManagerBase.Instance.Builder.BuilderGameStateEnabled += OnBuilderGameStateEnabled;
+        GameManagerBase.Instance.Builder.BuilderGameStateEnabled += OnBuilderGameStateDisabled;
         
         GameManagerBase.Instance.Logger.Log("Subscribe item");
     }

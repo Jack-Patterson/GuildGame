@@ -24,8 +24,7 @@ namespace com.Halcyon.Core.Manager
                 new InputService(), GameState.MainMenu);
 
             GameManager.Instance.Logger.Log("Beginning initial game startup.");
-
-
+            
             ValidateAndCreateFolders();
             HandleCommandLineArguments();
 

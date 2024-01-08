@@ -2,6 +2,7 @@
 
 using System;
 using com.Halcyon.API.Services.Input;
+using com.Halcyon.Core.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Services.Input

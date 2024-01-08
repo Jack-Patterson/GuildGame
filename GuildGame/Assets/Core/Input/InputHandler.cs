@@ -1,4 +1,5 @@
-﻿using com.Halcyon.Core.Manager;
+﻿using System;
+using com.Halcyon.Core.Manager;
 using com.Halcyon.Core.Services.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +10,6 @@ namespace com.Halcyon.Core.Input
     {
         private PlayerInputs _playerInputs;
         private InputService _inputService;
-        private InputAction _movement;
 
         private void Awake()
         {
@@ -27,7 +27,6 @@ namespace com.Halcyon.Core.Input
         private void OnMovePerformed(InputAction.CallbackContext eventAction)
         {
             Vector2 moveDirection = eventAction.ReadValue<Vector2>();
-            // print(moveDirection);
             _inputService.InvokeMovePerformed(moveDirection);
         }
 
@@ -158,6 +157,7 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.Mouse3Scroll.performed += OnMouseScrollPerformed;
             _playerInputs.PlayerControls.MouseMove.started += OnMouseMoveStarted;
             _playerInputs.PlayerControls.MousePosition.performed += OnMousePositionPerformed;
+            _playerInputs.PlayerControls.MousePositionMouse1.performed += OnMousePositionPerformedWithMouse1;
 
             _playerInputs.PlayerControls.TimePause.started += OnTimePausePressed;
             _playerInputs.PlayerControls.Time1Speed.started += OnTimeOnePressed;
@@ -183,6 +183,7 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.Mouse3Scroll.performed -= OnMouseScrollPerformed;
             _playerInputs.PlayerControls.MouseMove.started -= OnMouseMoveStarted;
             _playerInputs.PlayerControls.MousePosition.performed -= OnMousePositionPerformed;
+            _playerInputs.PlayerControls.MousePositionMouse1.performed -= OnMousePositionPerformedWithMouse1;
 
             _playerInputs.PlayerControls.TimePause.started -= OnTimePausePressed;
             _playerInputs.PlayerControls.Time1Speed.started -= OnTimeOnePressed;
