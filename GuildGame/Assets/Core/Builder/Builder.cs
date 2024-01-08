@@ -30,7 +30,7 @@ namespace com.Halcyon.Core.Builder
 
         private void FixedUpdate()
         {
-            if (!IsInBuildMode())
+            if (!IsInBuildMode)
                 return;
 
             _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);

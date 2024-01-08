@@ -1,5 +1,4 @@
 ﻿using com.Halcyon.API.Core.Building.BuilderItem;
-using com.Halcyon.API.Services.Logger;
 using UnityEngine;
 
 namespace com.Halcyon.API.Core.Building;
@@ -28,6 +27,8 @@ public abstract class BuilderAbstract : MonoBehaviour
         BuilderGameStateDisabled?.Invoke();
     }
 
+    protected bool IsInBuildMode => GameManagerBase.Instance.GameParameters.GameState == GameState.Building;
+
     protected void Start()
     {
         GameManagerBase.Instance.Builder = this;
@@ -54,8 +55,6 @@ public abstract class BuilderAbstract : MonoBehaviour
 
         return null!;
     }
-
-    protected bool IsInBuildMode() => GameManagerBase.Instance.GameParameters.GameState == GameState.Building;
 
     protected void ToggleBuilderGameState()
     {

@@ -26,6 +26,7 @@ namespace com.Halcyon.Core.Manager
             _currentFilePath = ConstructCurrentFilePath(logFileCounter);
         }
 
+#pragma warning disable CS0108, CS0114
         public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
         {
             GameManager.Instance.Logger.Log(message, logType, exception);
@@ -42,6 +43,7 @@ namespace com.Halcyon.Core.Manager
         }
         
         public static void LogException(Exception exception)
+#pragma warning restore CS0108, CS0114
         {
             GameManager.Instance.Logger.LogException(exception);
         }
