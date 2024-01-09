@@ -22,6 +22,11 @@ namespace com.Halcyon.Core.Builder
             _builder.BuilderGameStateDisabled += TogglePointerVisibility;
         }
 
+        private void OnMousePositionChanged(RaycastHit hit)
+        {
+            
+        }
+
         private void TogglePointerVisibility()
         {
             if (_pointer == null) return;

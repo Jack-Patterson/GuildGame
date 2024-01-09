@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using com.Halcyon.API.Core;
+using com.Halcyon.API.Core.Building;
+using com.Halcyon.API.Core.Building.BuilderItem;
+using com.Halcyon.API.Services.Input;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
@@ -17,7 +20,7 @@ namespace com.Halcyon.Core.Builder
 
         protected override void Draw(Builder builder, List<GameObject> prefabToUse)
         {
-            if (!IsDrawingCreation || !IsBuildModeEnabled ||
+            if (!IsDrawingCreation ||
                 Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
             
@@ -39,21 +42,41 @@ namespace com.Halcyon.Core.Builder
 
         public override void SubscribeGridBuildMethods()
         {
-            GameLogger.Log("Enabled");
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                UpdateCurrentMousePosition;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                DrawEvent;
-            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
-                DestroyEvent;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressStarted +=
-                ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse1PressEnded +=
-                ToggleIsDrawingWallCreation;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressStarted +=
-                ToggleIsDrawingWallDestruction;
-            GameManager.Instance.GameParameters.InputService.Mouse2PressEnded +=
-                ToggleIsDrawingWallDestruction;
+            IInputService inputService = GameManager.Instance.GameParameters.InputService;
+            Builder builder = GameManager.Instance.Builder as Builder;
+            
+            inputService.MousePositionPerformed += UpdateCurrentMousePosition;
+            inputService.MousePositionPerformed += DrawEvent;
+            inputService.MousePositionPerformed += DestroyEvent;
+            inputService.Mouse1PressStarted += ToggleIsDrawingWallCreation;
+            inputService.Mouse1PressEnded += ToggleIsDrawingWallCreation;
+            inputService.Mouse2PressStarted += ToggleIsDrawingWallDestruction;
+            inputService.Mouse2PressEnded += ToggleIsDrawingWallDestruction;
+            builder!.OnMousePositionChanged += OnMousePositionChanged;
+        }
+
+        public override void UnsubscribeGridBuildMethods()
+        {
+            IInputService inputService = GameManager.Instance.GameParameters.InputService;
+            Builder builder = GameManager.Instance.Builder as Builder;
+            
+            inputService.MousePositionPerformed -= UpdateCurrentMousePosition;
+            inputService.MousePositionPerformed -= DrawEvent;
+            inputService.MousePositionPerformed -= DestroyEvent;
+            inputService.Mouse1PressStarted -= ToggleIsDrawingWallCreation;
+            inputService.Mouse1PressEnded -= ToggleIsDrawingWallCreation;
+            inputService.Mouse2PressStarted -= ToggleIsDrawingWallDestruction;
+            inputService.Mouse2PressEnded -= ToggleIsDrawingWallDestruction;
+            builder!.OnMousePositionChanged -= OnMousePositionChanged;
+        }
+
+        protected override void OnMousePositionChanged(RaycastHit hit)
+        {
+            LastPosition = SnapToGrid(CurrentPosition);
+            
+            if (hit.collider.GetComponent<IBuilderItem>() != null)
+                CurrentPosition = SnapToGrid(LastPosition);
+            CurrentPosition = SnapToGrid(hit.point);
         }
     }
 }

@@ -32,5 +32,15 @@ namespace com.Halcyon.Core.Builder
         {
             throw new System.NotImplementedException();
         }
+
+        public override void UnsubscribeGridBuildMethods()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void OnMousePositionChanged(RaycastHit value)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

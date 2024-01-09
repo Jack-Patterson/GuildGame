@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using com.Halcyon.API.Core.Building;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace com.Halcyon.Core.Builder
         private WallBuilderOld _wallBuilderOld;
         private WallBuilder _wallBuilder;
         private PointerHandler _pointerHandler;
+        
+        internal Action<RaycastHit> OnMousePositionChanged;
 
         internal List<Floor> Floors
         {
@@ -25,7 +28,6 @@ namespace com.Halcyon.Core.Builder
 
             _wallBuilderOld = new WallBuilderOld(wallPrefab, wallPostPrefab, placeRaycast, wallLayer, this);
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
-            _wallBuilder.SubscribeGridBuildMethods();
             _pointerHandler = new PointerHandler(pointer, this);
         }
 
@@ -33,10 +35,7 @@ namespace com.Halcyon.Core.Builder
         {
             if (!IsInBuildMode)
                 return;
-
-            _wallBuilder.LastPosition = _wallBuilder.SnapToGrid(_wallBuilder.CurrentPosition);
-            _wallBuilder.CurrentPosition = _wallBuilder.PointToPosition();
-            // print(_wallBuilder.CurrentPosition);
+            
             _pointerHandler.Position = _wallBuilder.CurrentPosition;
         }
 
@@ -59,6 +58,29 @@ namespace com.Halcyon.Core.Builder
             }
 
             return null;
+        }
+        
+        protected override void UpdateCurrentMousePosition(Vector2 value)
+        {
+            if (value == CurrentMousePosition)
+                return;
+            
+            CurrentMousePosition = value;
+
+            RaycastHit worldPosition = MousePositionToWorldPosition();
+            OnMousePositionChanged?.Invoke(worldPosition);
+        }
+
+        protected override void SubscribeBuilderMethods()
+        {
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed +=
+                UpdateCurrentMousePosition;
+        }
+        
+        protected override void UnsubscribeBuilderMethods()
+        {
+            GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
+                UpdateCurrentMousePosition;
         }
     }
 }

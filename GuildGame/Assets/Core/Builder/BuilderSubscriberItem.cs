@@ -1,4 +1,5 @@
-﻿using com.Halcyon.Core.Manager;
+﻿using com.Halcyon.API.Core.Building;
+using com.Halcyon.Core.Manager;
 
 namespace com.Halcyon.Core.Builder
 {
@@ -6,12 +7,13 @@ namespace com.Halcyon.Core.Builder
     {
         protected BuilderSubscriberItem()
         {
-            GameManager.Instance.Logger.Log(GameManager.Instance.Builder);
-            GameInitializer.GameInitializationComplete += SubscribeGridBuildMethods;
-
-            GameManager.Instance.Logger.Log("Subscribe item");
+            BuilderAbstract builder = GameManager.Instance.Builder;
+            
+            builder.BuilderGameStateEnabled += SubscribeGridBuildMethods;
+            builder.BuilderGameStateDisabled += UnsubscribeGridBuildMethods;
         }
 
         public abstract void SubscribeGridBuildMethods();
+        public abstract void UnsubscribeGridBuildMethods();
     }
 }

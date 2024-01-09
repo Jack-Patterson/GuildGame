@@ -63,22 +63,6 @@ namespace com.Halcyon.Core.Builder
             _wallLayer = wallLayer;
         }
         
-        internal Vector3 PointToPosition()
-        {
-            Ray ray = UnityEngine.Camera.main.ScreenPointToRay(CurrentMousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 1000f, _placeRaycast))
-            {
-                if (hit.collider.GetComponent<IBuilderItem>() != null)
-                    return SnapToGrid(LastPosition);
-                // GameLogger.Log(("Hitting position", hit.point));
-                return SnapToGrid(hit.point);
-            }
-
-            return SnapToGrid(LastPosition);
-        }
-        
         internal Vector3 SnapToGrid(Vector3 position)
         {
             float x = Mathf.Round(position.x / _wallGridSize) * _wallGridSize;
@@ -89,16 +73,25 @@ namespace com.Halcyon.Core.Builder
         
         internal void ToggleIsDrawingWallCreation()
         {
+            if (!IsBuildModeEnabled)
+                return;
+            
             _isDrawingCreation = !_isDrawingCreation;
         }
 
         internal void ToggleIsDrawingWallDestruction()
         {
+            if (!IsBuildModeEnabled)
+                return;
+            
             _isDrawingDestruction = !_isDrawingDestruction;
         }
 
         internal void DrawEvent(Vector2 vector)
         {
+            if (!IsBuildModeEnabled)
+                return;
+            
             Builder builder = GameManager.Instance.Builder as Builder;
             Draw(builder, builder!.GetPrefabs(this));
             GameLogger.Log(vector);
@@ -106,17 +99,24 @@ namespace com.Halcyon.Core.Builder
         
         internal void DestroyEvent(Vector2 vector)
         {
+            if (!IsBuildModeEnabled)
+                return;
+            
             Builder builder = GameManager.Instance.Builder as Builder;
             Destroy(builder);
         }
         
         internal void UpdateCurrentMousePosition(Vector2 value)
         {
+            if (!IsBuildModeEnabled)
+                return;
+            
             _currentMousePosition = value;
         }
 
         protected abstract void Draw(Builder builder, List<GameObject> prefabToUse);
         protected abstract void Create(Builder builder, List<GameObject> prefabToUse);
         protected abstract void Destroy(Builder builder);
+        protected abstract void OnMousePositionChanged(RaycastHit value);
     }
 }
