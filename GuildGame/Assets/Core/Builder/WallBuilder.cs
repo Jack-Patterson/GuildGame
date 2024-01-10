@@ -5,7 +5,6 @@ using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Services.Input;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace com.Halcyon.Core.Builder
 {
@@ -130,7 +129,7 @@ namespace com.Halcyon.Core.Builder
 
             if (wallToDestroy != null && wallPositionValid)
             {
-                Object.Destroy(wallToDestroy.gameObject);
+                DestroyObject(wallToDestroy.gameObject);
 
                 DestroyPosts(expectedWallPosition, wallToDestroy);
             }
@@ -158,12 +157,12 @@ namespace com.Halcyon.Core.Builder
 
             if (firstPostToDestroy != null && firstPostOverlapItemsAmount == 1)
             {
-                Object.Destroy(firstPostToDestroy.gameObject);
+                DestroyObject(firstPostToDestroy.gameObject);
             }
 
             if (secondPostToDestroy != null && secondPostOverlapItemsAmount == 1)
             {
-                Object.Destroy(secondPostToDestroy.gameObject);
+                DestroyObject(secondPostToDestroy.gameObject);
             }
         }
 

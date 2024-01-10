@@ -111,12 +111,19 @@ namespace com.Halcyon.Core.Builder
         {
             Object.Instantiate(prefabToUse, position, rotation, parent);
             
-            GameLogger.Log($"Creating build object at position {position} with the rotation {rotation}.");
+            GameLogger.Log($"Creating build object at position (Vector3: {position}) with the rotation (Quaternion: {rotation}, EulerAngles: {rotation.eulerAngles}).");
         }
-        
+
         protected void Create(GameObject parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
         {
             Create(parent.transform, prefabToUse, position, rotation);
+        }
+
+        protected void DestroyObject(GameObject gameObject)
+        {
+            Object.Destroy(gameObject);
+            
+            GameLogger.Log($"Destroying build object at position (Vector3: {gameObject.transform.position}).");
         }
 
         protected abstract void Draw(Transform builder, List<GameObject> prefabsToUse);
