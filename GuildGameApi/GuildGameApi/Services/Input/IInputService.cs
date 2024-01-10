@@ -1,5 +1,4 @@
-﻿using com.Halcyon.API.Services.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace com.Halcyon.API.Services.Input
 {

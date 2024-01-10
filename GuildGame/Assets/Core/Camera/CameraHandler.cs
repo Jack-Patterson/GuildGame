@@ -7,7 +7,7 @@ namespace com.Halcyon.Core.Camera
 {
     public class CameraHandler : MonoBehaviour
     {
-        private CinemachineFreeLook Camera => GameManager.Instance.VirtualCamera;
+        private CinemachineFreeLook Camera => GameManager.Instance.Camera;
         private UnityEngine.Camera UnityEngineCamera => UnityEngine.Camera.main;
         private CameraParameters CameraParameter => GameManager.Instance.CameraParameters as CameraParameters;
         private Vector2 _moveDirection = Vector2.zero;
@@ -33,7 +33,7 @@ namespace com.Halcyon.Core.Camera
 
         private void AssignCamera()
         {
-            GameManager.Instance.VirtualCamera = GetComponent<CinemachineFreeLook>();
+            GameManager.Instance.Camera = GetComponent<CinemachineFreeLook>();
         }
 
         private void AssignCameraParameters()

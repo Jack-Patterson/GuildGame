@@ -13,12 +13,7 @@ namespace com.Halcyon.Core.Builder
         {
         }
 
-        protected override void Draw(Builder builder, List<GameObject> prefabToUse)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void Create(Builder builder, List<GameObject> prefabToUse)
+        protected override void Draw(Builder builder, List<GameObject> prefabsToUse)
         {
             throw new System.NotImplementedException();
         }
@@ -28,12 +23,12 @@ namespace com.Halcyon.Core.Builder
             throw new System.NotImplementedException();
         }
 
-        public override void SubscribeGridBuildMethods()
+        protected override void SubscribeGridBuildMethods()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void UnsubscribeGridBuildMethods()
+        protected override void UnsubscribeGridBuildMethods()
         {
             throw new System.NotImplementedException();
         }

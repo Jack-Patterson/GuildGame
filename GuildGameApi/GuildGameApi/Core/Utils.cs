@@ -32,4 +32,30 @@ public class Utils
     {
         return GetComponentFromColliderArray<T>(colliders.ToArray());
     }
+
+    public static GameObject? GetPrefabFromListByScript<T>(GameObject?[] prefabs)
+    {
+        foreach (GameObject? go in prefabs)
+        {
+            if (go != null && go.GetComponent<T>() != null)
+            {
+                return go;
+            }
+        }
+
+        return null;
+    }
+    
+    public static GameObject? GetPrefabFromListByScript<T>(List<GameObject> prefabs)
+    {
+        return GetPrefabFromListByScript<T>(prefabs.ToArray());
+    }
+
+    public static bool OverlapAreaContainsItem<T>(Vector3 position, float radius, LayerMask layer)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, radius, layer);
+        bool containsItem = GetComponentFromColliderArray<T>(colliders) != null;
+        
+        return containsItem;
+    }
 }

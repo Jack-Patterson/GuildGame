@@ -12,6 +12,7 @@ namespace com.Halcyon.Core.Manager
     public class GameLogger : LoggerService
     {
         private readonly string _currentFilePath;
+        private static LoggerService _logger = null!;
 
         public GameLogger()
         {
@@ -24,28 +25,30 @@ namespace com.Halcyon.Core.Manager
 
             int logFileCounter = UpdateLogFileCounter();
             _currentFilePath = ConstructCurrentFilePath(logFileCounter);
+
+            _logger = this;
         }
 
 #pragma warning disable CS0108, CS0114
         public static void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
         {
-            GameManager.Instance.Logger.Log(message, logType, exception);
+            _logger.Log(message, logType, exception);
         }
         
         public static void Log(object message, LogType logType = LogType.Log, Exception? exception = null)
         {
-            GameManager.Instance.Logger.Log(message, logType, exception);
+            _logger.Log(message, logType, exception);
         }
         
         public static void Log(LoggerParameters loggerParameters)
         {
-            GameManager.Instance.Logger.Log(loggerParameters);
+            _logger.Log(loggerParameters);
         }
         
         public static void LogException(Exception exception)
 #pragma warning restore CS0108, CS0114
         {
-            GameManager.Instance.Logger.LogException(exception);
+            _logger.LogException(exception);
         }
 
         private void LogToFile(string message, string stackTrace, LogType logType)

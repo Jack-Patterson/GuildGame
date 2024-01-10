@@ -47,20 +47,20 @@ namespace com.Halcyon.Core.Camera
 
         public RigParameters TopRigCurrent
         {
-            get => RigParamsFromOrbit(GameManager.Instance.VirtualCamera.m_Orbits[0]);
-            set => GameManager.Instance.VirtualCamera.m_Orbits[0] = RigParamsToOrbit(value);
+            get => RigParamsFromOrbit(GameManager.Instance.Camera.m_Orbits[0]);
+            set => GameManager.Instance.Camera.m_Orbits[0] = RigParamsToOrbit(value);
         }
 
         public RigParameters MiddleRigCurrent
         {
-            get => RigParamsFromOrbit(GameManager.Instance.VirtualCamera.m_Orbits[1]);
-            set => GameManager.Instance.VirtualCamera.m_Orbits[1] = RigParamsToOrbit(value);
+            get => RigParamsFromOrbit(GameManager.Instance.Camera.m_Orbits[1]);
+            set => GameManager.Instance.Camera.m_Orbits[1] = RigParamsToOrbit(value);
         }
 
         public RigParameters BottomRigCurrent
         {
-            get => RigParamsFromOrbit(GameManager.Instance.VirtualCamera.m_Orbits[2]);
-            set => GameManager.Instance.VirtualCamera.m_Orbits[2] = RigParamsToOrbit(value);
+            get => RigParamsFromOrbit(GameManager.Instance.Camera.m_Orbits[2]);
+            set => GameManager.Instance.Camera.m_Orbits[2] = RigParamsToOrbit(value);
         }
 
         public CameraParameters()

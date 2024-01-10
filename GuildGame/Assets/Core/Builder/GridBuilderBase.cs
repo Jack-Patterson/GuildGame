@@ -8,8 +8,8 @@ namespace com.Halcyon.Core.Builder
 {
     internal abstract class GridBuilderBase : BuilderSubscriberItem
     {
-        private readonly LayerMask _placeRaycast;
-        private readonly LayerMask _wallLayer;
+        protected readonly LayerMask PlaceRaycast;
+        protected readonly LayerMask WallLayer;
         private readonly float _wallGridSize = Constants.DefaultGridSize;
         
         private Vector3 _currentPosition = Vector3.zero;
@@ -30,12 +30,6 @@ namespace com.Halcyon.Core.Builder
             set => _lastPosition = value;
         }
 
-        public Vector2 CurrentMousePosition
-        {
-            get => _currentMousePosition;
-            set => _currentMousePosition = value;
-        }
-
         public bool IsDrawingCreation
         {
             get => _isDrawingCreation;
@@ -52,15 +46,15 @@ namespace com.Halcyon.Core.Builder
         
         protected GridBuilderBase(LayerMask placeRaycast, LayerMask wallLayer)
         {
-            _placeRaycast = placeRaycast;
-            _wallLayer = wallLayer;
+            PlaceRaycast = placeRaycast;
+            WallLayer = wallLayer;
         }
 
         protected GridBuilderBase(int wallGridSize, LayerMask placeRaycast, LayerMask wallLayer)
         {
             _wallGridSize = wallGridSize;
-            _placeRaycast = placeRaycast;
-            _wallLayer = wallLayer;
+            PlaceRaycast = placeRaycast;
+            WallLayer = wallLayer;
         }
         
         internal Vector3 SnapToGrid(Vector3 position)
@@ -94,7 +88,6 @@ namespace com.Halcyon.Core.Builder
             
             Builder builder = GameManager.Instance.Builder as Builder;
             Draw(builder, builder!.GetPrefabs(this));
-            GameLogger.Log(vector);
         }
         
         internal void DestroyEvent(Vector2 vector)
@@ -114,8 +107,19 @@ namespace com.Halcyon.Core.Builder
             _currentMousePosition = value;
         }
 
-        protected abstract void Draw(Builder builder, List<GameObject> prefabToUse);
-        protected abstract void Create(Builder builder, List<GameObject> prefabToUse);
+        protected void Create(Transform parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
+        {
+            Object.Instantiate(prefabToUse, position, rotation, parent);
+            
+            GameLogger.Log($"Creating build object at position {position} with the rotation {rotation}.");
+        }
+        
+        protected void Create(GameObject parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
+        {
+            Create(parent.transform, prefabToUse, position, rotation);
+        }
+
+        protected abstract void Draw(Builder builder, List<GameObject> prefabsToUse);
         protected abstract void Destroy(Builder builder);
         protected abstract void OnMousePositionChanged(RaycastHit value);
     }
