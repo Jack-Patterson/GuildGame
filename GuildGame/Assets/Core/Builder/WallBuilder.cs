@@ -5,6 +5,7 @@ using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Services.Input;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace com.Halcyon.Core.Builder
 {
@@ -19,7 +20,7 @@ namespace com.Halcyon.Core.Builder
         {
         }
 
-        protected override void Draw(Builder builder, List<GameObject> prefabsToUse)
+        protected override void Draw(Transform parent, List<GameObject> prefabsToUse)
         {
             if (!IsDrawingCreation || Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
@@ -38,10 +39,12 @@ namespace com.Halcyon.Core.Builder
 
             Vector3 overlapSpherePosition = new Vector3(instantiationPoint.x,
                 instantiationPoint.y - Constants.FloorHeight / 2, instantiationPoint.z);
-            
-            bool shouldInstantiateWall = !Utils.OverlapAreaContainsItem<WallBuildItem>(overlapSpherePosition, Constants.WallCheckRadius, WallLayer);
+
+            bool shouldInstantiateWall =
+                !Utils.OverlapAreaContainsItem<WallBuildItem>(overlapSpherePosition, Constants.WallCheckRadius,
+                    WallLayer);
             bool wallPositionValid = ValidateWallPlacePosition(instantiationPoint);
-            
+
             if (shouldInstantiateWall && wallPositionValid)
             {
                 GameObject prefabToUse = Utils.GetPrefabFromListByScript<WallBuildItem>(prefabsToUse);
@@ -52,13 +55,14 @@ namespace com.Halcyon.Core.Builder
                     return;
                 }
 
-                Create(builder.transform, prefabToUse, instantiationPoint, rotation);
+                Create(parent, prefabToUse, instantiationPoint, rotation);
 
-                // PlacePosts(instantiationPoint, rotation, prefabsToUse);
+                PlacePosts(parent, instantiationPoint, rotation, prefabsToUse);
             }
         }
 
-        private void PlacePosts(Vector3 wallPosition, Quaternion rotation, List<GameObject> prefabsToUse)
+        private void PlacePosts(Transform parent, Vector3 wallPosition, Quaternion rotation,
+            List<GameObject> prefabsToUse)
         {
             bool wallIsRotated = rotation.eulerAngles.y.Equals(90f);
 
@@ -68,8 +72,39 @@ namespace com.Halcyon.Core.Builder
             Vector3 secondPossiblePostPosition = !wallIsRotated
                 ? new Vector3(wallPosition.x - 5f, wallPosition.y, wallPosition.z)
                 : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z - 5f);
-            
-            
+
+            bool shouldPlaceFirstPost =
+                !Utils.OverlapAreaContainsItem<WallPostBuildItem>(firstPossiblePostPosition, Constants.WallCheckRadius,
+                    WallLayer);
+            bool shouldPlaceSecondPost =
+                !Utils.OverlapAreaContainsItem<WallPostBuildItem>(secondPossiblePostPosition, Constants.WallCheckRadius,
+                    WallLayer);
+
+            if (shouldPlaceFirstPost)
+            {
+                GameObject prefabToUse = Utils.GetPrefabFromListByScript<WallPostBuildItem>(prefabsToUse);
+
+                if (prefabToUse == null)
+                {
+                    GameLogger.Log("No prefab found which is a WallBuildItem.", LogType.Error);
+                    return;
+                }
+
+                Create(parent, prefabToUse, firstPossiblePostPosition, rotation);
+            }
+
+            if (shouldPlaceSecondPost)
+            {
+                GameObject prefabToUse = Utils.GetPrefabFromListByScript<WallPostBuildItem>(prefabsToUse);
+
+                if (prefabToUse == null)
+                {
+                    GameLogger.Log("No prefab found which is a WallBuildItem.", LogType.Error);
+                    return;
+                }
+
+                Create(parent, prefabToUse, secondPossiblePostPosition, rotation);
+            }
         }
 
         private bool ValidateWallPlacePosition(Vector3 vector)
@@ -87,7 +122,49 @@ namespace com.Halcyon.Core.Builder
             if (!IsDrawingDestruction || Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
 
-            GameLogger.Log("destroying");
+            Vector3 expectedWallPosition = (CurrentPosition + LastPosition) / 2;
+
+            WallBuildItem wallToDestroy =
+                Utils.OverlapAreaGetItem<WallBuildItem>(expectedWallPosition, Constants.WallCheckRadius, WallLayer);
+            bool wallPositionValid = ValidateWallPlacePosition(expectedWallPosition);
+
+            if (wallToDestroy != null && wallPositionValid)
+            {
+                Object.Destroy(wallToDestroy.gameObject);
+
+                DestroyPosts(expectedWallPosition, wallToDestroy);
+            }
+        }
+
+        private void DestroyPosts(Vector3 wallPosition, WallBuildItem wall)
+        {
+            WallPostBuildItem firstPostToDestroy, secondPostToDestroy;
+            int firstPostOverlapItemsAmount, secondPostOverlapItemsAmount;
+            bool wallIsRotated = wall.Rotation.eulerAngles.y.Equals(90f);
+
+            Vector3 firstPossiblePostPosition = !wallIsRotated
+                ? new Vector3(wallPosition.x + 5f, wallPosition.y, wallPosition.z)
+                : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z + 5f);
+            Vector3 secondPossiblePostPosition = !wallIsRotated
+                ? new Vector3(wallPosition.x - 5f, wallPosition.y, wallPosition.z)
+                : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z - 5f);
+
+            (firstPostToDestroy, firstPostOverlapItemsAmount) =
+                Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(firstPossiblePostPosition,
+                    Constants.WallCheckRadius, WallLayer, typeof(WallBuildItem));
+            (secondPostToDestroy, secondPostOverlapItemsAmount) =
+                Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(secondPossiblePostPosition,
+                    Constants.WallCheckRadius, WallLayer, typeof(WallBuildItem));
+
+            if (firstPostToDestroy != null && firstPostOverlapItemsAmount == 1)
+            {
+                Object.Destroy(firstPostToDestroy.gameObject);
+            }
+
+            if (secondPostToDestroy != null && secondPostOverlapItemsAmount == 1)
+            {
+                Object.Destroy(secondPostToDestroy.gameObject);
+            }
         }
 
         protected override void SubscribeGridBuildMethods()

@@ -50,12 +50,35 @@ public class Utils
     {
         return GetPrefabFromListByScript<T>(prefabs.ToArray());
     }
+    
+    public static T OverlapAreaGetItem<T>(Vector3 position, float radius, LayerMask layer)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, radius, layer);
+        T item = GetComponentFromColliderArray<T>(colliders);
+        
+        return item;
+    }
+    
+    public static (T, int) OverlapAreaGetItemAndCheckForAnotherType<T>(Vector3 position, float radius, LayerMask layer, Type type)
+    {
+        List<Type> listOfType = new List<Type>();
+        
+        Collider[] colliders = Physics.OverlapSphere(position, radius, layer);
+        T item = GetComponentFromColliderArray<T>(colliders);
+        
+        foreach (Collider collider in colliders)
+        {
+            if (collider.GetComponent(type) != null)
+            {
+                listOfType.Add(type);
+            }
+        }
+        
+        return (item, listOfType.Count);
+    }
 
     public static bool OverlapAreaContainsItem<T>(Vector3 position, float radius, LayerMask layer)
     {
-        Collider[] colliders = Physics.OverlapSphere(position, radius, layer);
-        bool containsItem = GetComponentFromColliderArray<T>(colliders) != null;
-        
-        return containsItem;
+        return OverlapAreaGetItem<T>(position, radius, layer) != null;
     }
 }

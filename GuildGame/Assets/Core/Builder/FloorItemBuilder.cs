@@ -13,7 +13,7 @@ namespace com.Halcyon.Core.Builder
         {
         }
 
-        protected override void Draw(Builder builder, List<GameObject> prefabsToUse)
+        protected override void Draw(Transform parent, List<GameObject> prefabsToUse)
         {
             throw new System.NotImplementedException();
         }

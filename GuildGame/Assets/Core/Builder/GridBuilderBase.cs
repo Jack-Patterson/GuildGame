@@ -87,7 +87,7 @@ namespace com.Halcyon.Core.Builder
                 return;
             
             Builder builder = GameManager.Instance.Builder as Builder;
-            Draw(builder, builder!.GetPrefabs(this));
+            Draw(builder!.transform, builder!.GetPrefabs(this));
         }
         
         internal void DestroyEvent(Vector2 vector)
@@ -119,7 +119,7 @@ namespace com.Halcyon.Core.Builder
             Create(parent.transform, prefabToUse, position, rotation);
         }
 
-        protected abstract void Draw(Builder builder, List<GameObject> prefabsToUse);
+        protected abstract void Draw(Transform builder, List<GameObject> prefabsToUse);
         protected abstract void Destroy(Builder builder);
         protected abstract void OnMousePositionChanged(RaycastHit value);
     }
