@@ -41,6 +41,8 @@ namespace com.Halcyon.Core.Builder
             get => _isDrawingDestruction;
             set => _isDrawingDestruction = value;
         }
+        
+        protected float WallGridSize => _wallGridSize;
 
         protected bool IsBuildModeEnabled => GameManager.Instance.GameParameters.GameState == GameState.Building;
         
@@ -81,22 +83,13 @@ namespace com.Halcyon.Core.Builder
             _isDrawingDestruction = !_isDrawingDestruction;
         }
 
-        internal void DrawEvent(Vector2 vector)
+        protected void DrawEvent(Vector2 vector)
         {
-            if (!IsBuildModeEnabled)
+            if (!IsBuildModeEnabled || (!IsDrawingCreation && !IsDrawingDestruction) || Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
             
             Builder builder = GameManager.Instance.Builder as Builder;
-            Draw(builder!.transform, builder!.GetPrefabs(this));
-        }
-        
-        internal void DestroyEvent(Vector2 vector)
-        {
-            if (!IsBuildModeEnabled)
-                return;
-            
-            Builder builder = GameManager.Instance.Builder as Builder;
-            Destroy(builder);
+            Draw(builder!.transform, builder.GetPrefabs(this));
         }
         
         internal void UpdateCurrentMousePosition(Vector2 value)
@@ -119,7 +112,7 @@ namespace com.Halcyon.Core.Builder
             Create(parent.transform, prefabToUse, position, rotation);
         }
 
-        protected void DestroyObject(GameObject gameObject)
+        protected void Destroy(GameObject gameObject)
         {
             Object.Destroy(gameObject);
             
@@ -127,7 +120,6 @@ namespace com.Halcyon.Core.Builder
         }
 
         protected abstract void Draw(Transform builder, List<GameObject> prefabsToUse);
-        protected abstract void Destroy(Builder builder);
         protected abstract void OnMousePositionChanged(RaycastHit value);
     }
 }

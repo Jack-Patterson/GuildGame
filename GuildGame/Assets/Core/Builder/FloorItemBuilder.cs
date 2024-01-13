@@ -18,11 +18,6 @@ namespace com.Halcyon.Core.Builder
             throw new System.NotImplementedException();
         }
 
-        protected override void Destroy(Builder builder)
-        {
-            throw new System.NotImplementedException();
-        }
-
         protected override void SubscribeGridBuildMethods()
         {
             throw new System.NotImplementedException();
