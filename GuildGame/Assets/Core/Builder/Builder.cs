@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
@@ -8,25 +9,22 @@ namespace com.Halcyon.Core.Builder
 {
     public class Builder : BuilderAbstract
     {
-        [SerializeField] [HideInInspector] private List<Floor> floors = new List<Floor>();
-
         private WallBuilder _wallBuilder;
         private PointerHandler _pointerHandler;
         
         internal Action<RaycastHit> OnMousePositionChanged;
 
-        internal List<Floor> Floors
-        {
-            get => floors;
-            set => floors = value;
-        }
-
         private new void Start()
         {
             base.Start();
             
+            List<Floor> floors = Utils.GetComponentsFromTransform<Floor>(transform);
+            
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
             _pointerHandler = new PointerHandler(pointer, this);
+            _floorHandler = new FloorHandler(floors);
+            
+            InvokeOnBuilderInitialisationComplete();
         }
 
         private void FixedUpdate()
@@ -35,17 +33,6 @@ namespace com.Halcyon.Core.Builder
                 return;
             
             _pointerHandler.Position = _wallBuilder.CurrentPosition;
-        }
-
-        
-        internal void GetFloors()
-        {
-            foreach (Transform child in transform)
-            {
-                Floor floor = child.GetComponent<Floor>();
-                if (!floors.Contains(floor))
-                    floors.Add(floor);
-            }
         }
 
         internal List<GameObject> GetPrefabs(GridBuilderBase gridBuilder)

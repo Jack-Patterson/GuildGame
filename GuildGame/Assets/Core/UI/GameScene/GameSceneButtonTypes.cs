@@ -4,6 +4,9 @@
     {
         Save,
         Load,
-        Exit
+        Exit,
+        Floor1,
+        Floor2,
+        Floor3
     }
 }

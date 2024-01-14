@@ -18,6 +18,7 @@ namespace com.Halcyon.Core.Manager
         private new void Awake()
         {
             base.Awake();
+            InvokeReadyToAssignObjects();
             GameInitializer.InitialGameStartup();
         }
 

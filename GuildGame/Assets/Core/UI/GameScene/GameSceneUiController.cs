@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using com.Halcyon.API.Core.Building;
-using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,6 +35,12 @@ namespace com.Halcyon.Core.UI.GameScene
                     return SaveAction;
                 case GameSceneButtonTypes.Load:
                     return LoadAction;
+                case GameSceneButtonTypes.Floor1:
+                    return () => FloorAction(1);
+                case GameSceneButtonTypes.Floor2:
+                    return () => FloorAction(2);
+                case GameSceneButtonTypes.Floor3:
+                    return () => FloorAction(3);
                 case GameSceneButtonTypes.Exit:
                 default:
                     return null;
@@ -52,5 +56,11 @@ namespace com.Halcyon.Core.UI.GameScene
         {
             GameManager.Instance.DataHolder = GameManager.Instance.DataHolder.LoadData("GameSaveTest");
         }
+
+        private void FloorAction(int value)
+        {
+            builder.FloorHandler.CurrentFloor = value;
+        }
+        
     }
 }

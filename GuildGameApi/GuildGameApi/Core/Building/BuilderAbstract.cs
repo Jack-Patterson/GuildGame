@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace com.Halcyon.API.Core.Building;
 
-public abstract class BuilderAbstract : MonoBehaviour
+public abstract class BuilderAbstract : ExtendedMonoBehaviour
 {
     [SerializeField] protected GameObject pointer = null!;
     [SerializeField] protected GameObject wallPrefab = null!;
@@ -13,13 +13,16 @@ public abstract class BuilderAbstract : MonoBehaviour
 
     public event Action? BuilderGameStateEnabled;
     public event Action? BuilderGameStateDisabled;
+    public event Action? BuilderInitialisationCompleted; 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     internal Action<RaycastHit>? OnMousePositionChanged;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
     private List<IBuilderItem> _builderItems = new List<IBuilderItem>();
     protected Vector2 CurrentMousePosition = Vector2.zero;
+    protected IFloorHandler _floorHandler = null!;
 
     public List<IBuilderItem> BuilderItems => _builderItems;
+    public IFloorHandler FloorHandler => _floorHandler;
 
     public IBuilderItem AddBuilderItem
     {
@@ -33,10 +36,15 @@ public abstract class BuilderAbstract : MonoBehaviour
 
     protected bool IsInBuildMode => GameManagerBase.Instance.GameParameters.GameState == GameState.Building;
 
+    protected override void OnAwake()
+    {
+        GameManagerBase.ReadyToAssignObjects += () => GameManagerBase.Instance.Builder = this;;
+    }
+
     protected void Start()
     {
-        GameManagerBase.Instance.Builder = this;
         GameManagerBase.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
+        
         BuilderGameStateEnabled += SubscribeBuilderMethods;
         BuilderGameStateDisabled += UnsubscribeBuilderMethods;
     }
@@ -100,9 +108,15 @@ public abstract class BuilderAbstract : MonoBehaviour
     {
         OnMousePositionChanged?.Invoke(value);
     }
+    
+    protected void InvokeOnBuilderInitialisationComplete()
+    {
+        BuilderInitialisationCompleted?.Invoke();
+    }
 
     protected abstract void UpdateCurrentMousePosition(Vector2 value);
 
     protected abstract void SubscribeBuilderMethods();
+
     protected abstract void UnsubscribeBuilderMethods();
 }

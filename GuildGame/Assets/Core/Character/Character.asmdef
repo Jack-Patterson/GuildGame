@@ -1,5 +1,5 @@
 {
-    "name": "Builder",
+    "name": "Character",
     "rootNamespace": "com.Halcyon",
     "references": [
         "GUID:7c879d82b14f42f4ea853cd4cdc40883"

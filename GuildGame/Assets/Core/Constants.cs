@@ -5,13 +5,25 @@ namespace com.Halcyon.Core
 {
     public static class Constants
     {
-        public static readonly string ModsFolderPath = Path.Combine(Application.persistentDataPath, "Mods").Replace("\\", "/");
-        public static readonly string LogsFolderPath = Path.Combine(Application.persistentDataPath, "Logs").Replace("\\", "/");
-        public static readonly string SavesFolderPath = Path.Combine(Application.persistentDataPath, "Saves").Replace("\\", "/");
+        public static readonly string ModsFolderPath =
+            Path.Combine(Application.persistentDataPath, "Mods").Replace("\\", "/");
+
+        public static readonly string LogsFolderPath =
+            Path.Combine(Application.persistentDataPath, "Logs").Replace("\\", "/");
+
+        public static readonly string SavesFolderPath =
+            Path.Combine(Application.persistentDataPath, "Saves").Replace("\\", "/");
+
         public static readonly string DiscordInviteLink = "https://discord.gg/FnKBMfRqRb";
-        public const float DefaultGridSize = 10f;
-        public const float FloorHeight = 10f;
-        public const int WallCheckRadius = 1;
-        public const int PostCheckRadius = 1;
+
+        public static class BuilderConstants
+        {
+            public const float DefaultGridSize = 10f;
+            public const float MaxGridSize = 50f;
+            public const float MaxUnityGridSize = 10f;
+            public const float FloorHeight = 10f;
+            public const int WallCheckRadius = 1;
+            public const int PostCheckRadius = 1;
+        }
     }
 }

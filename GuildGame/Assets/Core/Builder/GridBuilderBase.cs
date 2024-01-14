@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using com.Halcyon.API.Core;
-using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace com.Halcyon.Core.Builder
     {
         protected readonly LayerMask PlaceRaycast;
         protected readonly LayerMask WallLayer;
-        private readonly float _wallGridSize = Constants.DefaultGridSize;
+        private readonly float _wallGridSize = Constants.BuilderConstants.DefaultGridSize;
         
         private Vector3 _currentPosition = Vector3.zero;
         private Vector3 _lastPosition = Vector3.zero;

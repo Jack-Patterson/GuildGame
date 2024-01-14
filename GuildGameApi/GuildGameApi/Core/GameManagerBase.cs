@@ -9,6 +9,8 @@ namespace com.Halcyon.API.Core;
 public class GameManagerBase : MonoBehaviour
 {
     private static GameManagerBase _gManagerBase = null!;
+
+    public static Action ReadyToAssignObjects = null!;
     
     private GameParameters _gameParameters = null!;
     private LoggerService _logger = null!;
@@ -61,5 +63,10 @@ public class GameManagerBase : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+    }
+    
+    protected void InvokeReadyToAssignObjects()
+    {
+        ReadyToAssignObjects?.Invoke();
     }
 }

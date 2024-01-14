@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using com.Halcyon.API.Core;
+using UnityEngine;
 
 namespace com.Halcyon.Core.Builder
 {
@@ -10,7 +11,7 @@ namespace com.Halcyon.Core.Builder
         internal Vector3 Position
         {
             get => _pointer.transform.position;
-            set => _pointer.transform.position = value;
+            set => _pointer.transform.position = Utils.ClampVector3OnlyXZ(value, -Constants.BuilderConstants.MaxGridSize, Constants.BuilderConstants.MaxGridSize);
         }
 
         public PointerHandler(GameObject pointer, Builder builder)

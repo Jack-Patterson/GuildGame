@@ -27,10 +27,11 @@ namespace com.Halcyon.Core.Builder
             float rotationAngleFalse = 90f;
 
             Vector3 expectedWallPosition = (CurrentPosition + LastPosition) / 2;
-            expectedWallPosition.y += Constants.FloorHeight / 2;
+            expectedWallPosition.y += Constants.BuilderConstants.FloorHeight / 2;
 
             WallBuildItem potentialExistingWall =
-                Utils.OverlapAreaGetItem<WallBuildItem>(expectedWallPosition, Constants.WallCheckRadius, WallLayer);
+                Utils.OverlapAreaGetItem<WallBuildItem>(expectedWallPosition,
+                    Constants.BuilderConstants.WallCheckRadius, WallLayer);
             bool shouldInstantiateWall = potentialExistingWall == null;
             bool wallPositionValid = ValidateWallPlacePosition(expectedWallPosition);
 
@@ -50,7 +51,7 @@ namespace com.Halcyon.Core.Builder
                     GameLogger.Log("No prefab found which is a WallBuildItem.", LogType.Error);
                     return;
                 }
-                
+
                 if (postPrefabToUse == null)
                 {
                     GameLogger.Log("No prefab found which is a WallPostBuildItem.", LogType.Error);
@@ -81,14 +82,14 @@ namespace com.Halcyon.Core.Builder
             Vector3 secondPossiblePostPosition = !wallIsRotated
                 ? new Vector3(wallPosition.x - distance, wallPosition.y, wallPosition.z)
                 : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z - distance);
-            
+
             (firstPotentialPost, firstPostOverlapItemsAmount) =
                 Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(firstPossiblePostPosition,
-                    Constants.WallCheckRadius, WallLayer, typeof(WallBuildItem));
+                    Constants.BuilderConstants.PostCheckRadius, WallLayer, typeof(WallBuildItem));
             (secondPotentialPost, secondPostOverlapItemsAmount) =
                 Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(secondPossiblePostPosition,
-                    Constants.WallCheckRadius, WallLayer, typeof(WallBuildItem));
-            
+                    Constants.BuilderConstants.PostCheckRadius, WallLayer, typeof(WallBuildItem));
+
             bool firstPostIsNull = firstPotentialPost == null;
             bool secondPostIsNull = secondPotentialPost == null;
 
@@ -98,6 +99,7 @@ namespace com.Halcyon.Core.Builder
                 {
                     Create(parent, wallPostPrefab, firstPossiblePostPosition, rotation);
                 }
+
                 if (secondPostIsNull)
                 {
                     Create(parent, wallPostPrefab, secondPossiblePostPosition, rotation);

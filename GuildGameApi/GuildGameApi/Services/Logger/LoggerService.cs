@@ -9,19 +9,16 @@ public abstract class LoggerService
         Log(loggerParameters.Message, loggerParameters.LogType, loggerParameters.Exception);
     }
 
-    /// <summary>
-    /// Test
-    /// </summary>
-    /// <param name="message"></param>
-    /// <param name="logType"></param>
-    /// <param name="exception"></param>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    
     public void Log(string message, LogType logType = LogType.Log, Exception? exception = null)
     {
         if (!char.IsPunctuation(message.TrimEnd().LastOrDefault()))
         {
             message += ".";
         }
+        
+        if (exception != null && logType != LogType.Exception)
+            Log(message, LogType.Exception, exception);
         
         switch (logType)
         {
