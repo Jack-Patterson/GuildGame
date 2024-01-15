@@ -13,20 +13,20 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
 
     public event Action? BuilderGameStateEnabled;
     public event Action? BuilderGameStateDisabled;
-    public event Action? BuilderInitialisationCompleted; 
+    public static event Action? BuilderInitialisationCompleted; 
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     internal Action<RaycastHit>? OnMousePositionChanged;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
-    private List<IBuilderItem> _builderItems = new List<IBuilderItem>();
+    private FloorBuilderItems<IWallBuilderItem> _wallBuilderItems = new FloorBuilderItems<IWallBuilderItem>();
     protected Vector2 CurrentMousePosition = Vector2.zero;
     protected IFloorHandler _floorHandler = null!;
 
-    public List<IBuilderItem> BuilderItems => _builderItems;
+    public FloorBuilderItems<IWallBuilderItem> WallBuilderItems => _wallBuilderItems;
     public IFloorHandler FloorHandler => _floorHandler;
 
-    public IBuilderItem AddBuilderItem
+    public IWallBuilderItem AddBuilderItem
     {
-        set => BuilderItems.Add(value);
+        set => WallBuilderItems.Add(FloorHandler.CurrentFloor, value);
     }
 
     private void OnDisable()
@@ -41,7 +41,7 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
         GameManagerBase.ReadyToAssignObjects += () => GameManagerBase.Instance.Builder = this;;
     }
 
-    protected void Start()
+    protected override void OnStart()
     {
         GameManagerBase.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
         
@@ -52,7 +52,7 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
     public GameObject InstantiateBuilderPrefab(GameObject builderPrefab, Vector3 position, Quaternion rotation)
     {
         GameObject newObject = Instantiate(builderPrefab, position, rotation, transform);
-        BuilderItems.Add(newObject.GetComponent<IBuilderItem>());
+        WallBuilderItems.Add(FloorHandler.CurrentFloor, (newObject.GetComponent<IBuilderItem>() as IWallBuilderItem)!);
 
         return newObject;
     }

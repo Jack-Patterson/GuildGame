@@ -43,8 +43,8 @@ namespace com.Halcyon.Core.Services.Serialization
 
         public SerializableDataHolder(DataHolder.DataHolder dataHolder)
         {
-            _serializableBuilderItems =
-                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.BuilderItems);
+            // _serializableBuilderItems =
+            //     SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.BuilderItems);
             _cameraParameters = dataHolder.CameraParameters as CameraParameters;
         }
 

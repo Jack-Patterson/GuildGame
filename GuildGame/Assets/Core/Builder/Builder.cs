@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building;
+using com.Halcyon.Core.Builder.FloorBuilder;
+using com.Halcyon.Core.Builder.GridBuilder;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
@@ -14,9 +16,9 @@ namespace com.Halcyon.Core.Builder
         
         internal Action<RaycastHit> OnMousePositionChanged;
 
-        private new void Start()
+        protected override void OnStart()
         {
-            base.Start();
+            base.OnStart();
             
             List<Floor> floors = Utils.GetComponentsFromTransform<Floor>(transform);
             
@@ -25,6 +27,7 @@ namespace com.Halcyon.Core.Builder
             _floorHandler = new FloorHandler(floors);
             
             InvokeOnBuilderInitialisationComplete();
+            _floorHandler.InvokeFloorChanged(1);
         }
 
         private void FixedUpdate()

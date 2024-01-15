@@ -65,6 +65,7 @@ namespace com.Halcyon.Core.Camera
 
         public CameraParameters()
         {
+            
         }
 
         public static RigParameters RigParamsFromOrbit(CinemachineFreeLook.Orbit orbit) =>

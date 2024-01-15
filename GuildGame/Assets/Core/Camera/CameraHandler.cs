@@ -1,18 +1,20 @@
 using Cinemachine;
+using com.Halcyon.API.Core;
+using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Camera
 {
-    public class CameraHandler : MonoBehaviour
+    public class CameraHandler : ExtendedMonoBehaviour
     {
         private CinemachineFreeLook Camera => GameManager.Instance.Camera;
         private UnityEngine.Camera UnityEngineCamera => UnityEngine.Camera.main;
         private CameraParameters CameraParameter => GameManager.Instance.CameraParameters as CameraParameters;
         private Vector2 _moveDirection = Vector2.zero;
 
-        private void Awake()
+        protected override void OnAwake()
         {
             GameInitializer.GameInitializationComplete += AssignCamera;
             GameInitializer.GameInitializationComplete += AssignCameraParameters;
@@ -20,10 +22,12 @@ namespace com.Halcyon.Core.Camera
             {
                 GameManager.Instance.GameParameters.InputService.Mouse3ScrollPerformed += ZoomCamera;
                 GameManager.Instance.GameParameters.InputService.MovePerformed += UpdateMoveDirection;
+                BuilderAbstract.BuilderInitialisationCompleted += () =>
+                    GameManager.Instance.Builder.FloorHandler.OnFloorChanged += OnFloorChanged;
             };
         }
 
-        private void Update()
+        protected override void OnUpdate()
         {
             if (_moveDirection != Vector2.zero)
             {
@@ -94,6 +98,14 @@ namespace com.Halcyon.Core.Camera
             movement.Normalize();
 
             Camera.Follow.Translate(movement * (CameraParameter.MoveSpeed * Time.deltaTime));
+        }
+
+        private void OnFloorChanged(int newFloorIndex)
+        {
+            Vector3 position = Camera.Follow.position;
+            position.y = (int)((newFloorIndex - 1) * Constants.BuilderConstants.FloorHeight);
+
+            Camera.Follow.position = position;
         }
 
         private void UpdateMoveDirection(Vector2 value)

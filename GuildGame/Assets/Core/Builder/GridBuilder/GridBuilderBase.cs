@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using com.Halcyon.API.Core;
+using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
-namespace com.Halcyon.Core.Builder
+namespace com.Halcyon.Core.Builder.GridBuilder
 {
     internal abstract class GridBuilderBase : BuilderSubscriberItem
     {
@@ -101,9 +102,11 @@ namespace com.Halcyon.Core.Builder
 
         protected void Create(Transform parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
         {
-            Object.Instantiate(prefabToUse, position, rotation, parent);
+            Builder builder = GameManager.Instance.Builder as Builder;
+            GameObject newObject = Object.Instantiate(prefabToUse, position, rotation, parent);
+            builder!.BuilderItems.Add(newObject.GetComponent<IBuilderItem>());
             
-            GameLogger.Log($"Creating build object at position (Vector3: {position}) with the rotation (Quaternion: {rotation}, EulerAngles: {rotation.eulerAngles}).");
+            Log($"Creating build object at position (Vector3: {position}) with the rotation (Quaternion: {rotation}, EulerAngles: {rotation.eulerAngles}).");
         }
 
         protected void Create(GameObject parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
@@ -113,9 +116,11 @@ namespace com.Halcyon.Core.Builder
 
         protected void Destroy(GameObject gameObject)
         {
+            Builder builder = GameManager.Instance.Builder as Builder;
+            builder!.WallBuilderItems.Remove(gameObject.GetComponent<IBuilderItem>());
             Object.Destroy(gameObject);
             
-            GameLogger.Log($"Destroying build object at position (Vector3: {gameObject.transform.position}).");
+            Log($"Destroying build object at position (Vector3: {gameObject.transform.position}).");
         }
 
         protected abstract void Draw(Transform builder, List<GameObject> prefabsToUse);

@@ -8,7 +8,7 @@ using com.Halcyon.API.Services.Input;
 using com.Halcyon.Core.Manager;
 using UnityEngine;
 
-namespace com.Halcyon.Core.Builder
+namespace com.Halcyon.Core.Builder.GridBuilder
 {
     internal class WallBuilder : GridBuilderBase
     {

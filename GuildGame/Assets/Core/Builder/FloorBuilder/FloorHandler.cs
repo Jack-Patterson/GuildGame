@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using com.Halcyon.API.Core.Building;
 
-namespace com.Halcyon.Core.Builder
+namespace com.Halcyon.Core.Builder.FloorBuilder
 {
     public class FloorHandler : BuilderSubscriberItem, IFloorHandler
     {

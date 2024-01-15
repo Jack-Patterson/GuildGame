@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Halcyon.Core.Builder
+namespace com.Halcyon.Core.Builder.GridBuilder
 {
     internal class FloorItemBuilder: GridBuilderBase
     {
