@@ -13,15 +13,18 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
 
     public event Action? BuilderGameStateEnabled;
     public event Action? BuilderGameStateDisabled;
-    public static event Action? BuilderInitialisationCompleted; 
+    public static event Action? BuilderInitialisationCompleted;
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     internal Action<RaycastHit>? OnMousePositionChanged;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
-    private FloorBuilderItems<IWallBuilderItem> _wallBuilderItems = new FloorBuilderItems<IWallBuilderItem>();
+    
+    private BuilderItemsHandler<IWallBuilderItem> _wallBuilderItems = new BuilderItemsHandler<IWallBuilderItem>();
+    private BuilderItemsHandler<IFloorBuilderItem> _floorBuilderItems = new BuilderItemsHandler<IFloorBuilderItem>();
     protected Vector2 CurrentMousePosition = Vector2.zero;
     protected IFloorHandler _floorHandler = null!;
 
-    public FloorBuilderItems<IWallBuilderItem> WallBuilderItems => _wallBuilderItems;
+    public BuilderItemsHandler<IWallBuilderItem> WallBuilderItems => _wallBuilderItems;
+    public BuilderItemsHandler<IFloorBuilderItem> FloorBuilderItems => _floorBuilderItems;
     public IFloorHandler FloorHandler => _floorHandler;
 
     public IWallBuilderItem AddBuilderItem
@@ -38,13 +41,14 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
 
     protected override void OnAwake()
     {
-        GameManagerBase.ReadyToAssignObjects += () => GameManagerBase.Instance.Builder = this;;
+        GameManagerBase.ReadyToAssignObjects += () => GameManagerBase.Instance.Builder = this;
+        ;
     }
 
     protected override void OnStart()
     {
         GameManagerBase.Instance.GameParameters.InputService.ToggleBuildStarted += ToggleBuilderGameState;
-        
+
         BuilderGameStateEnabled += SubscribeBuilderMethods;
         BuilderGameStateDisabled += UnsubscribeBuilderMethods;
     }
@@ -70,6 +74,32 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
         return null!;
     }
 
+    public void AddBuilderItemBasedOnType(IBuilderItem itemToAdd)
+    {
+        switch (itemToAdd)
+        {
+            case IWallBuilderItem wbi:
+                WallBuilderItems.Add(FloorHandler.CurrentFloor, wbi);
+                break;
+            case IFloorBuilderItem fbi:
+                FloorBuilderItems.Add(FloorHandler.CurrentFloor, fbi);
+                break;
+        }
+    }
+    
+    public void RemoveBuilderItemBasedOnType(IBuilderItem itemToAdd)
+    {
+        switch (itemToAdd)
+        {
+            case IWallBuilderItem wbi:
+                WallBuilderItems.Remove(FloorHandler.CurrentFloor, wbi);
+                break;
+            case IFloorBuilderItem fbi:
+                FloorBuilderItems.Remove(FloorHandler.CurrentFloor, fbi);
+                break;
+        }
+    }
+
     protected void ToggleBuilderGameState()
     {
         if (GameManagerBase.Instance.GameParameters.GameState == GameState.Building)
@@ -87,12 +117,12 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
             BuilderGameStateEnabled?.Invoke();
         }
     }
-    
+
     protected void InvokeBuilderGameStateEnabled()
     {
         BuilderGameStateEnabled?.Invoke();
     }
-    
+
     protected RaycastHit MousePositionToWorldPosition()
     {
         Ray ray = UnityEngine.Camera.main!.ScreenPointToRay(CurrentMousePosition);
@@ -108,7 +138,7 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
     {
         OnMousePositionChanged?.Invoke(value);
     }
-    
+
     protected void InvokeOnBuilderInitialisationComplete()
     {
         BuilderInitialisationCompleted?.Invoke();

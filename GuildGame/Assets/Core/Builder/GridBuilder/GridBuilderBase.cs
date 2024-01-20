@@ -100,24 +100,34 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             _currentMousePosition = value;
         }
 
-        protected void Create(Transform parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
+        protected void Create<T>(Transform parent, GameObject prefabToUse, Vector3 position, Quaternion rotation) where T : IBuilderItem
         {
             Builder builder = GameManager.Instance.Builder as Builder;
             GameObject newObject = Object.Instantiate(prefabToUse, position, rotation, parent);
-            builder!.BuilderItems.Add(newObject.GetComponent<IBuilderItem>());
+            T builderItem = newObject.GetComponent<T>();
+            
+            if (builderItem == null)
+            {
+                Object.Destroy(newObject);
+                return;
+            }
+            
+            builder!.AddBuilderItemBasedOnType(builderItem);
             
             Log($"Creating build object at position (Vector3: {position}) with the rotation (Quaternion: {rotation}, EulerAngles: {rotation.eulerAngles}).");
         }
 
-        protected void Create(GameObject parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)
+        protected void Create<T>(GameObject parent, GameObject prefabToUse, Vector3 position, Quaternion rotation)  where T : IBuilderItem
         {
-            Create(parent.transform, prefabToUse, position, rotation);
+            Create<T>(parent.transform, prefabToUse, position, rotation);
         }
 
-        protected void Destroy(GameObject gameObject)
+        protected void Destroy<T>(GameObject gameObject) where T : IBuilderItem
         {
             Builder builder = GameManager.Instance.Builder as Builder;
-            builder!.WallBuilderItems.Remove(gameObject.GetComponent<IBuilderItem>());
+            T builderItem = gameObject.GetComponent<T>();
+            builder!.RemoveBuilderItemBasedOnType(builderItem);
+
             Object.Destroy(gameObject);
             
             Log($"Destroying build object at position (Vector3: {gameObject.transform.position}).");

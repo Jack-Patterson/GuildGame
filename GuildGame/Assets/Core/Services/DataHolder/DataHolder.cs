@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.API.Services.DataHolder;
 using com.Halcyon.API.Services.Serialization;
@@ -13,8 +14,8 @@ namespace com.Halcyon.Core.Services.DataHolder
         {
         }
 
-        public DataHolder(List<SerializableBuilderItem> builderItems, ICameraParameters cameraParameters) : base(
-            builderItems, cameraParameters)
+        public DataHolder(BuilderItemsHandler<IWallBuilderItem> wallBuilderItems, ICameraParameters cameraParameters) : base(
+            wallBuilderItems, cameraParameters)
         {
         }
 

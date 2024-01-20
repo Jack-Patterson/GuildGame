@@ -1,19 +1,19 @@
 ﻿namespace com.Halcyon.API.Core.Building.BuilderItem;
 
-public class FloorBuilderItems<T> where T : IBuilderItem
+public class BuilderItemsHandler<T> where T : IBuilderItem
 {
     public List<T> FirstFloorItems { get; }
     public List<T> SecondFloorItems { get; }
     public List<T> ThirdFloorItems { get; }
 
-    public FloorBuilderItems()
+    public BuilderItemsHandler()
     {
         FirstFloorItems = new List<T>();
         SecondFloorItems = new List<T>();
         ThirdFloorItems = new List<T>();
     }
 
-    public FloorBuilderItems(List<T> firstFloorItems, List<T> secondFloorItems, List<T> thirdFloorItems)
+    public BuilderItemsHandler(List<T> firstFloorItems, List<T> secondFloorItems, List<T> thirdFloorItems)
     {
         FirstFloorItems = firstFloorItems;
         SecondFloorItems = secondFloorItems;

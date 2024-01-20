@@ -7,7 +7,7 @@ namespace com.Halcyon.API.Services.DataHolder;
 
 public abstract class DataHolderAbstract : IDataHolderService
 {
-    public FloorBuilderItems<IWallBuilderItem> BuilderItems => GameManagerBase.Instance.Builder.WallBuilderItems;
+    public BuilderItemsHandler<IWallBuilderItem> WallBuilderItemsHandler => GameManagerBase.Instance.Builder.WallBuilderItems;
 
     public ICameraParameters CameraParameters
     {
@@ -19,9 +19,9 @@ public abstract class DataHolderAbstract : IDataHolderService
     {
     }
 
-    protected DataHolderAbstract(List<SerializableBuilderItem> builderItems, ICameraParameters cameraParameters)
+    protected DataHolderAbstract(BuilderItemsHandler<IWallBuilderItem> wallBuilderItemsHandler, ICameraParameters cameraParameters)
     {
-        SerializableBuilderItem.InstantiateItemsAndReferences(builderItems);
+        // WallBuilderItemsHandler = wallBuilderItemsHandler;
         CameraParameters = cameraParameters;
     }
 

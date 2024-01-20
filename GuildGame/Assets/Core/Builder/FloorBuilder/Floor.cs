@@ -39,6 +39,11 @@ namespace com.Halcyon.Core.Builder.FloorBuilder
         {
             if (floorIndex <= newFloorIndex)
             {
+                if (_areaCollider.enabled)
+                {
+                    _areaCollider.EnableAllRenderers();
+                }
+                
                 EnableFloor();
             }
             else if (floorIndex > newFloorIndex)
@@ -69,6 +74,10 @@ namespace com.Halcyon.Core.Builder.FloorBuilder
             if (builder!.FloorHandler.CurrentFloor < floorIndex)
             {
                 DisableFloor();
+            }
+            else
+            {
+                EnableFloor();
             }
         }
 

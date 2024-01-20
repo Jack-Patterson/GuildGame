@@ -58,11 +58,11 @@ namespace com.Halcyon.Core.Builder.GridBuilder
                     return;
                 }
 
-                Create(parent, wallPrefabToUse, expectedWallPosition, rotation);
+                Create<WallBuildItem>(parent, wallPrefabToUse, expectedWallPosition, rotation);
             }
             else if (IsDrawingDestruction && !shouldInstantiateWall && wallPositionValid)
             {
-                Destroy(potentialExistingWall!.gameObject);
+                Destroy<WallBuildItem>(potentialExistingWall!.gameObject);
             }
 
             DrawPosts(expectedWallPosition, rotation, postPrefabToUse, parent);
@@ -97,24 +97,24 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             {
                 if (firstPostIsNull)
                 {
-                    Create(parent, wallPostPrefab, firstPossiblePostPosition, rotation);
+                    Create<WallPostBuildItem>(parent, wallPostPrefab, firstPossiblePostPosition, rotation);
                 }
 
                 if (secondPostIsNull)
                 {
-                    Create(parent, wallPostPrefab, secondPossiblePostPosition, rotation);
+                    Create<WallPostBuildItem>(parent, wallPostPrefab, secondPossiblePostPosition, rotation);
                 }
             }
             else if (IsDrawingDestruction)
             {
                 if (!firstPostIsNull && firstPostOverlapItemsAmount == 1)
                 {
-                    Destroy(firstPotentialPost!.gameObject);
+                    Destroy<WallPostBuildItem>(firstPotentialPost!.gameObject);
                 }
 
                 if (!secondPostIsNull && secondPostOverlapItemsAmount == 1)
                 {
-                    Destroy(secondPotentialPost!.gameObject);
+                    Destroy<WallPostBuildItem>(secondPotentialPost!.gameObject);
                 }
             }
         }

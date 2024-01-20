@@ -8,7 +8,7 @@ namespace com.Halcyon.Core.Services.Serialization
 {
     public class SerializableDataHolder
     {
-        private List<SerializableBuilderItem> _serializableBuilderItems;
+        private BuilderItemsHandler<IWallBuilderItem> _wallBuilderItemsHandler;
         private CameraParameters _cameraParameters;
 
         public CameraParameters CameraParameters
@@ -17,38 +17,31 @@ namespace com.Halcyon.Core.Services.Serialization
             set => _cameraParameters = value;
         }
 
-        public List<SerializableBuilderItem> SerializableBuilderItems
+        public BuilderItemsHandler<IWallBuilderItem> WallBuilderItemsHandler
         {
-            get => _serializableBuilderItems;
-            set => _serializableBuilderItems = value;
+            get => _wallBuilderItemsHandler;
+            set => _wallBuilderItemsHandler = value;
         }
 
         public SerializableDataHolder()
         {
-            _serializableBuilderItems = new List<SerializableBuilderItem>();
+            _wallBuilderItemsHandler = new BuilderItemsHandler<IWallBuilderItem>();
         }
 
-        public SerializableDataHolder(List<SerializableBuilderItem> serializableBuilderItems,
+        public SerializableDataHolder(BuilderItemsHandler<IWallBuilderItem> wallBuilderItemsHandler,
             CameraParameters cameraParameters)
         {
-            _serializableBuilderItems = serializableBuilderItems;
-            _cameraParameters = cameraParameters;
-        }
-
-        public SerializableDataHolder(List<IBuilderItem> builderItems, CameraParameters cameraParameters)
-        {
-            _serializableBuilderItems = SerializableBuilderItem.GetBuilderItemsFromInterfaceList(builderItems);
+            _wallBuilderItemsHandler = wallBuilderItemsHandler;
             _cameraParameters = cameraParameters;
         }
 
         public SerializableDataHolder(DataHolder.DataHolder dataHolder)
         {
-            // _serializableBuilderItems =
-            //     SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.BuilderItems);
+            _wallBuilderItemsHandler = dataHolder.WallBuilderItemsHandler;
             _cameraParameters = dataHolder.CameraParameters as CameraParameters;
         }
 
         public DataHolder.DataHolder ToDataHolder() =>
-            new DataHolder.DataHolder(SerializableBuilderItems, _cameraParameters as ICameraParameters);
+            new DataHolder.DataHolder(WallBuilderItemsHandler, _cameraParameters as ICameraParameters);
     }
 }
