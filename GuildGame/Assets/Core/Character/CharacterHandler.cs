@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
+using com.Halcyon.API.Core.Character;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character
 {
-    public class CharacterHandler : MonoBehaviour
+    public class CharacterHandler : CharacterHandlerBase
     {
         [SerializeField] private GameObject passerbyPrefab;
         [SerializeField] private Transform footPathPointOne;
         [SerializeField] private Transform footPathPointTwo;
+
+        internal Transform FootPathPointOne => footPathPointOne;
+        internal Transform FootPathPointTwo => footPathPointTwo;
 
         private List<GameObject> _passerbys;
 
@@ -23,7 +27,7 @@ namespace com.Halcyon.Core.Character
 
         private void InstantiateAndMovePasserbys()
         {
-            int random = Random.Range(1f, 2f) >= 1.5f ? 2 : 1;
+            int random = Random.Range(1f, 2f) < 1.5f ? 1 : 2;
             bool isStartPointOne = random == 1;
 
             GameObject passerby = Instantiate(passerbyPrefab,
