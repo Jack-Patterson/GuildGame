@@ -11,3 +11,4 @@ C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\netstandard2.1\GuildGameApi.csproj.CopyComplete
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\netstandard2.1\GuildGameApi.dll
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\netstandard2.1\GuildGameApi.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGameApi\GuildGameApi\obj\Debug\netstandard2.1\GuildGameApi.sourcelink.json

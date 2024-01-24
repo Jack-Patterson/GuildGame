@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using com.Halcyon.API.Core.Building.BuilderItem;
+﻿using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Camera;
@@ -8,7 +7,7 @@ namespace com.Halcyon.Core.Services.Serialization
 {
     public class SerializableDataHolder
     {
-        private BuilderItemsHandler<IWallBuilderItem> _wallBuilderItemsHandler;
+        private SerializableBuilderItemsHandler _wallBuilderItemsHandler;
         private CameraParameters _cameraParameters;
 
         public CameraParameters CameraParameters
@@ -17,7 +16,7 @@ namespace com.Halcyon.Core.Services.Serialization
             set => _cameraParameters = value;
         }
 
-        public BuilderItemsHandler<IWallBuilderItem> WallBuilderItemsHandler
+        public SerializableBuilderItemsHandler WallBuilderItemsHandler
         {
             get => _wallBuilderItemsHandler;
             set => _wallBuilderItemsHandler = value;
@@ -25,23 +24,40 @@ namespace com.Halcyon.Core.Services.Serialization
 
         public SerializableDataHolder()
         {
-            _wallBuilderItemsHandler = new BuilderItemsHandler<IWallBuilderItem>();
+            // _wallBuilderItemsHandler = new SerializableBuilderItemsHandler();
         }
 
         public SerializableDataHolder(BuilderItemsHandler<IWallBuilderItem> wallBuilderItemsHandler,
+            CameraParameters cameraParameters)
+        {
+            _wallBuilderItemsHandler = new SerializableBuilderItemsHandler(
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(wallBuilderItemsHandler.FirstFloorItems),
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(wallBuilderItemsHandler.SecondFloorItems),
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(wallBuilderItemsHandler.ThirdFloorItems));
+            _cameraParameters = cameraParameters;
+        }
+
+        public SerializableDataHolder(DataHolder.DataHolder dataHolder)
+        {
+            _wallBuilderItemsHandler = new SerializableBuilderItemsHandler(
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.WallBuilderItemsHandler
+                    .FirstFloorItems),
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.WallBuilderItemsHandler
+                    .SecondFloorItems),
+                SerializableBuilderItem.GetBuilderItemsFromInterfaceList(dataHolder.WallBuilderItemsHandler
+                    .ThirdFloorItems));
+            _cameraParameters = dataHolder.CameraParameters as CameraParameters;
+        }
+
+        public SerializableDataHolder(SerializableBuilderItemsHandler wallBuilderItemsHandler,
             CameraParameters cameraParameters)
         {
             _wallBuilderItemsHandler = wallBuilderItemsHandler;
             _cameraParameters = cameraParameters;
         }
 
-        public SerializableDataHolder(DataHolder.DataHolder dataHolder)
-        {
-            _wallBuilderItemsHandler = dataHolder.WallBuilderItemsHandler;
-            _cameraParameters = dataHolder.CameraParameters as CameraParameters;
-        }
-
         public DataHolder.DataHolder ToDataHolder() =>
-            new DataHolder.DataHolder(WallBuilderItemsHandler, _cameraParameters as ICameraParameters);
+            new DataHolder.DataHolder(WallBuilderItemsHandler.ToBuilderItemsHandler<IWallBuilderItem>(),
+                _cameraParameters as ICameraParameters);
     }
 }

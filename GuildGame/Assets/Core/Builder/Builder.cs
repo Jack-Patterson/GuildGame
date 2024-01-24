@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building;
+using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Builder.FloorBuilder;
 using com.Halcyon.Core.Builder.GridBuilder;
 using com.Halcyon.Core.Manager;
@@ -25,6 +26,8 @@ namespace com.Halcyon.Core.Builder
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
             _pointerHandler = new PointerHandler(pointer, this);
             _floorHandler = new FloorHandler(floors);
+            _wallBuilderItems = new BuilderItemsHandler<IWallBuilderItem>();
+            _floorBuilderItems = new BuilderItemsHandler<IFloorBuilderItem>();
             
             InvokeOnBuilderInitialisationComplete();
             _floorHandler.InvokeFloorChanged(1);

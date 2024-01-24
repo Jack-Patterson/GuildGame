@@ -2,9 +2,15 @@
 
 namespace com.Halcyon.API.Core.Building.BuilderItem;
 
-public class WallBuildItem : MonoBehaviour, IWallBuilderItem
+public class WallBuildItem : ExtendedMonoBehaviour, IWallBuilderItem
 {
     private BuilderItemType _builderItemType = BuilderItemType.Wall;
+    private Renderer? _renderer;
+
+    protected override void OnAwake()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
 
     public BuilderItemType BuilderItemType
     {
@@ -12,15 +18,13 @@ public class WallBuildItem : MonoBehaviour, IWallBuilderItem
         set => _builderItemType = value;
     }
 
-    public Vector3 Position
+    public void Show()
     {
-        get => transform.position;
-        set => transform.position = value;
+        if (_renderer != null) _renderer.enabled = true;
     }
 
-    public Quaternion Rotation
+    public void Hide()
     {
-        get => transform.rotation;
-        set => transform.rotation = value;
+        if (_renderer != null) _renderer.enabled = false;
     }
 }

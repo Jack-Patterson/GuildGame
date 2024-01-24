@@ -18,8 +18,8 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
     internal Action<RaycastHit>? OnMousePositionChanged;
 #pragma warning restore CS0649 // Field is never assigned to, and will always have its default value
     
-    private BuilderItemsHandler<IWallBuilderItem> _wallBuilderItems = new BuilderItemsHandler<IWallBuilderItem>();
-    private BuilderItemsHandler<IFloorBuilderItem> _floorBuilderItems = new BuilderItemsHandler<IFloorBuilderItem>();
+    protected BuilderItemsHandler<IWallBuilderItem> _wallBuilderItems = null!;
+    protected BuilderItemsHandler<IFloorBuilderItem> _floorBuilderItems = null!;
     protected Vector2 CurrentMousePosition = Vector2.zero;
     protected IFloorHandler _floorHandler = null!;
 
@@ -42,7 +42,6 @@ public abstract class BuilderAbstract : ExtendedMonoBehaviour
     protected override void OnAwake()
     {
         GameManagerBase.ReadyToAssignObjects += () => GameManagerBase.Instance.Builder = this;
-        ;
     }
 
     protected override void OnStart()

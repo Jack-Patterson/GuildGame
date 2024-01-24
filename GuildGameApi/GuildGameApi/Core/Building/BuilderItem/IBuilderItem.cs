@@ -7,4 +7,7 @@ public interface IBuilderItem
     BuilderItemType BuilderItemType { get; set; }
     Vector3 Position { get; set; }
     Quaternion Rotation { get; set; }
+    
+    void Show();
+    void Hide();
 }

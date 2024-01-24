@@ -36,10 +36,10 @@ public class SerializableBuilderItem
         _rotation = rotation;
     }
 
-    public static List<SerializableBuilderItem> GetBuilderItemsFromInterfaceList(List<IBuilderItem> builderItems)
+    public static List<SerializableBuilderItem> GetBuilderItemsFromInterfaceList<T>(List<T> builderItems) where T : IBuilderItem
     {
         List<SerializableBuilderItem> newBuilderItems = new List<SerializableBuilderItem>();
-        foreach (IBuilderItem builderItem in builderItems)
+        foreach (T builderItem in builderItems)
         {
             SerializableBuilderItem newSerializableBuilderItem = new SerializableBuilderItem(
                 builderItem.BuilderItemType,
@@ -51,17 +51,19 @@ public class SerializableBuilderItem
         return newBuilderItems;
     }
 
-    public static List<IBuilderItem> InstantiateItemsAndReferences(List<SerializableBuilderItem> builderItems)
+    public static List<T> InstantiateItemsAndReferences<T>(List<SerializableBuilderItem> builderItems) where T : IBuilderItem
     {
-        List<IBuilderItem> newBuilderItems = new List<IBuilderItem>();
+        List<T> newBuilderItems = new List<T>();
+        if (builderItems.Count <= 0) return newBuilderItems;
         foreach (SerializableBuilderItem builderItem in builderItems)
         {
             GameObject prefab = GameManagerBase.Instance.Builder.GetPrefabBasedOnType(builderItem.BuilderItemType);
 
-            GameObject go = GameManagerBase.Instance.Builder.InstantiateBuilderPrefab(prefab, builderItem.Position.GetUnityVector(),
+            GameObject go = GameManagerBase.Instance.Builder.InstantiateBuilderPrefab(prefab,
+                builderItem.Position.GetUnityVector(),
                 builderItem.Rotation.GetUnityQuaternion());
 
-            IBuilderItem builderItemInterface = go.GetComponent<IBuilderItem>();
+            T builderItemInterface = go.GetComponent<T>();
 
             newBuilderItems.Add(builderItemInterface);
         }

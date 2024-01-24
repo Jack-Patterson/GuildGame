@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using com.Halcyon.API.Core.Building.BuilderItem;
+﻿using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.API.Services.DataHolder;
-using com.Halcyon.API.Services.Serialization;
 using com.Halcyon.Core.Manager;
 using com.Halcyon.Core.Services.Serialization;
 
