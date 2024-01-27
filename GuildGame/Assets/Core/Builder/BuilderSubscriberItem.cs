@@ -14,7 +14,7 @@ namespace com.Halcyon.Core.Builder
             builder.BuilderGameStateDisabled += UnsubscribeGridBuildMethods;
         }
 
-        protected abstract void SubscribeGridBuildMethods();
-        protected abstract void UnsubscribeGridBuildMethods();
+        protected internal abstract void SubscribeGridBuildMethods();
+        protected internal abstract void UnsubscribeGridBuildMethods();
     }
 }

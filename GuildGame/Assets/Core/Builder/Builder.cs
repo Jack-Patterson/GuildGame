@@ -13,7 +13,10 @@ namespace com.Halcyon.Core.Builder
     public class Builder : BuilderAbstract
     {
         private WallBuilder _wallBuilder;
+        private GridBuilder.FloorBuilder _floorBuilder;
         private PointerHandler _pointerHandler;
+        
+        private GridBuilderBase _currentGridBuilder;
         
         internal Action<RaycastHit> OnMousePositionChanged;
 
@@ -24,10 +27,13 @@ namespace com.Halcyon.Core.Builder
             List<Floor> floors = Utils.GetComponentsFromTransform<Floor>(transform);
             
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
+            _floorBuilder = new GridBuilder.FloorBuilder(placeRaycast, wallLayer);
             _pointerHandler = new PointerHandler(pointer, this);
             _floorHandler = new FloorHandler(floors);
             _wallBuilderItems = new BuilderItemsHandler<IWallBuilderItem>();
             _floorBuilderItems = new BuilderItemsHandler<IFloorBuilderItem>();
+
+            _currentGridBuilder = _wallBuilder;
             
             InvokeOnBuilderInitialisationComplete();
             _floorHandler.InvokeFloorChanged(1);
@@ -73,6 +79,19 @@ namespace com.Halcyon.Core.Builder
         {
             GameManager.Instance.GameParameters.InputService.MousePositionPerformed -=
                 UpdateCurrentMousePosition;
+        }
+        
+        public void ToggleCurrentlyActiveGridBuilder()
+        {
+            if (_currentGridBuilder == _wallBuilder)
+            {
+                _currentGridBuilder.UnsubscribeGridBuildMethods();
+                _currentGridBuilder = _floorBuilder;
+                return;
+            }
+
+            _currentGridBuilder.UnsubscribeGridBuildMethods();
+            _currentGridBuilder = _wallBuilder;
         }
     }
 }

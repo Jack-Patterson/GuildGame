@@ -19,9 +19,14 @@ namespace com.Halcyon.Core.UI.GameScene
         private List<GameSceneButton> FindAndInitializeButtons()
         {
             List<GameSceneButton> gameSceneButtons = GetComponentsInChildren<GameSceneButton>().ToList();
-            foreach (GameSceneButton mmb in gameSceneButtons)
+            List<GameSceneToggle> gameSceneToggles = GetComponentsInChildren<GameSceneToggle>().ToList();
+            foreach (GameSceneButton gameSceneButton in gameSceneButtons)
             {
-                mmb.Initialize(AddActionBasedOnButtonType(mmb.MenuButtonType));
+                gameSceneButton.Initialize(AddActionBasedOnButtonType(gameSceneButton.MenuButtonType));
+            }
+            foreach (GameSceneToggle gameSceneToggle in gameSceneToggles)
+            {
+                gameSceneToggle.Initialize(AddActionBasedOnToggleType(gameSceneToggle.MenuToggleType));
             }
 
             return gameSceneButtons;
@@ -46,6 +51,17 @@ namespace com.Halcyon.Core.UI.GameScene
                     return null;
             }
         }
+        
+        private UnityAction<bool> AddActionBasedOnToggleType(GameSceneToggleTypes buttonTypes)
+        {
+            switch (buttonTypes)
+            {
+                case GameSceneToggleTypes.UseWallBuilder:
+                    return GridBuilderToggleAction;
+                default:
+                    return null;
+            }
+        }
 
         private void SaveAction()
         {
@@ -62,5 +78,9 @@ namespace com.Halcyon.Core.UI.GameScene
             builder.FloorHandler.CurrentFloor = value;
         }
         
+        private void GridBuilderToggleAction(bool value)
+        {
+            builder.ToggleCurrentlyActiveGridBuilder();
+        }
     }
 }

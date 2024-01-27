@@ -133,7 +133,7 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             return isValid;
         }
 
-        protected override void SubscribeGridBuildMethods()
+        protected internal override void SubscribeGridBuildMethods()
         {
             IInputService inputService = GameManager.Instance.GameParameters.InputService;
             Builder builder = (GameManager.Instance.Builder as Builder)!;
@@ -147,7 +147,7 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             builder.OnMousePositionChanged += OnMousePositionChanged;
         }
 
-        protected override void UnsubscribeGridBuildMethods()
+        protected internal override void UnsubscribeGridBuildMethods()
         {
             IInputService inputService = GameManager.Instance.GameParameters.InputService;
             Builder builder = (GameManager.Instance.Builder as Builder)!;

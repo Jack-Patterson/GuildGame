@@ -1,5 +1,4 @@
-﻿using System;
-using com.Halcyon.API.Core;
+﻿using com.Halcyon.API.Core;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character

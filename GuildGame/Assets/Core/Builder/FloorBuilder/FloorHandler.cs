@@ -34,11 +34,11 @@ namespace com.Halcyon.Core.Builder.FloorBuilder
             OnFloorChanged?.Invoke(value);
         }
 
-        protected override void SubscribeGridBuildMethods()
+        protected internal override void SubscribeGridBuildMethods()
         {
         }
 
-        protected override void UnsubscribeGridBuildMethods()
+        protected internal override void UnsubscribeGridBuildMethods()
         {
         }
 
