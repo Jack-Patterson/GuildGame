@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using com.Halcyon.API.Core.Character;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character
 {
-    public class CharacterHandler : CharacterHandlerBase
+    public class CharacterManager : API.Core.Character.CharacterManager
     {
         [SerializeField] private GameObject passerbyPrefab;
         [SerializeField] private Transform footPathPointOne;
@@ -21,11 +20,11 @@ namespace com.Halcyon.Core.Character
 
             for (int i = 0; i < 10; i++)
             {
-                InstantiateAndMovePasserbys();
+                InstantiateAndMovePasserby();
             }
         }
 
-        private void InstantiateAndMovePasserbys()
+        private void InstantiateAndMovePasserby()
         {
             int random = Random.Range(1f, 2f) < 1.5f ? 1 : 2;
             bool isStartPointOne = random == 1;
@@ -34,7 +33,7 @@ namespace com.Halcyon.Core.Character
                 isStartPointOne ? footPathPointOne.position : footPathPointTwo.position, Quaternion.identity);
             _passerbys.Add(passerby);
 
-            passerby.GetComponent<PasserbyCharacter>()
+            passerby.GetComponent<Character>()
                 .SetTarget(isStartPointOne ? footPathPointTwo.position : footPathPointOne.position);
         }
     }

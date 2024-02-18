@@ -18,7 +18,7 @@ public class GameManagerBase : MonoBehaviour
     private BuilderAbstract _builder = null!;
     private IDataHolderService _dataHolder = null!;
     private ICameraParameters _cameraParameters = null!;
-    private CharacterHandlerBase _characterHandlerBase = null!;
+    private CharacterManager _characterManager = null!;
     // private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
     public static GameManagerBase Instance => _gManagerBase;
@@ -53,10 +53,10 @@ public class GameManagerBase : MonoBehaviour
         set => _gameParameters = value;
     }
     
-    public CharacterHandlerBase CharacterHandlerBase
+    public CharacterManager CharacterManager
     {
-        get => _characterHandlerBase;
-        set => _characterHandlerBase = value;
+        get => _characterManager;
+        set => _characterManager = value;
     }
 
     protected void Awake()

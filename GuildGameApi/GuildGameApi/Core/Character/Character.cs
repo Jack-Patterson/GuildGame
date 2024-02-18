@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using com.Halcyon.API.Core.Character.Tasks;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace com.Halcyon.API.Core.Character;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public abstract class CharacterBase : ExtendedMonoBehaviour
+public abstract class Character : ExtendedMonoBehaviour
 {
     private CharacterClass _characterClass = CharacterClass.None;
     protected NavMeshAgent NavMeshAgent = null!;
+    protected ICharacterTask CurrentTask = null!;
 
     public CharacterClass CharacterClass
     {
@@ -15,8 +17,7 @@ public abstract class CharacterBase : ExtendedMonoBehaviour
         set => _characterClass = value;
     }
 
-    private void Awake()
-    {
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-    }
+    public abstract void SetTarget(Vector3 target);
+
+    public abstract void SetTarget(Transform target);
 }

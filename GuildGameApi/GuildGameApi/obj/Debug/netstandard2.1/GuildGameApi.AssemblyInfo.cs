@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GuildGameApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+149e2a67a439d860eb8584de0b5cdaf30a702f1f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a58eff68c03c87c9e399c169e4257844c4fd81b6")]
 [assembly: System.Reflection.AssemblyProductAttribute("GuildGameApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GuildGameApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
