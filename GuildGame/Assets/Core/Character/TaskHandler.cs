@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using com.Halcyon.API.Core;
+using com.Halcyon.Core.Character.Tasks;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using com.Halcyon.Core.Character.Tasks;
+using UnityEngine;
 
 namespace com.Halcyon.Core.Character.Jobs
 {
@@ -11,17 +12,24 @@ namespace com.Halcyon.Core.Character.Jobs
 
         private void Start()
         {
-            TaskHandler.AddSequence(new TaskSequence(new Task[]
-            {
-                new MoveTask(this, interactDrinkStandPos.position),
-                new LookAtTask(this, interactDrinkLookPos.position),
-                new WaitTask(this, 1.5f),
-                new PrintTask(this, "Interacting with drink stand"),
-                new MoveTask(this, placeDrinkStandPos.position),
-                new LookAtTask(this, placeDrinkLookPos.position),
-                new WaitTask(this, 1.5f),
-                new PrintTask(this, "Placing drink")
-            }, true));
+            TaskPool taskPool = new TaskPool();
+            TaskSequence sequence = new TaskSequence(taskPool, true);
+            
+            taskPool.RegisterTaskFactory(character => new MoveTask(character));
+            taskPool.RegisterTaskFactory(character => new PrintTask(character));
+            taskPool.RegisterTaskFactory(character => new LookAtTask(character));
+            taskPool.RegisterTaskFactory(character => new WaitTask(character));
+            
+            sequence.AddTask<MoveTask>(this, task => task.SetDestination(interactDrinkStandPos.position));
+            sequence.AddTask<LookAtTask>(this, task => task.SetLookPosition(interactDrinkLookPos.position));
+            sequence.AddTask<WaitTask>(this, task => task.SetWaitTime(1.5f));
+            sequence.AddTask<PrintTask>(this, task => task.SetPrintMessage("Interacting with drink stand"));
+            sequence.AddTask<MoveTask>(this, task => task.SetDestination(placeDrinkStandPos.position));
+            sequence.AddTask<LookAtTask>(this, task => task.SetLookPosition(placeDrinkLookPos.position));
+            sequence.AddTask<WaitTask>(this, task => task.SetWaitTime(1.5f));
+            sequence.AddTask<PrintTask>(this, task => task.SetPrintMessage("Placing drink"));
+            
+            TaskHandler.AddSequence(sequence);
         }
     }
 }

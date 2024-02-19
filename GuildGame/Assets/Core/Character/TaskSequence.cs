@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using com.Halcyon.Core.Character.Tasks;
 
 namespace com.Halcyon.Core.Character
 {
@@ -6,12 +8,20 @@ namespace com.Halcyon.Core.Character
     {
         private List<Task> _tasks = new();
         private int _currentIndex;
+        private TaskPool _taskPool;
         public bool IsLooping { get; set; }
 
-        public TaskSequence(IEnumerable<Task> tasks, bool isLooping = false)
+        public TaskSequence(TaskPool pool, bool isLooping = false)
         {
-            _tasks.AddRange(tasks);
+            _taskPool = pool;
             IsLooping = isLooping;
+        }
+        
+        public void AddTask<T>(Character character, Action<T> configureTask) where T : Task
+        {
+            var task = _taskPool.GetTask<T>(character);
+            configureTask(task);
+            _tasks.Add(task);
         }
 
         public Task GetCurrentTask()
