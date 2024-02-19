@@ -6,20 +6,34 @@ namespace com.Halcyon.Core.Character
     [RequireComponent(typeof(TaskHandler))]
     public class Character : API.Core.Character.Character
     {
+        protected TaskHandler TaskHandler = null!;
+        
         private void Awake()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
+            Agent = GetComponent<NavMeshAgent>();
             TaskHandler = GetComponent<TaskHandler>();
         }
         
         public override void SetTarget(Vector3 target)
         {
-            NavMeshAgent.SetDestination(target);
+            Agent.ResetPath();
+            Agent.SetDestination(target);
         }
 
         public override void SetTarget(Transform target)
         {
-            NavMeshAgent.SetDestination(target.position);
+            Agent.ResetPath();
+            Agent.SetDestination(target.position);
+        }
+
+        public override bool DestinationReached()
+        {
+            return Agent.remainingDistance <= Agent.stoppingDistance;
+        }
+        
+        public void Stop()
+        {
+            Agent.velocity = Vector3.zero;
         }
     }
 }

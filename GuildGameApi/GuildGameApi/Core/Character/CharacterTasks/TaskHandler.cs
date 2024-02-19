@@ -2,19 +2,55 @@
 
 public abstract class TaskHandler : ExtendedMonoBehaviour
 {
-    protected List<Task> tasks = null!;
-    protected Character Character = null!;
-    public List<Task> Tasks => tasks;
-
-    private void Awake()
-    {
-        tasks = new List<Task>();
-        Character = GetComponent<Character>();
-    }
-
-    public abstract void AddTask(Task task);
-
-    public abstract void RemoveTask(Task task);
-
-    public abstract void SetTasks(List<Task> tasks);
+    // private TaskSequence _currentSequence;
+    // private Task _currentTask;
+    //
+    // void Update()
+    // {
+    //     if (_currentTask == null)
+    //     {
+    //         if (_currentSequence != null)
+    //         {
+    //             StartNextTaskInSequence();
+    //         }
+    //     }
+    // }
+    //
+    // private void StartNextTaskInSequence()
+    // {
+    //     _currentTask = _currentSequence?.GetCurrentTask();
+    //     if (_currentTask != null)
+    //     {
+    //         _currentTask.Execute();
+    //         _currentTask.OnTaskCompleted += OnCurrentTaskCompleted;
+    //     }
+    // }
+    //
+    // private void OnCurrentTaskCompleted()
+    // {
+    //     _currentTask.OnTaskCompleted -= OnCurrentTaskCompleted;
+    //     _currentTask = null;
+    //     _currentSequence.MoveToNextTask();
+    // }
+    //
+    // public void SetSequence(TaskSequence sequence)
+    // {
+    //     if (_currentTask != null)
+    //     {
+    //         _currentTask.Stop();
+    //         _currentTask = null;
+    //     }
+    //     _currentSequence = sequence;
+    //     _currentSequence.Reset();
+    // }
+    //
+    // public void EndCurrentSequence()
+    // {
+    //     if (_currentTask != null)
+    //     {
+    //         _currentTask.Stop();
+    //         _currentTask = null;
+    //     }
+    //     _currentSequence = null;
+    // }
 }

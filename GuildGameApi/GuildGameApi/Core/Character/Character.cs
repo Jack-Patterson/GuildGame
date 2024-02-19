@@ -4,13 +4,11 @@ using UnityEngine.AI;
 
 namespace com.Halcyon.API.Core.Character;
 
-[RequireComponent(typeof(TaskHandler))]
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Character : ExtendedMonoBehaviour
 {
     private CharacterClass _characterClass = CharacterClass.None;
-    protected NavMeshAgent NavMeshAgent = null!;
-    protected TaskHandler TaskHandler = null!;
+    protected NavMeshAgent Agent = null!;
 
     public CharacterClass CharacterClass
     {
@@ -21,4 +19,6 @@ public abstract class Character : ExtendedMonoBehaviour
     public abstract void SetTarget(Vector3 target);
 
     public abstract void SetTarget(Transform target);
+
+    public abstract bool DestinationReached();
 }

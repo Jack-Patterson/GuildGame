@@ -1,31 +1,75 @@
 ﻿using System.Collections.Generic;
-using com.Halcyon.API.Core.Character.CharacterTasks;
+using com.Halcyon.API.Core;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character
 {
-    public class TaskHandler : API.Core.Character.CharacterTasks.TaskHandler
+    public class TaskHandler : ExtendedMonoBehaviour
     {
-        private void Start()
+        private readonly Queue<TaskSequence> _sequences = new();
+        private TaskSequence _currentSequence;
+        private Task _currentTask;
+
+        void Update()
         {
-            Tasks.Add(new MoveTask(Character));
-            Tasks[0].Perform();
-            ((Task<Vector3>)Tasks[0]).Perform(new Vector3(10, 0, 10));
+            if (_currentTask == null)
+            {
+                if (_currentSequence == null || _currentSequence.GetCurrentTask() == null)
+                {
+                    if (_sequences.Count > 0 && _currentSequence == null)
+                    {
+                        _currentSequence = _sequences.Dequeue();
+                        _currentSequence.Reset();
+                    }
+                    else if (_currentSequence != null && !_currentSequence.IsLooping)
+                    {
+                        _currentSequence = _sequences.Count > 0 ? _sequences.Dequeue() : null;
+                        if (_currentSequence != null) _currentSequence.Reset();
+                    }
+                }
+
+                StartNextTaskInSequence();
+            }
         }
 
-        public override void AddTask(Task task)
+        private void StartNextTaskInSequence()
         {
-            Tasks.Add(task);
+            if (_currentSequence != null)
+            {
+                _currentTask = _currentSequence.GetCurrentTask();
+                if (_currentTask != null)
+                {
+                    _currentTask.OnTaskCompleted += OnCurrentTaskCompleted;
+                    _currentTask.Execute();
+                }
+                else if (_currentSequence.IsLooping)
+                {
+                    _currentSequence.Reset();
+                    StartNextTaskInSequence();
+                }
+            }
         }
 
-        public override void RemoveTask(Task task)
+        private void OnCurrentTaskCompleted()
         {
-            Tasks.Remove(task);
+            _currentTask.OnTaskCompleted -= OnCurrentTaskCompleted;
+            _currentTask = null;
+            _currentSequence?.MoveToNextTask();
         }
 
-        public override void SetTasks(List<Task> tasks)
+        public void AddSequence(TaskSequence sequence)
         {
-            this.tasks = tasks;
+            _sequences.Enqueue(sequence);
+        }
+
+        public void EndCurrentSequence()
+        {
+            if (_currentTask != null)
+            {
+                _currentTask.Stop();
+                _currentTask = null;
+            }
+            _currentSequence = null;
         }
     }
 }
