@@ -1,17 +1,21 @@
-﻿using com.Halcyon.Core.Character.Tasks;
+﻿using com.Halcyon.Core.Character.CharacterParameters.Needs;
+using com.Halcyon.Core.Character.CharacterParameters.Stats;
+using com.Halcyon.Core.Character.Tasks;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Character.Jobs
 {
-    public class Bartender : Character
+    public class Bartender : Character<CharacterNeeds, BartenderStats>
     {
         [SerializeField] private Transform interactDrinkStandPos;
         [SerializeField] private Transform interactDrinkLookPos;
         [SerializeField] private Transform placeDrinkStandPos;
         [SerializeField] private Transform placeDrinkLookPos;
 
-        private void Start()
+        private new void Start()
         {
+            base.Start();
+            
             TaskPool taskPool = new TaskPool();
             TaskSequence sequence = new TaskSequence(taskPool, true);
             
@@ -30,6 +34,9 @@ namespace com.Halcyon.Core.Character.Jobs
             sequence.AddTask<PrintTask>(this, task => task.SetPrintMessage("Placing drink"));
             
             TaskHandler.AddSequence(sequence);
+            
+            print(Needs.GetType());
+            print(Stats.GetType());
         }
     }
 }

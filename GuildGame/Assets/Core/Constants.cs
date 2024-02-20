@@ -25,5 +25,22 @@ namespace com.Halcyon.Core
             public const int WallCheckRadius = 1;
             public const int PostCheckRadius = 1;
         }
+
+        public static class CharacterConstants
+        {
+            public static class CharacterNeedsConstants
+            {
+                 public const float MaxValue = 100;
+                 public const float MinValue = -100;
+                 public const float BaseNeedDecay = -0.1f;
+                 public const float BaseValue = 100;
+            }
+            
+            public static class CharacterStatsConstants
+            {
+                public const int MaxValue = 100;
+                public const int MinValue = 0;
+            }
+        }
     }
 }
