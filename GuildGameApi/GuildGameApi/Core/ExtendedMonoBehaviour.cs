@@ -58,4 +58,21 @@ public abstract class ExtendedMonoBehaviour : LoggerUtilMonoBehaviour
     protected virtual void OnOnEnable(){}
     protected virtual void OnOnDisable(){}
     protected virtual void OnOnDestroy(){}
+    
+    protected void Singleton<T>(ref T instance, bool dontDestroyOnLoad = false) where T : ExtendedMonoBehaviour
+    {
+        if (instance == null)
+        {
+            instance = (this as T)!;
+            
+            if (dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 }

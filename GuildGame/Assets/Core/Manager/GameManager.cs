@@ -21,17 +21,5 @@ namespace com.Halcyon.Core.Manager
             InvokeReadyToAssignObjects();
             GameInitializer.InitialGameStartup();
         }
-
-        private void Update()
-        {
-            // if (Input.anyKey)
-            // {
-            //     int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            //     int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
-            //     SceneManager.LoadScene(nextSceneIndex);
-            // }
-
-            // print(_testNum);
-        }
     }
 }
