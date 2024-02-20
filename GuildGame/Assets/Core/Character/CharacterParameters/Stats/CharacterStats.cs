@@ -9,19 +9,6 @@ namespace com.Halcyon.Core.Character.CharacterParameters.Stats
         public float Swordsmanship { get; private set; }
         public float Archery { get; private set; }
 
-        // public CharacterStats(float stamina, float magic, float swordsmanship, float archery)
-        // {
-        //     Stamina = stamina;
-        //     Magic = magic;
-        //     Swordsmanship = swordsmanship;
-        //     Archery = archery;
-        // }
-
-        public CharacterStats()
-        {
-            
-        }
-
         public void TrainStat(string stat, float amount)
         {
             switch (stat.ToLower())

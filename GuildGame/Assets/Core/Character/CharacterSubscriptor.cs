@@ -5,6 +5,6 @@ namespace com.Halcyon.Core.Character
 {
     public abstract class CharacterSubscriptor : LoggerUtil
     {
-        public abstract Action GetActionToSubscribeToOnDecay();
+        public abstract Action<float> GetActionToSubscribeToOnDecay();
     }
 }

@@ -32,7 +32,7 @@ namespace com.Halcyon.Core
             {
                  public const float MaxValue = 100;
                  public const float MinValue = -100;
-                 public const float BaseNeedDecay = -0.1f;
+                 public const float BaseNeedDecay = 0.1f;
                  public const float BaseValue = 100;
             }
             

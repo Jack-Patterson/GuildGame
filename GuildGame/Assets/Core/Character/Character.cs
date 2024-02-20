@@ -10,9 +10,7 @@ namespace com.Halcyon.Core.Character
     public class Character : API.Core.Character.Character
     {
         protected TaskHandler TaskHandler = null!;
-        internal event Action OnNeedsDecay = null!;
-        protected CharacterNeeds Needs;
-        protected CharacterStats Stats;
+        internal event Action<float> OnNeedsDecay = null!;
         
         private void Awake()
         {
@@ -20,9 +18,10 @@ namespace com.Halcyon.Core.Character
             TaskHandler = GetComponent<TaskHandler>();
         }
 
-        protected override void OnFixedUpdate()
+        protected override void OnUpdate()
         {
-            OnNeedsDecay?.Invoke();
+            float needDecay = Constants.CharacterConstants.CharacterNeedsConstants.BaseNeedDecay * Time.deltaTime;
+            OnNeedsDecay?.Invoke(needDecay);
         }
 
         public override void SetTarget(Vector3 target)
@@ -48,29 +47,35 @@ namespace com.Halcyon.Core.Character
         }
     }
     
-    public class Character<TNeeds, TStats> : Character where TNeeds : CharacterNeeds, new() where TStats : CharacterStats, new()
+    public class Character<TStats> : Character where TStats : CharacterStats, new()
     {
-        public new TNeeds Needs
-        {
-            get => (TNeeds)base.Needs;
-            protected set => base.Needs = value;
-        }
-
-        public new TStats Stats
-        {
-            get => (TStats)base.Stats;
-            protected set => base.Stats = value;
-        }
+        protected new TStats Stats { get; private set; }
 
         protected void Start()
         {
-            InitializeNeedsAndStats(new TNeeds(), new TStats());
+            InitializeStats(new TStats());
         }
         
-        protected void InitializeNeedsAndStats(TNeeds needs, TStats stats)
+        private void InitializeStats(TStats stats)
+        {
+            Stats = stats;
+        }
+    }
+    
+    public class Character<TNeeds, TStats> : Character<TStats> where TNeeds : CharacterNeeds, new() where TStats : CharacterStats, new()
+    {
+        protected new TNeeds Needs { get; private set; }
+
+        protected new void Start()
+        {
+            base.Start();
+            
+            InitializeNeeds(new TNeeds());
+        }
+        
+        private void InitializeNeeds(TNeeds needs)
         {
             Needs = needs;
-            Stats = stats;
             
             OnNeedsDecay += Needs.GetActionToSubscribeToOnDecay();
         }
