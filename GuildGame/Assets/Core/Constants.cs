@@ -38,8 +38,9 @@ namespace com.Halcyon.Core
             
             public static class CharacterStatsConstants
             {
-                public const int MaxValue = 100;
-                public const int MinValue = 0;
+                public const float MaxValue = 100;
+                public const float MinValue = 0;
+                public const float BaseValue = 0;
             }
         }
     }

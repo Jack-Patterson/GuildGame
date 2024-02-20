@@ -19,7 +19,7 @@ namespace com.Halcyon.Core.Character.CharacterParameters.Needs
         
         public Need(float value)
         {
-            Value = _value;
+            Value = value;
         }
     }
 }

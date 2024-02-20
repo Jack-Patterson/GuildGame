@@ -12,6 +12,12 @@ namespace com.Halcyon.Core.Character
     {
         protected TaskHandler TaskHandler = null!;
         internal event Action<float> OnNeedsDecay = null!;
+
+        public Vector3 Velocity
+        {
+            get => Agent.velocity;
+            set => Agent.velocity = value;
+        }
         
         private void Awake()
         {
@@ -44,7 +50,7 @@ namespace com.Halcyon.Core.Character
         
         public void Stop()
         {
-            Agent.velocity = Vector3.zero;
+            Velocity = Vector3.zero;
         }
     }
     

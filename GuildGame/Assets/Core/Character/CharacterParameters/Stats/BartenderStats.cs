@@ -2,8 +2,6 @@
 {
     public class BartenderStats : StaffStats
     {
-        public BartenderStats() : base()
-        {
-        }
+        
     }
 }

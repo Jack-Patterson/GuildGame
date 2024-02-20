@@ -26,7 +26,6 @@ namespace com.Halcyon.Core.Character.Tasks
                 yield return null;
             }
 
-            Character.Stop();
             CompleteTask();
         }
 

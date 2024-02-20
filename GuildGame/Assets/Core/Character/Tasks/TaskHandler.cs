@@ -61,6 +61,13 @@ namespace com.Halcyon.Core.Character.Tasks
             _sequences.Enqueue(sequence);
         }
 
+        public void SetSequence(TaskSequence sequence)
+        {
+            ClearSequences();
+            
+            AddSequence(sequence);
+        }
+
         public void EndCurrentSequence()
         {
             if (_currentTask != null)
@@ -70,6 +77,13 @@ namespace com.Halcyon.Core.Character.Tasks
             }
 
             _currentSequence = null;
+        }
+
+        public void ClearSequences()
+        {
+            EndCurrentSequence();
+            
+            _sequences.Clear();
         }
     }
 }
