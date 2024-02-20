@@ -2,7 +2,7 @@
 using com.Halcyon.Core.Character.Tasks;
 using UnityEngine;
 
-namespace com.Halcyon.Core.Character.Jobs
+namespace com.Halcyon.Core.Character.Jobs.Staff
 {
     public class Bartender : Staff<BartenderStats>
     {

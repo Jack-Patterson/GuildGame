@@ -1,6 +1,7 @@
 ﻿using System;
 using com.Halcyon.Core.Character.CharacterParameters.Needs;
 using com.Halcyon.Core.Character.CharacterParameters.Stats;
+using com.Halcyon.Core.Character.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,7 +50,7 @@ namespace com.Halcyon.Core.Character
     
     public class Character<TStats> : Character where TStats : CharacterStats, new()
     {
-        protected new TStats Stats { get; private set; }
+        protected TStats Stats { get; private set; }
 
         protected void Start()
         {
@@ -64,7 +65,7 @@ namespace com.Halcyon.Core.Character
     
     public class Character<TNeeds, TStats> : Character<TStats> where TNeeds : CharacterNeeds, new() where TStats : CharacterStats, new()
     {
-        protected new TNeeds Needs { get; private set; }
+        protected TNeeds Needs { get; private set; }
 
         protected new void Start()
         {

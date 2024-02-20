@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using com.Halcyon.Core.Character.Tasks;
 
-namespace com.Halcyon.Core.Character
+namespace com.Halcyon.Core.Character.Tasks
 {
     public class TaskSequence : API.Core.Character.CharacterTasks.TaskSequence
     {
