@@ -20,7 +20,7 @@ namespace com.Halcyon.Core.Interaction.InteractableObjects
         
         public void Deregister(IInteractableObject interactableObject) => _interactableObjects.Remove(interactableObject);
         
-        public T GetInteractableObject<T>(Vector3 characterPosition) where T : InteractableObject
+        public T GetClosestInteractableObjectOfType<T>(Vector3 characterPosition) where T : InteractableObject
         {
             return _interactableObjects
                 .OfType<T>()

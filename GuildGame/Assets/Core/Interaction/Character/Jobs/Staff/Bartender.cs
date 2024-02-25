@@ -8,7 +8,6 @@ namespace com.Halcyon.Core.Interaction.Character.Jobs.Staff
     public class Bartender : Staff<BartenderStats>
     {
         [SerializeField] private Transform leavePos;
-        private InteractableObject _assignedBar;
 
         private new void Start()
         {
@@ -19,15 +18,12 @@ namespace com.Halcyon.Core.Interaction.Character.Jobs.Staff
 
         public void AssignBarAndBeginWorking()
         {
-            _assignedBar = InteractableObjectHandler.Instance.GetInteractableObject<Bar>(transform.position);
-            
-            if (_assignedBar == null)
+            if (AssignedWorkstation == null)
             {
-                Log("No bar found for bartender.", LogType.Error);
-                return;
+                AssignedWorkstation = InteractableObjectHandler.Instance.GetClosestInteractableObjectOfType<Bar>(transform.position);
             }
             
-            TaskHandler.SetSequence(_assignedBar.GetTaskSequence(this));
+            TaskHandler.SetSequence(AssignedWorkstation.GetTaskSequence(this));
         }
 
         public void Leave()
