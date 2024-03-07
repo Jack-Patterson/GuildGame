@@ -12,7 +12,7 @@ namespace com.Halcyon.Core.Interaction.Character.Jobs.Staff
         private new void Start()
         {
             base.Start();
-
+            
             AssignBarAndBeginWorking();
         }
 
