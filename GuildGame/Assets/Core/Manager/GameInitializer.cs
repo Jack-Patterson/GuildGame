@@ -31,6 +31,7 @@ namespace com.Halcyon.Core.Manager
             GameInitializationComplete?.Invoke();
 
             ModsInitializer.CollectAndInitialiseAllMods();
+            Services.Serialization.Constants.LoadConstants();
         }
 
         private static void HandleCommandLineArguments()

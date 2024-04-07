@@ -9,7 +9,7 @@ namespace com.Halcyon.Core.Interaction.InteractableObjects
     {
         public static InteractableObjectHandler Instance;
 
-        private List<IInteractableObject> _interactableObjects = new();
+        private readonly List<IInteractableObject> _interactableObjects = new();
 
         private void Awake()
         {

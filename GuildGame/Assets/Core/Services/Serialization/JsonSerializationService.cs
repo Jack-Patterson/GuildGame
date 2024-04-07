@@ -12,7 +12,7 @@ namespace com.Halcyon.Core.Services.Serialization
     {
         public bool SaveData<T>(T objectToSerialize, string relativeSaveLocation, bool encrypted = false)
         {
-            string path = Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
+            string path = Core.Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
 
             object objectToSerializeConverted = ConvertNonSerializableTypes(objectToSerialize);
             
@@ -45,7 +45,7 @@ namespace com.Halcyon.Core.Services.Serialization
 
         public T LoadData<T>(string relativeSaveLocation, bool encrypted = false)
         {
-            string path = Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
+            string path = Core.Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
 
             if (!File.Exists(path))
             {

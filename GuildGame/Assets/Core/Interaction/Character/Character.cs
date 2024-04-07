@@ -23,10 +23,6 @@ namespace com.Halcyon.Core.Interaction.Character
         {
             Agent = GetComponent<NavMeshAgent>();
             TaskHandler = GetComponent<TaskHandler>();
-        }
-
-        protected void Start()
-        {
             
         }
 
@@ -63,9 +59,8 @@ namespace com.Halcyon.Core.Interaction.Character
     {
         protected TStats Stats { get; private set; }
 
-        protected new void Start()
+        protected void Start()
         {
-            base.Start();
             InitializeStats(new TStats());
         }
         

@@ -4,7 +4,7 @@
     {
         private string _message;
 
-        public PrintTask(Interaction.Character.Character character) : base(character)
+        public PrintTask(Character character) : base(character)
         {
         }
 

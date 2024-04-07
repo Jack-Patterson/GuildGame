@@ -7,7 +7,7 @@ namespace com.Halcyon.Core.Interaction.Character.Tasks
     public abstract class Task : LoggerUtil
     {
         public event Action OnTaskCompleted = null!;
-        protected readonly Interaction.Character.Character Character;
+        protected Interaction.Character.Character Character;
         protected IEnumerator CurrentCoroutine = null!;
 
         protected Task(Interaction.Character.Character character)
