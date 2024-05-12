@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace com.Halcyon.Core.Input
 {
-    public class InputHandler : MonoBehaviour
+    public class InputHandler : MonoBehaviour, IEditorAddable
     {
         private PlayerInputs _playerInputs;
         private InputService _inputService;
@@ -14,7 +14,7 @@ namespace com.Halcyon.Core.Input
         private void Awake()
         {
             _playerInputs = new PlayerInputs();
-            GameInitializer.GameInitializationComplete += AssignInputService;
+            GameInitializer.InputInitializationComplete += AssignInputService;
         }
 
         private void AssignInputService()
@@ -195,6 +195,11 @@ namespace com.Halcyon.Core.Input
             _playerInputs.PlayerControls.ToggleBuild.started -= OnToggleBuildPressed;
 
             _playerInputs.PlayerControls.Disable();
+        }
+
+        public void OnAdd()
+        {
+            print("InputHandler added");
         }
     }
 }

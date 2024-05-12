@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using com.Halcyon.API.Core;
-using com.Halcyon.Core.Manager;
+using com.Halcyon.Core.Utils;
+using com.Halkyon.Core.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace com.Halcyon.Core.UI.MainMenu
 {
-    public class MainMenuUiController : MonoBehaviour
+    public class MainMenuUiController : MonoBehaviourExtended
     {
         [SerializeField] private List<MainMenuButton> buttons;
 
@@ -52,8 +53,8 @@ namespace com.Halcyon.Core.UI.MainMenu
         private void ContinueButtonAction()
         {
             print("Continue");
-            GameManager.Instance.GameParameters.GameState = GameState.GameBase;
-            GameManager.Instance.GameParameters.SceneService.ChangeToScene(1);
+            GameManager.GameParameters.GameState = GameState.GameBase;
+            GameManager.GameParameters.SceneService.ChangeToScene(1);
         }
 
         private void NewGameButtonAction()

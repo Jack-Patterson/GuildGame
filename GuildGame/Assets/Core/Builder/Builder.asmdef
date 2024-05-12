@@ -2,7 +2,9 @@
     "name": "Builder",
     "rootNamespace": "com.Halcyon",
     "references": [
-        "GUID:7c879d82b14f42f4ea853cd4cdc40883"
+        "GUID:7c879d82b14f42f4ea853cd4cdc40883",
+        "GUID:9eb809a889d55e84cb494015919ba6a2",
+        "GUID:20d218e075bf2734bb8d49544f92c354"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

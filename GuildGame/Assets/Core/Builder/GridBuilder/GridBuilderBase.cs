@@ -2,6 +2,7 @@
 using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.Core.Manager;
+using com.Halcyon.Core.Utils;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Builder.GridBuilder
@@ -85,7 +86,7 @@ namespace com.Halcyon.Core.Builder.GridBuilder
 
         protected void DrawEvent(Vector2 vector)
         {
-            if (!IsBuildModeEnabled || (!IsDrawingCreation && !IsDrawingDestruction) || Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
+            if (!IsBuildModeEnabled || (!IsDrawingCreation && !IsDrawingDestruction) || API.Core.Utils.ValidateVectorSameAsAnother(CurrentPosition, LastPosition))
                 return;
             
             Builder builder = GameManager.Instance.Builder as Builder;

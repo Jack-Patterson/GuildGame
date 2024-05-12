@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace com.Halcyon.Core.Builder
 {
-    public class Builder : BuilderAbstract
+    public class Builder : BuilderAbstract, IEditorAddable
     {
         private WallBuilder _wallBuilder;
         private GridBuilder.FloorBuilder _floorBuilder;
@@ -24,7 +24,7 @@ namespace com.Halcyon.Core.Builder
         {
             base.OnStart();
             
-            List<Floor> floors = Utils.GetComponentsFromTransform<Floor>(transform);
+            List<Floor> floors = API.Core.Utils.GetComponentsFromTransform<Floor>(transform);
             
             _wallBuilder = new WallBuilder(placeRaycast, wallLayer);
             _floorBuilder = new GridBuilder.FloorBuilder(placeRaycast, wallLayer);
@@ -92,6 +92,11 @@ namespace com.Halcyon.Core.Builder
 
             _currentGridBuilder.UnsubscribeGridBuildMethods();
             _currentGridBuilder = _wallBuilder;
+        }
+
+        public void OnAdd()
+        {
+            print("Builder added");
         }
     }
 }

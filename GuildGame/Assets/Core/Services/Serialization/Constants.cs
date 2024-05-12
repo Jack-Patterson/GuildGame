@@ -1,39 +1,59 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using com.Halcyon.API.Core;
 using Newtonsoft.Json;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Services.Serialization
 {
-    public class Constants
+    public class Constants : LoggerUtilMonoBehaviour
     {
-        private static string _exampleVariable;
+        public static Constants Instance;
         
-        public static string ExampleVariable
-        {
-            get { return _exampleVariable; }
-            private set { _exampleVariable = value; }
-        }
+        private string ModsFolderPath = Path.Combine(Application.persistentDataPath, "Mods").Replace("\\", "/");
 
-        // Method to load and deserialize the constants.json file
-        public static void LoadConstants()
+        private string LogsFolderPath = Path.Combine(Application.persistentDataPath, "Logs").Replace("\\", "/");
+
+        private string SavesFolderPath = Path.Combine(Application.persistentDataPath, "Saves").Replace("\\", "/");
+
+        private string DiscordInviteLink = "https://discord.gg/FnKBMfRqRb";
+
+        public static void Load()
         {
             string filePath = Path.Combine(Application.persistentDataPath, "constants.json");
             if (File.Exists(filePath))
             {
                 string dataAsJson = File.ReadAllText(filePath);
-                var constantsData = JsonConvert.DeserializeObject<ConstantsData>(dataAsJson);
+                Constants deserializedObject = JsonConvert.DeserializeObject<Constants>(dataAsJson);
 
-                ExampleVariable = constantsData.ExampleVariable;
+                Instance = deserializedObject;
             }
             else
             {
                 Debug.LogError("Cannot find constants.json file.");
             }
         }
-        
-        private class ConstantsData
+
+        public static void Save()
         {
-            public string ExampleVariable { get; set; }
+            string filePath = Path.Combine(Application.persistentDataPath, "constants.json");
+
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+
+                using FileStream stream = File.Create(filePath);
+                stream.Close();
+
+                File.WriteAllText(filePath, JsonConvert.SerializeObject(Instance, Formatting.Indented));
+            }
+            catch (Exception e)
+            {
+                LogException(e);
+            }
         }
     }
 }

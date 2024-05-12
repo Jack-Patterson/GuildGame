@@ -3,11 +3,12 @@ using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building;
 using com.Halcyon.API.Core.Camera;
 using com.Halcyon.Core.Manager;
+using com.Halcyon.Core.Utils;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Camera
 {
-    public class CameraHandler : ExtendedMonoBehaviour
+    public class CameraHandler : ExtendedMonoBehaviour, IEditorAddable
     {
         private CinemachineFreeLook Camera => GameManager.Instance.Camera;
         private UnityEngine.Camera UnityEngineCamera => UnityEngine.Camera.main;
@@ -111,6 +112,11 @@ namespace com.Halcyon.Core.Camera
         private void UpdateMoveDirection(Vector2 value)
         {
             _moveDirection = value;
+        }
+
+        public void OnAdd()
+        {
+            print("CameraHandler added");
         }
     }
 }

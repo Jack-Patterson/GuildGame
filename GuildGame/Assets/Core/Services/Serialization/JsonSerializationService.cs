@@ -12,40 +12,42 @@ namespace com.Halcyon.Core.Services.Serialization
     {
         public bool SaveData<T>(T objectToSerialize, string relativeSaveLocation, bool encrypted = false)
         {
-            string path = Core.Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
+            string path = Utils.Constants.SavesFolderPath +
+                          $"/{API.Core.Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
 
             object objectToSerializeConverted = ConvertNonSerializableTypes(objectToSerialize);
-            
-                try
-                {
-                    if (File.Exists(path))
-                    {
-                        GameManager.Instance.Logger.Log($"File {relativeSaveLocation} already exists. Overwriting existing file.");
-                        File.Delete(path);
-                    }
-                    else
-                    {
-                        Debug.Log($"File {relativeSaveLocation} does not exist. Creating new file.");
-                    }
 
-                    using FileStream stream = File.Create(path);
-                    stream.Close();
-                    
-                    File.WriteAllText(path, JsonConvert.SerializeObject(objectToSerializeConverted, Formatting.Indented));
-                    
-                    GameManager.Instance.Logger.Log($"Successfully saved all data to {relativeSaveLocation}");
-                    return true;
-                }
-                catch (Exception e)
+            try
+            {
+                if (File.Exists(path))
                 {
-                    GameManager.Instance.Logger.LogException(e);
-                    return false;
+                    GameManager.Instance.Logger.Log(
+                        $"File {relativeSaveLocation} already exists. Overwriting existing file.");
+                    File.Delete(path);
                 }
+                else
+                {
+                    Debug.Log($"File {relativeSaveLocation} does not exist. Creating new file.");
+                }
+
+                using FileStream stream = File.Create(path);
+                stream.Close();
+
+                File.WriteAllText(path, JsonConvert.SerializeObject(objectToSerializeConverted, Formatting.Indented));
+
+                GameManager.Instance.Logger.Log($"Successfully saved all data to {relativeSaveLocation}");
+                return true;
+            }
+            catch (Exception e)
+            {
+                GameManager.Instance.Logger.LogException(e);
+                return false;
+            }
         }
 
         public T LoadData<T>(string relativeSaveLocation, bool encrypted = false)
         {
-            string path = Core.Constants.SavesFolderPath + $"/{Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
+            string path = Utils.Constants.SavesFolderPath + $"/{API.Core.Utils.AddSuffixIfNotExists(relativeSaveLocation, ".json")}";
 
             if (!File.Exists(path))
             {

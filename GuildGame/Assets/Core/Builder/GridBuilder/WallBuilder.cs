@@ -6,6 +6,7 @@ using com.Halcyon.API.Core;
 using com.Halcyon.API.Core.Building.BuilderItem;
 using com.Halcyon.API.Services.Input;
 using com.Halcyon.Core.Manager;
+using com.Halcyon.Core.Utils;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Builder.GridBuilder
@@ -30,7 +31,7 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             expectedWallPosition.y += Constants.BuilderConstants.FloorHeight / 2;
 
             WallBuildItem potentialExistingWall =
-                Utils.OverlapAreaGetItem<WallBuildItem>(expectedWallPosition,
+                API.Core.Utils.OverlapAreaGetItem<WallBuildItem>(expectedWallPosition,
                     Constants.BuilderConstants.WallCheckRadius, WallLayer);
             bool shouldInstantiateWall = potentialExistingWall == null;
             bool wallPositionValid = ValidateWallPlacePosition(expectedWallPosition);
@@ -41,8 +42,8 @@ namespace com.Halcyon.Core.Builder.GridBuilder
             float rotationYAngle = shouldRotatePrefab ? rotationAngleTrue : rotationAngleFalse;
             Quaternion rotation = Quaternion.Euler(0f, rotationYAngle, 0f);
 
-            GameObject wallPrefabToUse = Utils.GetPrefabFromListByScript<WallBuildItem>(prefabsToUse)!;
-            GameObject postPrefabToUse = Utils.GetPrefabFromListByScript<WallPostBuildItem>(prefabsToUse)!;
+            GameObject wallPrefabToUse = API.Core.Utils.GetPrefabFromListByScript<WallBuildItem>(prefabsToUse)!;
+            GameObject postPrefabToUse = API.Core.Utils.GetPrefabFromListByScript<WallPostBuildItem>(prefabsToUse)!;
 
             if (IsDrawingCreation && shouldInstantiateWall && wallPositionValid)
             {
@@ -84,10 +85,10 @@ namespace com.Halcyon.Core.Builder.GridBuilder
                 : new Vector3(wallPosition.x, wallPosition.y, wallPosition.z - distance);
 
             (firstPotentialPost, firstPostOverlapItemsAmount) =
-                Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(firstPossiblePostPosition,
+                API.Core.Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(firstPossiblePostPosition,
                     Constants.BuilderConstants.PostCheckRadius, WallLayer, typeof(WallBuildItem));
             (secondPotentialPost, secondPostOverlapItemsAmount) =
-                Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(secondPossiblePostPosition,
+                API.Core.Utils.OverlapAreaGetItemAndCheckForAnotherType<WallPostBuildItem>(secondPossiblePostPosition,
                     Constants.BuilderConstants.PostCheckRadius, WallLayer, typeof(WallBuildItem));
 
             bool firstPostIsNull = firstPotentialPost == null;

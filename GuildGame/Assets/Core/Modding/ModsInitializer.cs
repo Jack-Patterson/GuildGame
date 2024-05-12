@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using com.Halcyon.API.Core.Modding;
 using com.Halcyon.Core.Manager;
+using com.Halcyon.Core.Utils;
 using UnityEngine;
 
 namespace com.Halcyon.Core.Modding

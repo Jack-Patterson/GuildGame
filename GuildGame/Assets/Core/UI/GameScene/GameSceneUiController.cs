@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using com.Halcyon.Core.Manager;
+using com.Halkyon.Core.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace com.Halcyon.Core.UI.GameScene
 {
-    public class GameSceneUiController : MonoBehaviour
+    public class GameSceneUiController : MonoBehaviourExtended
     {
         [SerializeField] private List<GameSceneButton> buttons;
         [SerializeField] private Builder.Builder builder;
@@ -65,12 +65,12 @@ namespace com.Halcyon.Core.UI.GameScene
 
         private void SaveAction()
         {
-            print(GameManager.Instance.DataHolder.SaveData("GameSaveTest"));
+            print(GameManager.DataHolder.SaveData("GameSaveTest"));
         }
         
         private void LoadAction()
         {
-            GameManager.Instance.DataHolder = GameManager.Instance.DataHolder.LoadData("GameSaveTest");
+            GameManager.DataHolder = GameManager.DataHolder.LoadData("GameSaveTest");
         }
 
         private void FloorAction(int value)

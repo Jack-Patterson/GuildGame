@@ -3,7 +3,7 @@ using com.Halcyon.API.Core;
 
 namespace com.Halcyon.Core.Manager
 {
-    public class GameManager : GameManagerBase
+    public class GameManager : GameManagerBase, IEditorAddable
     {
         public new static GameManager Instance => GameManagerBase.Instance as GameManager;
 
@@ -20,6 +20,11 @@ namespace com.Halcyon.Core.Manager
             base.Awake();
             InvokeReadyToAssignObjects();
             GameInitializer.InitialGameStartup();
+        }
+
+        public void OnAdd()
+        {
+            print("GameManager added");
         }
     }
 }
