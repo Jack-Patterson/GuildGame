@@ -46,12 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Core\ExtendedMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\AI\Character\Need.cs" />
     <Compile Include="Assets\Core\Utils\Constants.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerService.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
+    <Compile Include="Assets\Core\AI\Character\Skill.cs" />
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
     <Compile Include="Assets\Core\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Core\GameManager.cs" />
+    <Compile Include="Assets\Core\AI\Character\Character.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterNeeds.cs" />
     <Compile Include="Assets\Core\Input\InputActions.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterSkills.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\Player.cs" />
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
