@@ -22,7 +22,19 @@ namespace com.Halkyon.AI.Character
         public float Progress
         {
             get => _progress;
-            set => _progress = Mathf.Min(CalculateLevelProgressAmount(), value);
+            set  {
+                int levelProgressCeiling = CalculateLevelProgressAmount();
+                
+                if (value >= levelProgressCeiling)
+                {
+                    _progress = 0;
+                    _level++;
+                }
+                else
+                {
+                    _progress = value;
+                }
+            }
         }
         
         public Skill(string name)
@@ -56,8 +68,7 @@ namespace com.Halkyon.AI.Character
         
         private int CalculateLevelProgressAmount()
         {
-            int levelProgressAmount = _level + (_levelProgressIncrement * (_level - 1));
-            Debug.Log($"Level Ceiling: {levelProgressAmount}");
+            int levelProgressAmount = 100 + (_levelProgressIncrement * (_level - 1));
             return levelProgressAmount;
         }
     }

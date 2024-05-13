@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace com.Halkyon.AI.Character
 {
-    public class CharacterNeeds : ExtendedMonoBehaviour
+    public class CharacterNeeds : CharacterSubscriber
     {
         private Action _onNeedsDecay;
         public List<Need> Needs { get; private set; } = new();
@@ -14,6 +14,7 @@ namespace com.Halkyon.AI.Character
         {
             Needs = Need.BaseNeeds;
 
+            SubscribeToNeedEvents();
             RegisterOnNeedsDecay();
             StartCoroutine(DecayRoutine());
         }
@@ -34,6 +35,27 @@ namespace com.Halkyon.AI.Character
             {
                 _onNeedsDecay += need.Decay;
             }
+        }
+
+        private void SubscribeToNeedEvents()
+        {
+            foreach (Need need in Needs)
+            {
+                need.OnNeedDepleted += OnNeedDepleted;
+            }
+        }
+        
+        private void OnNeedDepleted(Need need)
+        {
+            print($"Need {need.Name} fully depleted!");
+        }
+
+        protected override void OnUnsubscribeCharacterEvent()
+        {
+            _onNeedsDecay = null;
+
+            Needs.ForEach(need => need.OnNeedDepleted = null);
+            print("Needs Unsubscribed!");
         }
     }
 }

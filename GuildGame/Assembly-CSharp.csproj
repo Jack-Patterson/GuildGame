@@ -46,12 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Core\ExtendedMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\Services\Logger\LoggerServiceUser.cs" />
     <Compile Include="Assets\Core\AI\Character\Need.cs" />
+    <Compile Include="Assets\Core\AI\Character\Stat.cs" />
     <Compile Include="Assets\Core\Utils\Constants.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerService.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Skill.cs" />
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
+    <Compile Include="Assets\Core\Services\Logger\LoggerServiceUserMonoBehaviour.cs" />
     <Compile Include="Assets\Core\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Core\GameManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Character.cs" />
@@ -59,6 +62,8 @@
     <Compile Include="Assets\Core\Input\InputActions.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterSkills.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterStats.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterSubscriber.cs" />
     <Compile Include="Assets\Core\Player.cs" />
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
     <Reference Include="UnityEngine">
@@ -691,6 +696,45 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
@@ -702,12 +746,6 @@
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -721,38 +759,20 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
@@ -760,11 +780,8 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

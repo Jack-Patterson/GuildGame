@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace com.Halkyon.AI.Character
 {
     public class Need
     {
+        public Action<Need> OnNeedDepleted;
         private static List<Need> _needs = new List<Need>();
         private readonly float _decayRate = 0.01f;
         private string _name;
@@ -16,7 +18,18 @@ namespace com.Halkyon.AI.Character
         public float Value
         {
             get => _value;
-            set => _value = Mathf.Max(0, value);
+            set
+            {
+                if (value <= 0)
+                {
+                    _value = 0;
+                    OnNeedDepleted?.Invoke(this);
+                }
+                else
+                {
+                    _value = Mathf.Min(100, value);
+                }
+            }
         }
         
         public Need(string name, float value)
