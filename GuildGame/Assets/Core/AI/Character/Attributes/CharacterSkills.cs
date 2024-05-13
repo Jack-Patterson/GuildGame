@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using com.Halkyon.Input;
 
-namespace com.Halkyon.AI.Character
+namespace com.Halkyon.AI.Character.Attributes
 {
     public class CharacterSkills : CharacterSubscriber
     {

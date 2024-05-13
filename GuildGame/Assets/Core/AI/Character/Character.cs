@@ -1,4 +1,5 @@
 ﻿using System;
+using com.Halkyon.AI.Character.Attributes;
 using UnityEngine;
 using UnityEngine.AI;
 

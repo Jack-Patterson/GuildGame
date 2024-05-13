@@ -1,4 +1,6 @@
-﻿namespace com.Halkyon.AI.Character
+﻿using com.Halkyon.AI.Character.Attributes;
+
+namespace com.Halkyon.AI.Character
 {
     public class CharacterManager : ExtendedMonoBehaviour
     {

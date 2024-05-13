@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace com.Halkyon.AI.Character
+namespace com.Halkyon.AI.Character.Attributes
 {
     public class Stat
     {

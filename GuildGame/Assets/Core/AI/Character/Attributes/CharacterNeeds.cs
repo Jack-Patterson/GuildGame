@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Halkyon.AI.Character
+namespace com.Halkyon.AI.Character.Attributes
 {
     public class CharacterNeeds : CharacterSubscriber
     {
