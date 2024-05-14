@@ -15,16 +15,8 @@ namespace com.Halkyon.AI.Interaction.Quests
                 {
                     LoadQuests();
                 }
-                
-                return _quests;
-            }
-        }
 
-        void Start()
-        {
-            foreach (Quest quest in Quests)
-            {
-                print($"Quest: {quest.name} - Location: {quest.Location} {quest.locationCoordinates} - Rank: {quest.requiredRank} - Type: {quest.questType} - Description: {quest.description}");
+                return _quests;
             }
         }
 
@@ -32,6 +24,23 @@ namespace com.Halkyon.AI.Interaction.Quests
         {
             Quest[] loadedLocations = Resources.LoadAll<Quest>("Quests");
             _quests.AddRange(loadedLocations);
+        }
+
+        public static List<Quest> GetRandomQuests()
+        {
+            List<Quest> quests = new();
+
+            if (_quests.Count == 0)
+            {
+                int questsToGet = Random.Range(2, 5);
+                for (int i = 0; i < questsToGet; i++)
+                {
+                    Quest quest = Quests[Random.Range(0, Quests.Count)];
+                    quests.Add(quest);
+                }
+            }
+            
+            return quests;
         }
     }
 }
