@@ -1,0 +1,124 @@
+﻿{
+  "Quests": [
+    {
+      "Name": "Collect Apples",
+      "Description": "Collect 10 apples.",
+      "Rank": "E",
+      "Type": "Fetch",
+      "Rewards": [
+        {
+          "Type": "Foraging",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Collect Berries",
+      "Description": "Collect 10 berries.",
+      "Rank": "E",
+      "Type": "Fetch",
+      "Rewards": [
+        {
+          "Type": "Foraging",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Collect Wood",
+      "Description": "Collect 10 wood.",
+      "Rank": "E",
+      "Type": "Fetch",
+      "Rewards": [
+        {
+          "Type": "Foraging",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Collect Stone",
+      "Description": "Collect 10 stone.",
+      "Rank": "E",
+      "Type": "Fetch",
+      "Rewards": [
+        {
+          "Type": "Foraging",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Collect Iron",
+      "Description": "Collect 10 iron.",
+      "Rank": "E",
+      "Type": "Fetch",
+      "Rewards": [
+        {
+          "Type": "Foraging",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Hunt Rabbits",
+      "Description": "Hunt 10 rabbits.",
+      "Rank": "E",
+      "Type": "Combat",
+      "Rewards": [
+        {
+          "Type": "Combat",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Hunt Wolves",
+      "Description": "Hunt 10 wolves.",
+      "Rank": "E",
+      "Type": "Combat",
+      "Rewards": [
+        {
+          "Type": "Combat",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Hunt Bears",
+      "Description": "Hunt 10 bears.",
+      "Rank": "E",
+      "Type": "Combat",
+      "Rewards": [
+        {
+          "Type": "Combat",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Hunt Deer",
+      "Description": "Hunt 10 deer.",
+      "Rank": "E",
+      "Type": "Combat",
+      "Rewards": [
+        {
+          "Type": "Combat",
+          "Amount": 10
+        }
+      ]
+    },
+    {
+      "Name": "Hunt Boars",
+      "Description": "Hunt 10 boars.",
+      "Rank": "E",
+      "Type": "Combat",
+      "Rewards": [
+        {
+          "Type": "Combat",
+          "Amount": 10
+        }
+      ]
+    }
+  ]
+}

@@ -7,8 +7,8 @@ namespace com.Halkyon.Services.Logger
     {
         protected void Awake()
         {
-            LoggerService.MessageLogged += Log;
-            LoggerService.ExceptionLogged += LogException;
+            LoggerService.OnMessageLogged += Log;
+            LoggerService.OnExceptionLogged += LogException;
             Application.logMessageReceived += Log;
         }
 

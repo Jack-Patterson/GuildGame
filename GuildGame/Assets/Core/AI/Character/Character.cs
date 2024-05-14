@@ -14,7 +14,15 @@ namespace com.Halkyon.AI.Character
     public class Character : ExtendedMonoBehaviour
     {
         internal Action OnUnsubscribeCharacterEvents;
+        private CharacterRank _rank = CharacterRank.F;
+
+        public CharacterRank Rank => _rank;
 
         internal void InvokeUnsubscribeCharacterEvents() => OnUnsubscribeCharacterEvents?.Invoke();
+
+        private void OnDestroy()
+        {
+            InvokeUnsubscribeCharacterEvents();
+        }
     }
 }

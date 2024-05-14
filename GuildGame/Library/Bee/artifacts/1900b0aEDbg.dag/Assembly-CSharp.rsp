@@ -363,6 +363,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Core/AI/Character/Attributes/CharacterNeeds.cs"
+"Assets/Core/AI/Character/Attributes/CharacterRank.cs"
 "Assets/Core/AI/Character/Attributes/CharacterSkills.cs"
 "Assets/Core/AI/Character/Attributes/CharacterStats.cs"
 "Assets/Core/AI/Character/Attributes/Need.cs"
@@ -371,10 +372,16 @@
 "Assets/Core/AI/Character/Character.cs"
 "Assets/Core/AI/Character/CharacterManager.cs"
 "Assets/Core/AI/Character/CharacterSubscriber.cs"
+"Assets/Core/AI/Interaction/Quests/Quest.cs"
+"Assets/Core/AI/Interaction/Quests/QuestBoard.cs"
+"Assets/Core/AI/Interaction/Quests/QuestManager.cs"
+"Assets/Core/AI/Interaction/Quests/QuestType.cs"
 "Assets/Core/ExtendedMonoBehaviour.cs"
 "Assets/Core/GameManager.cs"
 "Assets/Core/Input/InputActions.cs"
 "Assets/Core/Input/PlayerInputActions.cs"
+"Assets/Core/Locations/Location.cs"
+"Assets/Core/Locations/LocationManager.cs"
 "Assets/Core/Player.cs"
 "Assets/Core/Services/Logger/FileLoggerService.cs"
 "Assets/Core/Services/Logger/LoggerService.cs"
@@ -383,6 +390,7 @@
 "Assets/Core/Services/Logger/LoggerServiceUserMonoBehaviour.cs"
 "Assets/Core/Services/Logger/MessageLoggerService.cs"
 "Assets/Core/Utils/Constants.cs"
+"Assets/Core/Utils/Polygon.cs"
 -langversion:9.0
 
 /deterministic
