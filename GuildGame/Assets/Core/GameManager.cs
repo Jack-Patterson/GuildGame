@@ -28,6 +28,12 @@ namespace com.Halkyon
 
         private void Awake()
         {
+            if (_instance == null)
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            
             CreateLoggersIfNotExists();
         }
         

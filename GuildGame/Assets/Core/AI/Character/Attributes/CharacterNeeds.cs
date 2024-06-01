@@ -8,7 +8,7 @@ namespace com.Halkyon.AI.Character.Attributes
     public class CharacterNeeds : CharacterSubscriber
     {
         private Action _onNeedsDecay;
-        public List<Need> Needs { get; private set; } = new();
+        internal List<Need> Needs { get; private set; } = new();
 
         private void Start()
         {

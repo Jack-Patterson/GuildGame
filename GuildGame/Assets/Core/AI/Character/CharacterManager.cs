@@ -6,9 +6,19 @@ namespace com.Halkyon.AI.Character
     {
         private void Awake()
         {
+            RegisterNeeds();
+            RegisterSkills();
+            RegisterStats();
+        }
+        
+        private void RegisterNeeds()
+        {
             Need.RegisterNeed(new Need("Hunger", 1f, 0.002f));
             Need.RegisterNeed(new Need("Thirst", 1f, 0.003f));
-            
+        }
+        
+        private void RegisterSkills()
+        {
             Skill.RegisterSkill(new Skill("Cooking", 1, 0, 25));
             Skill.RegisterSkill(new Skill("Fishing", 25));
             Skill.RegisterSkill(new Skill("Hunting"));
@@ -16,7 +26,10 @@ namespace com.Halkyon.AI.Character
             Skill.RegisterSkill(new Skill("Smithing", 30));
             Skill.RegisterSkill(new Skill("Woodcutting", 10));
             Skill.RegisterSkill(new Skill("Farming", 15));
-            
+        }
+        
+        private void RegisterStats()
+        {
             Stat.RegisterStat(new Stat("Health"));
             Stat.RegisterStat(new Stat("Stamina"));
             Stat.RegisterStat(new Stat("Mana"));

@@ -46,19 +46,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Core\ExtendedMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\AI\Character\CharacterActionHandler.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterStateMove.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceUser.cs" />
     <Compile Include="Assets\Core\Locations\Location.cs" />
     <Compile Include="Assets\Core\Utils\Constants.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerService.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterStateInteract.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
     <Compile Include="Assets\Core\Locations\LocationManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterNeeds.cs" />
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceUserMonoBehaviour.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestBoard.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterStateIdle.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterSkills.cs" />
     <Compile Include="Assets\Core\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Core\Utils\Polygon.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\ICharacterState.cs" />
     <Compile Include="Assets\Core\GameManager.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\Quest.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Stat.cs" />
@@ -66,15 +71,18 @@
     <Compile Include="Assets\Core\AI\Character\Attributes\Need.cs" />
     <Compile Include="Assets\Core\AI\Character\Character.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestType.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterStateFactory.cs" />
     <Compile Include="Assets\Core\Input\InputActions.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterRank.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterSubscriber.cs" />
     <Compile Include="Assets\Core\Player.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Skill.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterState.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterStats.cs" />
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
     <None Include="Assets\Resources\Quests\GenericQuests.json" />
+    <None Include="Assets\TestJSON\Chance.json" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using com.Halkyon.AI.Character.Attributes;
 
 namespace com.Halkyon.AI.Interaction.Quests
 {
@@ -19,12 +21,34 @@ namespace com.Halkyon.AI.Interaction.Quests
             }
         }
 
-        private void Start()
+        public Quest GetAvailableQuest(CharacterRank requesterRank)
         {
-            foreach (Quest quest in AvailableQuests)
+            List<Quest> appropriateQuests = AvailableQuests.OrderByDescending(q => q.requiredRank).ToList();
+            
+            foreach (Quest quest in appropriateQuests)
             {
-                print($"Quest: {quest.name} - Location: {quest.Location} {quest.locationCoordinates} - " +
-                      $"Rank: {quest.requiredRank} - Type: {quest.questType} - Description: {quest.description}");
+                if (IsAppropriateRank(requesterRank, quest.requiredRank))
+                {
+                    AvailableQuests.Remove(quest);
+                    return quest;
+                }
+            }
+
+            return null;
+        }
+
+        private bool IsAppropriateRank(CharacterRank requesterRank, CharacterRank questRank)
+        {
+            if (requesterRank <= CharacterRank.C)
+            {
+                return questRank == requesterRank ||
+                       questRank == requesterRank - 1 ||
+                       questRank == requesterRank + 1;
+            }
+            else
+            {
+                return questRank == requesterRank ||
+                       questRank == requesterRank - 1;
             }
         }
     }
