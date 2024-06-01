@@ -2,7 +2,7 @@
 {
     public class CharacterStateIdle : CharacterState
     {
-        public CharacterStateIdle(Character character) : base(character)
+        public CharacterStateIdle(Character character, object[] args) : base(character, args)
         {
         }
 
@@ -16,7 +16,6 @@
 
         public override void Exit()
         {
-            InvokeOnStateExit();
         }
     }
 }

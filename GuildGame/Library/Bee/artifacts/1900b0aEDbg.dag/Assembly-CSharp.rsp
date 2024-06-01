@@ -378,6 +378,8 @@
 "Assets/Core/AI/Character/States/CharacterStateIdle.cs"
 "Assets/Core/AI/Character/States/CharacterStateInteract.cs"
 "Assets/Core/AI/Character/States/CharacterStateMove.cs"
+"Assets/Core/AI/Character/States/ICharacterState.cs"
+"Assets/Core/AI/Interaction/IInteractable.cs"
 "Assets/Core/AI/Interaction/Quests/Quest.cs"
 "Assets/Core/AI/Interaction/Quests/QuestBoard.cs"
 "Assets/Core/AI/Interaction/Quests/QuestManager.cs"

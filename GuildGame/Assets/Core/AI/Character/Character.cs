@@ -38,16 +38,29 @@ namespace com.Halkyon.AI.Character
             _stats = GetComponent<CharacterStats>();
             _agent = GetComponent<NavMeshAgent>();
             _actionHandler = GetComponent<CharacterActionHandler>();
-            
-            Move(new Vector3(10,0, 10));
+
+            Move(new Vector3(10, 0, 10));
+
+            Vector3 target = new Vector3(0, 0, 10);
+            _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
+                new[] { (object)target }));
+            target = new Vector3(0, 0, 10);
+            _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
+                new[] { (object)target }));
+            target = new Vector3(10, 0, 0);
+            _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
+                new[] { (object)target }));
+            target = new Vector3(-10, 0, 10);
+            _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
+                new[] { (object)target }));
         }
 
         public void Move(Vector3 target)
         {
-            _agent.SetDestination(target);
-            _actionHandler.ChangeState(CharacterState.ConstructState<CharacterStateMove>(this));
+            _actionHandler.ChangeState(CharacterState.ConstructState<CharacterStateMove>(this,
+                new[] { (object)target }));
         }
-        
+
         public void Move(Transform target) => Move(target.position);
 
         internal void InvokeUnsubscribeCharacterEvents() => OnUnsubscribeCharacterEvents?.Invoke();

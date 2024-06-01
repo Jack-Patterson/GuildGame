@@ -2,7 +2,7 @@
 {
     public class CharacterStateInteract : CharacterState
     {
-        public CharacterStateInteract(Character character) : base(character)
+        public CharacterStateInteract(Character character, object[] args) : base(character, args)
         {
         }
 
@@ -13,11 +13,12 @@
 
         public override void Update()
         {
+            
         }
+
 
         public override void Exit()
         {
-            InvokeOnStateExit();
         }
     }
 }

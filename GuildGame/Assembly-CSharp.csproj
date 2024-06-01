@@ -75,6 +75,7 @@
     <Compile Include="Assets\Core\Input\InputActions.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterRank.cs" />
+    <Compile Include="Assets\Core\AI\Interaction\IInteractable.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterSubscriber.cs" />
     <Compile Include="Assets\Core\Player.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Skill.cs" />
