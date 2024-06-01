@@ -18,7 +18,6 @@ namespace com.Halkyon.AI.Character
         private void Update()
         {
             _currentState?.Update();
-            print(_currentState?.GetDescription());
         }
 
         public void ChangeState(ICharacterState characterState, object[] arguments = null,

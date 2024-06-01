@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using com.Halkyon.AI.Character.Attributes;
+using com.Halkyon.AI.Character.Attributes.Needs;
+using com.Halkyon.AI.Character.Attributes.Skills;
+using com.Halkyon.AI.Character.Attributes.Stats;
 using com.Halkyon.AI.Character.States;
-using com.Halkyon.AI.Interaction;
-using com.Halkyon.AI.Interaction.Quests;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,6 +33,7 @@ namespace com.Halkyon.AI.Character
         public List<Stat> Stats => _stats.Stats;
         public NavMeshAgent Agent => _agent;
         public CharacterActionHandler ActionHandler => _actionHandler;
+        protected CharacterManager CharacterManager => CharacterManager.Instance;
 
         private void Start()
         {
@@ -40,38 +42,12 @@ namespace com.Halkyon.AI.Character
             _stats = GetComponent<CharacterStats>();
             _agent = GetComponent<NavMeshAgent>();
             _actionHandler = GetComponent<CharacterActionHandler>();
-
-            // Move(new Vector3(10, 0, 10));
-            //
-            // Vector3 target = new Vector3(0, 0, 10);
-            // _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
-            //     new[] { (object)target }));
-            // target = new Vector3(0, 0, 10);
-            // _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
-            //     new[] { (object)target }));
-            // target = new Vector3(10, 0, 0);
-            // _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
-            //     new[] { (object)target }));
-            // target = new Vector3(-10, 0, 10);
-            // _actionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(this,
-            //     new[] { (object)target }));
-
-            QuestBoard questBoard = FindObjectOfType<QuestBoard>();
-
-            CharacterStateMove moveState =
-                CharacterState.ConstructState<CharacterStateMove>(this, new[] { (object)questBoard.transform });
-            CharacterStateInteract interactState =
-                CharacterState.ConstructState<CharacterStateInteract>(this, new[] { (object)questBoard });
-
-            _actionHandler.QueueState(moveState);
-            _actionHandler.QueueState(interactState);
-            _actionHandler.QueueState(moveState, new[] { (object)new Vector3(-50, 0, -50) });
         }
 
         public void Move(Vector3 target)
         {
             _actionHandler.ChangeState(CharacterState.ConstructState<CharacterStateMove>(this,
-                new[] { (object)target }));
+                new[] { (object)target }), forceStateChange: true);
         }
 
         public void Move(Transform target) => Move(target.position);

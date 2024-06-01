@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets\Core\ExtendedMonoBehaviour.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterActionHandler.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Stats\CharacterStats.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateMove.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceUser.cs" />
     <Compile Include="Assets\Core\Locations\Location.cs" />
@@ -55,35 +56,41 @@
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateInteract.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
     <Compile Include="Assets\Core\Locations\LocationManager.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\CharacterNeeds.cs" />
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Skills\Skill.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\IAttribute.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceUserMonoBehaviour.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestBoard.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateIdle.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\CharacterSkills.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\AttributeFactory.cs" />
     <Compile Include="Assets\Core\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Core\Utils\Polygon.cs" />
     <Compile Include="Assets\Core\AI\Character\States\ICharacterState.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Skills\CharacterSkills.cs" />
     <Compile Include="Assets\Core\GameManager.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Needs\Need.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\Quest.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\Stat.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestManager.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\Need.cs" />
     <Compile Include="Assets\Core\AI\Character\Character.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestType.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateFactory.cs" />
     <Compile Include="Assets\Core\Input\InputActions.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Needs\CharacterNeeds.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterRank.cs" />
     <Compile Include="Assets\Core\AI\Interaction\IInteractable.cs" />
+    <Compile Include="Assets\Core\AI\Character\Attributes\Stats\Stat.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterSubscriber.cs" />
     <Compile Include="Assets\Core\Player.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\Skill.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterState.cs" />
-    <Compile Include="Assets\Core\AI\Character\Attributes\CharacterStats.cs" />
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
     <None Include="Assets\Resources\Quests\GenericQuests.json" />
+    <None Include="Assets\Resources\Names\character_surnames_female.json" />
+    <None Include="Assets\Resources\Names\character_names_male.json" />
+    <None Include="Assets\Resources\Names\character_surnames_male.json" />
     <None Include="Assets\TestJSON\Chance.json" />
+    <None Include="Assets\Resources\Names\character_names_female.json" />
+    <None Include="Assets\Resources\Names\character_surnames_neutral.json" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -338,6 +345,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
