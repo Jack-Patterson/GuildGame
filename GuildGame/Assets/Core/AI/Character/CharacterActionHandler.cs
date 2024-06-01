@@ -7,7 +7,7 @@ namespace com.Halkyon.AI.Character
     {
         private Character _character;
         private ICharacterState _currentState;
-        private Queue<ICharacterState> _stateQueue = new Queue<ICharacterState>();
+        private Queue<(ICharacterState state, object[] args)> _stateQueue = new Queue<(ICharacterState, object[])>();
 
         private void Awake()
         {
@@ -18,9 +18,11 @@ namespace com.Halkyon.AI.Character
         private void Update()
         {
             _currentState?.Update();
+            print(_currentState?.GetDescription());
         }
 
-        public void ChangeState(ICharacterState characterState, bool forceStateChange = false)
+        public void ChangeState(ICharacterState characterState, object[] arguments = null,
+            bool forceStateChange = false)
         {
             if (forceStateChange)
                 _stateQueue.Clear();
@@ -31,19 +33,32 @@ namespace com.Halkyon.AI.Character
             }
 
             _currentState = characterState;
+
+            if (arguments != null)
+            {
+                _currentState.Reset();
+                _currentState.UpdateArgs(arguments);
+            }
+
             _currentState.Enter();
         }
 
-        public void QueueState(CharacterState characterState)
+        public void QueueState(CharacterState characterState, object[] arguments = null)
         {
-            _stateQueue.Enqueue(characterState);
+            if (_currentState is CharacterStateIdle)
+                ChangeState(characterState, arguments);
+            else
+                _stateQueue.Enqueue((characterState, arguments));
         }
 
         internal void MoveToNextState()
         {
             if (_stateQueue.Count > 0)
             {
-                ChangeState(_stateQueue.Dequeue());
+                ICharacterState nextState;
+                object[] arguments;
+                (nextState, arguments) = _stateQueue.Dequeue();
+                ChangeState(nextState, arguments);
             }
             else
             {

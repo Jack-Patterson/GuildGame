@@ -4,7 +4,7 @@ namespace com.Halkyon.AI.Character.States
 {
     internal class CharacterStateFactory
     {
-        public static CharacterState ConstructState<T>(Character character, object[] arguments) where T : CharacterState
+        public static T ConstructState<T>(Character character, object[] arguments) where T : CharacterState
         {
             if (character == null)
             {
@@ -16,7 +16,7 @@ namespace com.Halkyon.AI.Character.States
                     character, 
                     arguments);
 
-            return characterState;
+            return (T)characterState;
         }
     }
 }

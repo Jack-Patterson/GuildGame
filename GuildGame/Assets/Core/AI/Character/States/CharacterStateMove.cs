@@ -19,9 +19,15 @@ namespace com.Halkyon.AI.Character.States
                 print($"Moving to target {_target}");
                 Character.Agent.SetDestination(_target);
             }
+            else if (Arguments[0] is Transform)
+            {
+                _target = ((Transform)Arguments[0]).position;
+                print($"Moving to target {_target}");
+                Character.Agent.SetDestination(_target);
+            }
             else
             {
-                throw new ArgumentException("Invalid argument type");
+                throw new ArgumentException("Invalid argument type. Expected Vector3 or Transform.");
             }
         }
 
@@ -36,6 +42,19 @@ namespace com.Halkyon.AI.Character.States
         public override void Exit()
         {
             print($"Arrived at target {_target}");
+        }
+
+        public override void Reset()
+        {
+            _target = default;
+        }
+
+        public override string GetDescription()
+        {
+            float distance = Vector3.Distance(Character.Position, _target);
+            string message = $"Moving to target position. Distance: {distance:F1}";
+            
+            return message;
         }
     }
 }

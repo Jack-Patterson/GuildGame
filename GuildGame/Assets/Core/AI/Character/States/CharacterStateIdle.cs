@@ -17,5 +17,11 @@
         public override void Exit()
         {
         }
+
+        public override string GetDescription()
+        {
+            string message = "Idling";
+            return message;
+        }
     }
 }

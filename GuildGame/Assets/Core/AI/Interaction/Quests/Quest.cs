@@ -39,5 +39,10 @@ namespace com.Halkyon.AI.Interaction.Quests
         {
             _location = null;
         }
+        
+        public override string ToString()
+        {
+            return $"{name} - {description} - {Location} - {requiredRank} - {questType}";
+        }
     }
 }
