@@ -1,0 +1,12 @@
+﻿[
+  {
+    "name": "Hunger",
+    "maxValue": 100,
+    "decayRate": 0.1
+  },
+  {
+    "name": "Thirst",
+    "maxValue": 100,
+    "decayRate": 0.2
+  }
+]

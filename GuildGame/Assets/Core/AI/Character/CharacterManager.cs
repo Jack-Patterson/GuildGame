@@ -15,11 +15,16 @@ namespace com.Halkyon.AI.Character
     {
         public static CharacterManager Instance { get; private set; }
 
+        public static Action<Need> OnNeedAdded;
+        public static Action<Need> OnNeedRemoved;
+        public List<Need> Needs => DeepCopyNeeds();
+
         private List<string> _maleNames = new List<string>();
         private List<string> _femaleNames = new List<string>();
         private List<string> _genderNeutralLastNames = new List<string>();
         private List<string> _maleLastNames = new List<string>();
         private List<string> _femaleLastNames = new List<string>();
+        private readonly List<Need> _needs = new();
 
         private void Awake()
         {
@@ -33,14 +38,12 @@ namespace com.Halkyon.AI.Character
             }
 
             LoadNames();
+            ReadNeeds();
         }
 
-        public Need ConstructNeed(string name, float value, float decayRate)
+        private void Start()
         {
-            Need need = new Need(name, value, decayRate);
-            Need.RegisterNeed(need);
-            
-            return need;
+            ReadNeeds();
         }
 
         public string GetRandomName(bool isMale, bool shouldHaveLastName)
@@ -58,6 +61,64 @@ namespace com.Halkyon.AI.Character
                 : "";
 
             return (firstName + " " + lastName).Trim();
+        }
+
+        private void ReadNeeds()
+        {
+            TextAsset needsFile = Resources.Load<TextAsset>("Character/Attributes/Needs");
+            List<Need> needs = JsonConvert.DeserializeObject<List<Need>>(needsFile.text);
+
+            foreach (Need need in needs)
+            {
+                AddAttribute(need);
+            }
+        }
+
+        public void AddAttribute<T>(T attribute) where T : IAttribute<T>
+        {
+            switch (attribute)
+            {
+                case Need need:
+                    Needs.Add(need);
+                    OnNeedAdded?.Invoke(need);
+                    break;
+                case Skill skill:
+                    break;
+                case Stat stat:
+                    break;
+            }
+        }
+
+        public void RemoveAttribute<T>(T attribute) where T : IAttribute<T>
+        {
+            switch (attribute)
+            {
+                case Need need:
+                    Needs.Remove(need);
+                    OnNeedRemoved?.Invoke(need);
+                    break;
+                case Skill skill:
+                    break;
+                case Stat stat:
+                    break;
+            }
+        }
+
+        private List<Need> DeepCopyNeeds()
+        {
+            return _needs.Select(need => need.Copy()).ToList();
+        }
+
+        public void ConstructNeed(string needName, int maxValue)
+        {
+            ConstructNeed(needName, maxValue, 0.01f);
+        }
+
+        public void ConstructNeed(string needName, int maxValue, float decayRate)
+        {
+            object[] args = { needName, maxValue, decayRate };
+            Need need = AttributeFactory.ConstructAttribute<Need>(args);
+            _needs.Add(need);
         }
 
         private void LoadNames()
@@ -117,6 +178,14 @@ namespace com.Halkyon.AI.Character
         private List<string> DeserializeFiles(TextAsset file)
         {
             return JsonConvert.DeserializeObject<List<string>>(file.text);
+        }
+
+        private void OnDestroy()
+        {
+            foreach (Need need in _needs)
+            {
+                RemoveAttribute(need);
+            }
         }
     }
 }

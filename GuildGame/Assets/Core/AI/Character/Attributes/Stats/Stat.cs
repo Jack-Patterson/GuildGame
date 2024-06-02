@@ -14,6 +14,7 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
 
         public static List<Stat> BaseStats => DeepCopyStats();
         public string Name => _name;
+
         public int Amount
         {
             get => _amount;
@@ -35,7 +36,7 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
         {
             _name = name;
         }
-        
+
         public Stat(string name, int amount)
         {
             _name = name;
@@ -62,7 +63,12 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
             throw new NotImplementedException();
         }
 
-        public Stat DeepCopy()
+        public Stat Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset()
         {
             throw new NotImplementedException();
         }

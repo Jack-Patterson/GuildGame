@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using com.Halkyon.Utils;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Skills
@@ -82,7 +83,12 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             throw new System.NotImplementedException();
         }
 
-        public Skill DeepCopy()
+        public Skill Copy()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Reset()
         {
             throw new System.NotImplementedException();
         }

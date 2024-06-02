@@ -9,15 +9,15 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
 
         private void Start()
         {
-            InputActions inputActions = FindObjectOfType<InputActions>();
-            inputActions.StrategyPlayer.Mouse3Click.performed += _ =>
-            {
-                Stats[0].Amount -= 10;
-                print($"Stat {Stats[0].Name} progress: " + Stats[0].Amount);
-            };
-
-            Stats = Stat.BaseStats;
-            Stats[0].OnStatDepleted += _ => GetComponent<Character>().InvokeUnsubscribeCharacterEvents();
+            // InputActions inputActions = FindObjectOfType<InputActions>();
+            // inputActions.StrategyPlayer.Mouse3Click.performed += _ =>
+            // {
+            //     Stats[0].Amount -= 10;
+            //     print($"Stat {Stats[0].Name} progress: " + Stats[0].Amount);
+            // };
+            //
+            // Stats = Stat.BaseStats;
+            // Stats[0].OnStatDepleted += _ => GetComponent<Character>().InvokeUnsubscribeCharacterEvents();
             SubscribeToStatEvents();
         }
         

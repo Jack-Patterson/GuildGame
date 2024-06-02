@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using com.Halkyon.Utils;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Needs
@@ -8,40 +7,25 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
     public class Need : IAttribute<Need>
     {
         public Action<Need> OnNeedDepleted;
-        private static List<Need> _needs = new List<Need>();
-        private readonly float _decayRate = 0.01f;
-        private string _name;
+        private readonly float _decayRate;
+        private readonly string _name;
+        private readonly float _maxValue;
         private float _value;
 
-        public static List<Need> BaseNeeds => DeepCopyNeeds();
         public string Name => _name;
+        public float MaxValue => _maxValue;
+        public float DecayRate => _decayRate;
         public float Value
         {
             get => _value;
-            set
-            {
-                if (value <= 0)
-                {
-                    _value = 0;
-                    OnNeedDepleted?.Invoke(this);
-                }
-                else
-                {
-                    _value = Mathf.Min(100, value);
-                }
-            }
+            set => SetValue(value);
         }
-        
-        public Need(string name, float value)
+
+        public Need(string name, float maxValue, float decayRate = 0.01f)
         {
             _name = name;
-            _value = value;
-        }
-        
-        public Need(string name, float value, float decayRate)
-        {
-            _name = name;
-            _value = value;
+            _value = maxValue;
+            _maxValue = maxValue;
             _decayRate = decayRate;
         }
 
@@ -50,34 +34,32 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             Value -= _decayRate;
         }
 
-        public static void RegisterNeed(Need need)
+        public Need Copy()
         {
-            _needs.Add(need);
+            return new Need(Name, MaxValue, DecayRate);
         }
 
-        private static List<Need> DeepCopyNeeds()
+        public void Reset()
         {
-            return _needs.Select(need => new Need(need.Name, need.Value, need._decayRate)).ToList();
+            _value = _maxValue;
         }
 
-        public void Register()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Register(Need attribute)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Need DeepCopy()
-        {
-            throw new NotImplementedException();
-        }
-        
         public override string ToString()
         {
-            return $"{Name}: {Value}, Decay Rate: {_decayRate}";
+            return $"{Name} : {Value} : {MaxValue} : {DecayRate}";
+        }
+
+        private void SetValue(float value)
+        {
+            if (_value <= 0)
+            {
+                _value = 0;
+                OnNeedDepleted?.Invoke(this);
+            }
+            else
+            {
+                _value = Mathf.Min(100, value);
+            }
         }
     }
 }

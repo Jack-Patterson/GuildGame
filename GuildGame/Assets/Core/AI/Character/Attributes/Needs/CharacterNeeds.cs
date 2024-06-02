@@ -8,15 +8,22 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
     public class CharacterNeeds : CharacterSubscriber
     {
         private Action _onNeedsDecay;
-        internal List<Need> Needs { get; private set; } = new();
+        internal List<Need> Needs { get; } = new();
 
-        private void Start()
+        private void Awake()
         {
-            Needs = Need.BaseNeeds;
-
-            SubscribeToNeedEvents();
-            RegisterOnNeedsDecay();
+            CharacterManager.OnNeedAdded += OnNeedAdded;
+            CharacterManager.OnNeedRemoved += OnNeedRemoved;
+            
             StartCoroutine(DecayRoutine());
+        }
+
+        protected override void OnUnsubscribeCharacterEvent()
+        {
+            _onNeedsDecay = null;
+
+            Needs.ForEach(need => need.OnNeedDepleted = null);
+            print("Needs Unsubscribed!");
         }
 
         private IEnumerator DecayRoutine()
@@ -29,33 +36,23 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             }
         }
 
-        private void RegisterOnNeedsDecay()
+        private void OnNeedAdded(Need need)
         {
-            foreach (Need need in Needs)
-            {
-                _onNeedsDecay += need.Decay;
-            }
+            need.OnNeedDepleted += OnNeedDepleted;
+            _onNeedsDecay += need.Decay;
+            Needs.Add(need);
         }
 
-        private void SubscribeToNeedEvents()
+        private void OnNeedRemoved(Need need)
         {
-            foreach (Need need in Needs)
-            {
-                need.OnNeedDepleted += OnNeedDepleted;
-            }
+            need.OnNeedDepleted = null;
+            _onNeedsDecay -= need.Decay;
+            Needs.Remove(need);
         }
-        
+
         private void OnNeedDepleted(Need need)
         {
             print($"Need {need.Name} fully depleted!");
-        }
-
-        protected override void OnUnsubscribeCharacterEvent()
-        {
-            _onNeedsDecay = null;
-
-            Needs.ForEach(need => need.OnNeedDepleted = null);
-            print("Needs Unsubscribed!");
         }
     }
 }

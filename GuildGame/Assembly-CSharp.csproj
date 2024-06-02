@@ -54,6 +54,7 @@
     <Compile Include="Assets\Core\Utils\Constants.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerService.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateInteract.cs" />
+    <Compile Include="Assets\Core\Utils\ICopyable.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
     <Compile Include="Assets\Core\Locations\LocationManager.cs" />
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
     <None Include="Assets\Resources\Quests\GenericQuests.json" />
     <None Include="Assets\Resources\Names\character_surnames_female.json" />
+    <None Include="Assets\Resources\Character\Attributes\Needs.json" />
     <None Include="Assets\Resources\Names\character_names_male.json" />
     <None Include="Assets\Resources\Names\character_surnames_male.json" />
     <None Include="Assets\TestJSON\Chance.json" />
