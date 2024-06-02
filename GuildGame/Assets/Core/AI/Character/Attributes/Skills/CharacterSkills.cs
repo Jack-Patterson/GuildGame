@@ -13,14 +13,6 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             CharacterManager.OnSkillRemoved += OnSkillRemoved;
         }
 
-        private void Start()
-        {
-            foreach (Skill skill in Skills)
-            {
-                print(skill);
-            }
-        }
-
         protected override void OnUnsubscribeCharacterEvent()
         {
             print("Skills Unsubscribed!");

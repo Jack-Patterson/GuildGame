@@ -152,7 +152,7 @@ namespace com.Halkyon.AI.Character
             }
             else
             {
-                print("Male first names not found!");
+                print("Male first names not found!", LogType.Error);
             }
 
             if (femaleNames != null)
@@ -161,7 +161,7 @@ namespace com.Halkyon.AI.Character
             }
             else
             {
-                print("Female first names not found!");
+                print("Female first names not found!", LogType.Error);
             }
 
             if (genderNeutralLastNames != null)
@@ -170,7 +170,7 @@ namespace com.Halkyon.AI.Character
             }
             else
             {
-                print("Gender neutral surnames not found!");
+                print("Gender neutral surnames not found!", LogType.Error);
             }
 
             if (maleLastNames != null)
@@ -179,7 +179,7 @@ namespace com.Halkyon.AI.Character
             }
             else
             {
-                print("Male surnames not found!");
+                print("Male surnames not found!", LogType.Error);
             }
 
             if (femaleLastNames != null)
@@ -188,7 +188,7 @@ namespace com.Halkyon.AI.Character
             }
             else
             {
-                print("Female surnames not found!");
+                print("Female surnames not found!", LogType.Error);
             }
         }
 

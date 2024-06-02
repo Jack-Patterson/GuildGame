@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Halkyon.Locations
+namespace com.Halkyon.Services.Locations
 {
-    public class LocationManager : ExtendedMonoBehaviour
+    public class LocationService : ExtendedMonoBehaviour
     {
         private static List<Location> _locations = new();
         
@@ -19,13 +19,7 @@ namespace com.Halkyon.Locations
                 return _locations;
             }
         }
-        
-        private static List<Location> LoadLocations()
-        {
-            Location[] loadedLocations = Resources.LoadAll<Location>("Locations");
-            return new List<Location>(loadedLocations);
-        }
-        
+
         public static Location GetLocationOfPoint(Vector2 point)
         {
             foreach (Location location in Locations)
@@ -37,6 +31,12 @@ namespace com.Halkyon.Locations
             }
 
             return null;
+        }
+
+        private static List<Location> LoadLocations()
+        {
+            Location[] loadedLocations = Resources.LoadAll<Location>("Locations");
+            return new List<Location>(loadedLocations);
         }
     }
 }

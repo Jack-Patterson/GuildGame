@@ -10,15 +10,15 @@ namespace com.Halkyon
         private void Start()
         {
             InputActions inputActions = FindObjectOfType<InputActions>();
-            inputActions.StrategyPlayer.Move.performed += Move;
-            inputActions.StrategyPlayer.Jump.performed += Jump;
-            inputActions.StrategyPlayer.Mouse1Click.performed += Mouse1Click;
-            inputActions.StrategyPlayer.Mouse2Click.performed += Mouse2Click;
-            inputActions.StrategyPlayer.Mouse3Click.performed += Mouse3Click;
-            inputActions.StrategyPlayer.Mouse4Click.performed += Mouse4Click;
-            inputActions.StrategyPlayer.Mouse5Click.performed += Mouse5Click;
-            inputActions.StrategyPlayer.Mouse3Scroll.performed += Mouse3Scroll;
-            inputActions.StrategyPlayer.Rotate.performed += Rotate;
+            inputActions.Player.Move.performed += Move;
+            inputActions.Player.Jump.performed += Jump;
+            inputActions.Player.Mouse1Click.performed += Mouse1Click;
+            inputActions.Player.Mouse2Click.performed += Mouse2Click;
+            inputActions.Player.Mouse3Click.performed += Mouse3Click;
+            inputActions.Player.Mouse4Click.performed += Mouse4Click;
+            inputActions.Player.Mouse5Click.performed += Mouse5Click;
+            inputActions.Player.Mouse3Scroll.performed += Mouse3Scroll;
+            inputActions.Player.Rotate.performed += Rotate;
         }
 
         private void Rotate(InputAction.CallbackContext obj)

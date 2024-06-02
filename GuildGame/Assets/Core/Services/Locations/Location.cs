@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using com.Halkyon.Utils;
 using UnityEngine;
 
-namespace com.Halkyon.Locations
+namespace com.Halkyon.Services.Locations
 {
     [CreateAssetMenu(menuName = "Halkyon/New Location", fileName = "New Location")]
     public class Location : ScriptableObject

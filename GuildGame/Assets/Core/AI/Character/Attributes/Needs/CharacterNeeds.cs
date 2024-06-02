@@ -17,14 +17,6 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             
             StartCoroutine(DecayRoutine());
         }
-        
-        private void Start()
-        {
-            foreach (Need need in Needs)
-            {
-                print(need);
-            }
-        }
 
         protected override void OnUnsubscribeCharacterEvent()
         {

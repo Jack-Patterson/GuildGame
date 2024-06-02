@@ -1,6 +1,7 @@
 ﻿using com.Halkyon.AI.Character.Attributes;
-using com.Halkyon.Locations;
+using com.Halkyon.Services.Locations;
 using UnityEngine;
+using LocationService = com.Halkyon.Services.Locations.LocationService;
 
 namespace com.Halkyon.AI.Interaction.Quests
 {
@@ -19,7 +20,7 @@ namespace com.Halkyon.AI.Interaction.Quests
             get
             {
                 Location pointLocation =
-                    LocationManager.GetLocationOfPoint(new Vector2(locationCoordinates.x, locationCoordinates.z));
+                    LocationService.GetLocationOfPoint(new Vector2(locationCoordinates.x, locationCoordinates.z));
 
                 if (pointLocation != null)
                 {

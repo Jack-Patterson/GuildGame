@@ -2,13 +2,13 @@
 {
     public class InputActions : ExtendedMonoBehaviour
     {
-        public PlayerInputActions.StrategyPlayerActions StrategyPlayer;
+        public PlayerInputActions.StrategyPlayerActions Player;
 
         private void Awake()
         {
             PlayerInputActions playerInputActions = new PlayerInputActions();
-            StrategyPlayer = playerInputActions.StrategyPlayer;
-            StrategyPlayer.Enable();
+            Player = playerInputActions.StrategyPlayer;
+            Player.Enable();
         }
     }
 }

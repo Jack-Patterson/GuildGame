@@ -11,14 +11,6 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
             CharacterManager.OnStatAdded += OnStatAdded;
             CharacterManager.OnStatRemoved += OnStatRemoved;
         }
-        
-        private void Start()
-        {
-            foreach (Stat stat in Stats)
-            {
-                print(stat);
-            }
-        }
 
         private void OnStatAdded(Stat stat)
         {

@@ -5,6 +5,8 @@ using com.Halkyon.AI.Character.Attributes.Needs;
 using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.Attributes.Stats;
 using com.Halkyon.AI.Character.States;
+using com.Halkyon.AI.Interaction;
+using com.Halkyon.AI.Interaction.Stations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +22,7 @@ namespace com.Halkyon.AI.Character
     public class Character : ExtendedMonoBehaviour
     {
         internal Action OnUnsubscribeCharacterEvents;
-        private CharacterRank _rank = CharacterRank.F;
+        [SerializeField] private CharacterRank _rank = CharacterRank.None;
         private CharacterNeeds _needs;
         private CharacterSkills _skills;
         private CharacterStats _stats;
@@ -51,6 +53,11 @@ namespace com.Halkyon.AI.Character
         }
 
         public void Move(Transform target) => Move(target.position);
+
+        public void IncreaseRank()
+        {
+            _rank--;
+        }
 
         internal void InvokeUnsubscribeCharacterEvents() => OnUnsubscribeCharacterEvents?.Invoke();
 

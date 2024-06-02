@@ -21,6 +21,11 @@ namespace com.Halkyon.AI.Interaction.Quests
             }
         }
 
+        private void Start()
+        {
+            Register(this);
+        }
+
         public Quest GetAvailableQuest(CharacterRank requesterRank)
         {
             List<Quest> appropriateQuests = AvailableQuests.OrderByDescending(q => q.requiredRank).ToList();
@@ -37,6 +42,16 @@ namespace com.Halkyon.AI.Interaction.Quests
             return null;
         }
 
+        public void Interact(Character.Character character)
+        {
+            print(GetAvailableQuest(character.Rank));
+        }
+
+        public void Register(IInteractable interactable)
+        {
+            InteractableManager.Instance.Register(this);
+        }
+
         private bool IsAppropriateRank(CharacterRank requesterRank, CharacterRank questRank)
         {
             if (requesterRank <= CharacterRank.C)
@@ -50,11 +65,6 @@ namespace com.Halkyon.AI.Interaction.Quests
                 return questRank == requesterRank ||
                        questRank == requesterRank - 1;
             }
-        }
-
-        public void Interact(Character.Character character)
-        {
-            print(GetAvailableQuest(character.Rank));
         }
     }
 }
