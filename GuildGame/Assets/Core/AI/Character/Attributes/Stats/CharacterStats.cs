@@ -1,34 +1,37 @@
 ﻿using System.Collections.Generic;
-using com.Halkyon.Input;
 
 namespace com.Halkyon.AI.Character.Attributes.Stats
 {
     public class CharacterStats : CharacterSubscriber
     {
-        public List<Stat> Stats { get; private set; } = new();
+        public List<Stat> Stats { get; } = new();
 
-        private void Start()
+        private void Awake()
         {
-            // InputActions inputActions = FindObjectOfType<InputActions>();
-            // inputActions.StrategyPlayer.Mouse3Click.performed += _ =>
-            // {
-            //     Stats[0].Amount -= 10;
-            //     print($"Stat {Stats[0].Name} progress: " + Stats[0].Amount);
-            // };
-            //
-            // Stats = Stat.BaseStats;
-            // Stats[0].OnStatDepleted += _ => GetComponent<Character>().InvokeUnsubscribeCharacterEvents();
-            SubscribeToStatEvents();
+            CharacterManager.OnStatAdded += OnStatAdded;
+            CharacterManager.OnStatRemoved += OnStatRemoved;
         }
         
-        private void SubscribeToStatEvents()
+        private void Start()
         {
             foreach (Stat stat in Stats)
             {
-                stat.OnStatDepleted += OnStatDepleted;
+                print(stat);
             }
         }
-        
+
+        private void OnStatAdded(Stat stat)
+        {
+            Stats.Add(stat);
+            stat.OnStatDepleted += OnStatDepleted;
+        }
+
+        private void OnStatRemoved(Stat stat)
+        {
+            Stats.Remove(stat);
+            stat.OnStatDepleted = null;
+        }
+
         private void OnStatDepleted(Stat stat)
         {
             print($"Stat {stat.Name} fully depleted!");

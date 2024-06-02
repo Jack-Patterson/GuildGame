@@ -1,9 +1,8 @@
-﻿using com.Halkyon.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Skills
 {
-    public class Skill : IAttribute<Skill>, IDeepCopyable<Skill>
+    public class Skill : IAttribute<Skill>
     {
         private string _name;
         private int _level = 1;

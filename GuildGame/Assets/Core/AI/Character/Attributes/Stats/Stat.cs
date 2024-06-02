@@ -1,87 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using com.Halkyon.Utils;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Stats
 {
-    public class Stat : IAttribute<Stat>, IDeepCopyable<Stat>
+    public class Stat : IAttribute<Stat>
     {
         public Action<Stat> OnStatDepleted;
-        private static List<Stat> _stats = new List<Stat>();
         private string _name;
         private int _amount = 100;
+        private int _maxAmount = 100;
 
-        public static List<Stat> BaseStats => DeepCopyStats();
         public string Name => _name;
 
         public int Amount
         {
             get => _amount;
-            set
+            set => SetAmount(value);
+        }
+
+        public int MaxAmount => _maxAmount;
+
+        public Stat(string name, int maxAmount)
+        {
+            _name = name;
+            _maxAmount = maxAmount;
+            _amount = maxAmount;
+        }
+
+        private void SetAmount(int value)
+        {
+            if (value <= 0)
             {
-                if (value <= 0)
-                {
-                    _amount = 0;
-                    OnStatDepleted?.Invoke(this);
-                }
-                else
-                {
-                    _amount = Mathf.Min(100, value);
-                }
+                _amount = 0;
+                OnStatDepleted?.Invoke(this);
             }
-        }
-
-        public Stat(string name)
-        {
-            _name = name;
-        }
-
-        public Stat(string name, int amount)
-        {
-            _name = name;
-            _amount = amount;
-        }
-
-        public static void RegisterStat(Stat skill)
-        {
-            _stats.Add(skill);
-        }
-
-        private static List<Stat> DeepCopyStats()
-        {
-            return _stats.Select(stat => new Stat(stat.Name, stat.Amount)).ToList();
-        }
-
-        public void Register()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Register(Stat attribute)
-        {
-            throw new NotImplementedException();
+            else
+            {
+                _amount = Mathf.Min(100, value);
+            }
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            _amount = _maxAmount;
         }
 
         public Stat Copy()
         {
-            throw new NotImplementedException();
+            return new Stat(Name, MaxAmount);
         }
 
         public Stat DeepCopy()
         {
-            throw new NotImplementedException();
+            Stat stat = Copy();
+            stat._amount = _amount;
+
+            return stat;
         }
 
         public override string ToString()
         {
-            return $"{_name}: {_amount}";
+            return $"{_name} : {_amount} : {_maxAmount}";
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
-using com.Halkyon.Utils;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Needs
 {
-    public class Need : IAttribute<Need>, IDeepCopyable<Need>
+    public class Need : IAttribute<Need>
     {
         public Action<Need> OnNeedDepleted;
         private readonly float _decayRate;
@@ -49,7 +48,7 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
         {
             Need need = Copy();
             need._value = _value;
-            
+
             return need;
         }
 

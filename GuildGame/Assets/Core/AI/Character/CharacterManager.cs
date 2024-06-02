@@ -25,11 +25,11 @@ namespace com.Halkyon.AI.Character
         public List<Skill> Skills => CopyAttributesList(_skills);
         public List<Stat> Stats => CopyAttributesList(_stats);
 
-        private List<string> _maleNames = new List<string>();
-        private List<string> _femaleNames = new List<string>();
-        private List<string> _genderNeutralLastNames = new List<string>();
-        private List<string> _maleLastNames = new List<string>();
-        private List<string> _femaleLastNames = new List<string>();
+        private List<string> _maleNames = new();
+        private List<string> _femaleNames = new();
+        private List<string> _genderNeutralLastNames = new();
+        private List<string> _maleLastNames = new();
+        private List<string> _femaleLastNames = new();
         private readonly List<Need> _needs = new();
         private readonly List<Stat> _stats = new();
         private readonly List<Skill> _skills = new();
@@ -52,7 +52,7 @@ namespace com.Halkyon.AI.Character
         {
             LoadAttribute<Need>("Character/Attributes/Needs");
             LoadAttribute<Skill>("Character/Attributes/Skills");
-            // LoadAttribute<Stat>("Character/Attributes/Stats");
+            LoadAttribute<Stat>("Character/Attributes/Stats");
         }
 
         public string GetRandomName(bool isMale, bool shouldHaveLastName)
