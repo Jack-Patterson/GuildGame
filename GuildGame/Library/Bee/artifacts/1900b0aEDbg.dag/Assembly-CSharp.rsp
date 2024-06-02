@@ -402,6 +402,7 @@
 "Assets/Core/Services/Logger/MessageLoggerService.cs"
 "Assets/Core/Utils/Constants.cs"
 "Assets/Core/Utils/ICopyable.cs"
+"Assets/Core/Utils/IDeepCopyable.cs"
 "Assets/Core/Utils/Polygon.cs"
 -langversion:9.0
 

@@ -1,0 +1,38 @@
+﻿[
+  {
+    "name": "Swordsmanship",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Archery",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Hunting",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Foraging",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Magic (Fire)",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Magic (Water)",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Magic (Earth)",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Riding",
+    "levelProgressIncrement": 20
+  },
+  {
+    "name": "Taming",
+    "levelProgressIncrement": 20
+  }
+]

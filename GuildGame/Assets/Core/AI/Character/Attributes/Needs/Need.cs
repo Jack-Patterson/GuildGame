@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Needs
 {
-    public class Need : IAttribute<Need>
+    public class Need : IAttribute<Need>, IDeepCopyable<Need>
     {
         public Action<Need> OnNeedDepleted;
         private readonly float _decayRate;
@@ -15,6 +15,7 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
         public string Name => _name;
         public float MaxValue => _maxValue;
         public float DecayRate => _decayRate;
+
         public float Value
         {
             get => _value;
@@ -34,14 +35,22 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             Value -= _decayRate;
         }
 
+        public void Reset()
+        {
+            _value = _maxValue;
+        }
+
         public Need Copy()
         {
             return new Need(Name, MaxValue, DecayRate);
         }
 
-        public void Reset()
+        public Need DeepCopy()
         {
-            _value = _maxValue;
+            Need need = Copy();
+            need._value = _value;
+            
+            return need;
         }
 
         public override string ToString()

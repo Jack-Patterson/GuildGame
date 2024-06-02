@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using com.Halkyon.Utils;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Stats
 {
-    public class Stat : IAttribute<Stat>
+    public class Stat : IAttribute<Stat>, IDeepCopyable<Stat>
     {
         public Action<Stat> OnStatDepleted;
         private static List<Stat> _stats = new List<Stat>();
@@ -63,12 +64,17 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
             throw new NotImplementedException();
         }
 
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
+
         public Stat Copy()
         {
             throw new NotImplementedException();
         }
 
-        public void Reset()
+        public Stat DeepCopy()
         {
             throw new NotImplementedException();
         }

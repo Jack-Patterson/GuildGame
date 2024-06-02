@@ -1,27 +1,39 @@
+using System;
 using System.Collections.Generic;
-using com.Halkyon.Input;
 
 namespace com.Halkyon.AI.Character.Attributes.Skills
 {
     public class CharacterSkills : CharacterSubscriber
     {
-        public List<Skill> Skills { get; private set; } = new();
+        public List<Skill> Skills { get; } = new();
+
+        private void Awake()
+        {
+            CharacterManager.OnSkillAdded += OnSkillAdded;
+            CharacterManager.OnSkillRemoved += OnSkillRemoved;
+        }
 
         private void Start()
         {
-            InputActions inputActions = FindObjectOfType<InputActions>();
-            inputActions.StrategyPlayer.Mouse2Click.performed += _ =>
+            foreach (Skill skill in Skills)
             {
-                Skills[0].Progress += 10;
-                print($"Skill {Skills[0].Name} progress: " + Skills[0].Progress);
-            };
-
-            Skills = Skill.BaseSkills;
+                print(skill);
+            }
         }
 
         protected override void OnUnsubscribeCharacterEvent()
         {
             print("Skills Unsubscribed!");
+        }
+
+        private void OnSkillAdded(Skill skill)
+        {
+            Skills.Add(skill);
+        }
+
+        private void OnSkillRemoved(Skill skill)
+        {
+            Skills.Remove(skill);
         }
     }
 }
