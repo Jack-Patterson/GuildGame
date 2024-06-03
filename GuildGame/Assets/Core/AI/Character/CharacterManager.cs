@@ -5,6 +5,8 @@ using com.Halkyon.AI.Character.Attributes;
 using com.Halkyon.AI.Character.Attributes.Needs;
 using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.Attributes.Stats;
+using com.Halkyon.AI.Character.Classes;
+using com.Halkyon.Items;
 using Newtonsoft.Json;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,18 +23,21 @@ namespace com.Halkyon.AI.Character
         public static Action<Stat> OnStatRemoved;
         public static Action<Skill> OnSkillAdded;
         public static Action<Skill> OnSkillRemoved;
-        public List<Need> Needs => CopyAttributesList(_needs);
-        public List<Skill> Skills => CopyAttributesList(_skills);
-        public List<Stat> Stats => CopyAttributesList(_stats);
 
         private List<string> _maleNames = new();
         private List<string> _femaleNames = new();
         private List<string> _genderNeutralLastNames = new();
         private List<string> _maleLastNames = new();
         private List<string> _femaleLastNames = new();
+        private List<CharacterClass> _classes = new();
         private readonly List<Need> _needs = new();
         private readonly List<Stat> _stats = new();
         private readonly List<Skill> _skills = new();
+
+        public List<Need> Needs => CopyAttributesList(_needs);
+        public List<Skill> Skills => CopyAttributesList(_skills);
+        public List<Stat> Stats => CopyAttributesList(_stats);
+        public List<CharacterClass> Classes => _classes;
 
         private void Awake()
         {
@@ -50,9 +55,30 @@ namespace com.Halkyon.AI.Character
 
         private void Start()
         {
-            LoadAttribute<Need>("Character/Attributes/Needs");
-            LoadAttribute<Skill>("Character/Attributes/Skills");
-            LoadAttribute<Stat>("Character/Attributes/Stats");
+            LoadAttributes<Need>("Character/Attributes/Needs");
+            LoadAttributes<Skill>("Character/Attributes/Skills");
+            LoadAttributes<Stat>("Character/Attributes/Stats");
+            _classes = ReadFromJsonClasses("Character/Classes");
+            
+            foreach (var characterClass in _classes)
+            {
+                print(characterClass);
+            }
+
+            foreach (var skill in _classes[1].RequiredSkills)
+            {
+                print(skill);
+            }
+            
+            foreach (var item in _classes[1].RequiredItems)
+            {
+                print(item);
+            }
+            
+            foreach (var nextClass in _classes[1].NextClasses)
+            {
+                print(nextClass.Name);
+            }
         }
 
         public string GetRandomName(bool isMale, bool shouldHaveLastName)
@@ -110,15 +136,63 @@ namespace com.Halkyon.AI.Character
             }
         }
         
-        private void LoadAttribute<T>(string path) where T : IAttribute<T>
+        private void LoadAttributes<T>(string path) where T : IAttribute<T>
         {
-            TextAsset file = Resources.Load<TextAsset>(path);
-            List<T> attributes = JsonConvert.DeserializeObject<List<T>>(file.text);
+            List<T> attributes = ReadFromJson<T>(path);
 
             foreach (T attribute in attributes)
             {
                 AddAttribute(attribute);
             }
+        }
+        
+        private List<T> ReadFromJson<T>(string path)
+        {
+            TextAsset file = Resources.Load<TextAsset>(path);
+            return JsonConvert.DeserializeObject<List<T>>(file.text);
+        }
+        
+        private List<CharacterClass> ReadFromJsonClasses(string path)
+        {
+            TextAsset file = Resources.Load<TextAsset>(path);
+            List<CharacterClassSerializable> characterClassModels = JsonConvert.DeserializeObject<List<CharacterClassSerializable>>(file.text);
+
+            return PopulateClassesData(characterClassModels);
+        }
+        
+        private List<CharacterClass> PopulateClassesData(List<CharacterClassSerializable> characterClassModels)
+        {
+            List<CharacterClass> classes = new();
+
+            foreach (CharacterClassSerializable characterClassModel in characterClassModels)
+            {
+                classes.Add(new CharacterClass(characterClassModel.Id, characterClassModel.Name, new(), new(), new()));
+            }
+
+            foreach (CharacterClassSerializable characterClassModel in characterClassModels)
+            {
+                CharacterClass characterClass = classes.Find(characterClass => characterClass.Id == characterClassModel.Id);
+                
+                foreach (string requiredClass in characterClassModel.NextClasses)
+                {
+                    CharacterClass nextClass = classes.Find(nextClass => nextClass.Id == requiredClass);
+                    characterClass.NextClasses.Add(nextClass);
+                }
+                
+                foreach (RequiredSkillData requiredSkillData in characterClassModel.RequiredSkills)
+                {
+                    Skill skill = _skills.Find(skill => skill.Id == requiredSkillData.Id);
+                    characterClass.RequiredSkills.Add(skill);
+                }
+                
+                foreach (RequiredItemData requiredItemData in characterClassModel.RequiredItems)
+                {
+                    Item item = ItemManager.Instance.GetItemById(requiredItemData.Id);
+                    characterClass.RequiredItems.Add((item, requiredItemData.Amount));
+                }
+            }
+
+            return classes;
         }
 
         private List<T> CopyAttributesList<T>(List<T> attributes) where T : IAttribute<T>

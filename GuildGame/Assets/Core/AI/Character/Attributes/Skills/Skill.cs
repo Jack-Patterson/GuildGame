@@ -4,11 +4,13 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
 {
     public class Skill : IAttribute<Skill>
     {
+        private string _id;
         private string _name;
         private int _level = 1;
         private float _progress = 0;
-        private readonly int _levelProgressIncrement = 20;
+        private readonly int _levelProgressIncrement;
 
+        public string Id => _id;
         public string Name => _name;
         public int LevelProgressIncrement => _levelProgressIncrement;
 
@@ -24,8 +26,9 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             set => SetLevelProgress(value);
         }
 
-        public Skill(string name, int levelProgressIncrement)
+        public Skill(string id, string name, int levelProgressIncrement)
         {
+            _id = id;
             _name = name;
             _levelProgressIncrement = levelProgressIncrement;
         }
@@ -38,7 +41,7 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
 
         public Skill Copy()
         {
-            return new Skill(_name, _levelProgressIncrement);
+            return new Skill(_id, _name, _levelProgressIncrement);
         }
 
         public Skill DeepCopy()

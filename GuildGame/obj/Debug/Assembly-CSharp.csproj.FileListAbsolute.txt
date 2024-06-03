@@ -366,3 +366,6 @@ C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\obj\Debug\Assembly-CSharp
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\obj\Debug\Assembly-CSharp.dll
 C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\obj\Debug\Assembly-CSharp.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Temp\Bin\Debug\Assembly-CSharp\Newtonsoft.Json.dll
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Temp\Bin\Debug\Assembly-CSharp\Newtonsoft.Json.pdb
+C:\Users\jackp\Desktop\Development\GuildGame\GuildGame\Temp\Bin\Debug\Assembly-CSharp\Newtonsoft.Json.xml

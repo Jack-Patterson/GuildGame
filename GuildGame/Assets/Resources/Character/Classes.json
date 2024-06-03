@@ -1,0 +1,167 @@
+﻿[
+  {
+    "id": "1",
+    "name": "Novice",
+    "requiredSkills": [],
+    "nextClasses": [
+      "2",
+      "5",
+      "7"
+    ],
+    "requiredItems": [
+      {
+        "id": "1",
+        "amount": "2"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Soldier",
+    "requiredSkills": [
+        {
+            "id": "1",
+            "level": "2"
+        },
+        {
+            "id": "3",
+            "level": "1"
+        }
+    ],
+    "nextClasses": [
+      3,
+      14
+    ],
+    "requiredItems": [
+      {
+        "id": "1",
+        "amount": "2"
+      },
+      {
+        "id": "2",
+        "amount": "1"
+      },
+      {
+        "id": "9",
+        "amount": "1"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Sergeant",
+    "requiredSkills": [],
+    "nextClasses": [
+      4
+    ],
+    "requiredItems": [
+      {
+        "id": "1",
+        "amount": "4"
+      },
+      {
+        "id": "2",
+        "amount": "3"
+      },
+      {
+        "id": "3",
+        "amount": "1"
+      },
+      {
+        "id": "9",
+        "amount": "1"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Knight",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "5",
+    "name": "Archer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "6",
+    "name": "Crossbowman",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "7",
+    "name": "Magic Caster",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "8",
+    "name": "Mage",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "9",
+    "name": "Healer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "10",
+    "name": "Priest",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "11",
+    "name": "Sorcerer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "12",
+    "name": "Storm Wizard",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "13",
+    "name": "Necromancer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "14",
+    "name": "Spearman",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "15",
+    "name": "Magical Archer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  },
+  {
+    "id": "16",
+    "name": "Shadow Archer",
+    "requiredSkills": [],
+    "nextClasses": [],
+    "requiredItems": []
+  }
+]

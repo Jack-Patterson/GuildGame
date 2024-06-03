@@ -4,6 +4,7 @@ using com.Halkyon.AI.Character.Attributes;
 using com.Halkyon.AI.Character.Attributes.Needs;
 using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.Attributes.Stats;
+using com.Halkyon.AI.Character.Classes;
 using com.Halkyon.AI.Character.States;
 using com.Halkyon.AI.Interaction;
 using com.Halkyon.AI.Interaction.Stations;
@@ -28,6 +29,8 @@ namespace com.Halkyon.AI.Character
         private CharacterStats _stats;
         private NavMeshAgent _agent;
         private CharacterActionHandler _actionHandler;
+        private CharacterClass _currentClass;
+        private CharacterClass _aspiredClass;
 
         public CharacterRank Rank => _rank;
         public CharacterNeeds Needs => _needs;
@@ -35,6 +38,8 @@ namespace com.Halkyon.AI.Character
         public List<Stat> Stats => _stats.Stats;
         public NavMeshAgent Agent => _agent;
         public CharacterActionHandler ActionHandler => _actionHandler;
+        public CharacterClass CurrentClass => _currentClass;
+        public CharacterClass AspiredClass => _aspiredClass;
         protected CharacterManager CharacterManager => CharacterManager.Instance;
 
         private void Start()

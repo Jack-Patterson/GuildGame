@@ -1,0 +1,146 @@
+﻿[
+  {
+    "id" : "1",
+    "name": "Common Health Potion",
+    "category": "Potion",
+    "subCategory": "Health",
+    "value": 2,
+    "rank": 0,
+    "isStackable": true
+  },
+  {
+    "id" : "2",
+    "name": "Lesser Health Potion",
+    "category": "Potion",
+    "subCategory": "Health",
+    "value": 3,
+    "rank": 1,
+    "isStackable": true
+  },
+  {
+    "id" : "3",
+    "name": "Health Potion",
+    "category": "Potion",
+    "subCategory": "Health",
+    "value": 6,
+    "rank": 2,
+    "isStackable": true
+  },
+  {
+    "id" : "4",
+    "name": "Greater Health Potion",
+    "category": "Potion",
+    "subCategory": "Health",
+    "value": 10,
+    "rank": 3,
+    "isStackable": true
+  },
+  {
+    "id" : "5",
+    "name": "Common Mana Potion",
+    "category": "Potion",
+    "subCategory": "Mana",
+    "value": 2,
+    "rank": 0,
+    "isStackable": true
+  },
+  {
+    "id" : "6",
+    "name": "Lesser Mana Potion",
+    "category": "Potion",
+    "subCategory": "Mana",
+    "value": 3,
+    "rank": 1,
+    "isStackable": true
+  },
+  {
+    "id" : "7",
+    "name": "Mana Potion",
+    "category": "Potion",
+    "subCategory": "Mana",
+    "value": 5,
+    "rank": 2,
+    "isStackable": true
+  },
+  {
+    "id" : "8",
+    "name": "Greater Mana Potion",
+    "category": "Potion",
+    "subCategory": "Mana",
+    "value": 10,
+    "rank": 3,
+    "isStackable": true
+  },
+  {
+    "id" : "9",
+    "name": "Sword",
+    "category": "Weapon",
+    "subCategory": "One-Handed",
+    "value": 5,
+    "rank": 0,
+    "isStackable": false
+  },
+  {
+    "id" : "10",
+    "name": "Dagger",
+    "category": "Weapon",
+    "subCategory": "One-Handed",
+    "value": 4,
+    "rank": 0,
+    "isStackable": false
+  },
+  {
+    "id" : "11",
+    "name": "Bow",
+    "category": "Weapon",
+    "subCategory": "Ranged",
+    "value": 9,
+    "rank": 1,
+    "isStackable": false
+  },
+  {
+    "id" : "12",
+    "name": "Staff",
+    "category": "Weapon",
+    "subCategory": "Magical",
+    "value": 15,
+    "rank": 3,
+    "isStackable": false
+  },
+  {
+    "id" : "13",
+    "name": "Great Sword",
+    "category": "Weapon",
+    "subCategory": "Two-Handed",
+    "value": 12,
+    "rank": 2,
+    "isStackable": true
+  },
+  {
+    "id" : "14",
+    "name": "Raise Undead Scroll",
+    "category": "Consumable",
+    "subCategory": "Magical",
+    "value": 13,
+    "rank": 2,
+    "isStackable": true
+  },
+  {
+    "id" : "15",
+    "name": "Flight Ring",
+    "category": "Armor",
+    "subCategory": "Ring",
+    "value": 20,
+    "rank": 4,
+    "isStackable": true
+  },
+  {
+    "id" : "16",
+    "name": "Fishing Rod",
+    "category": "Tool",
+    "subCategory": "Tool",
+    "value": 2,
+    "rank": 0,
+    "isStackable": true
+  }
+]
