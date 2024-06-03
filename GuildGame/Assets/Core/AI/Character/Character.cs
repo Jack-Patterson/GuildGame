@@ -30,7 +30,7 @@ namespace com.Halkyon.AI.Character
         private CharacterActionHandler _actionHandler;
 
         public CharacterRank Rank => _rank;
-        public List<Need> Needs => _needs.Needs;
+        public CharacterNeeds Needs => _needs;
         public List<Skill> Skills => _skills.Skills;
         public List<Stat> Stats => _stats.Stats;
         public NavMeshAgent Agent => _agent;

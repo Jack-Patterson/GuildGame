@@ -16,21 +16,17 @@ namespace com.Halkyon.AI.Character.States
             {
                 IInteractable interactable = (IInteractable)Arguments[0];
                 HandleInteraction(interactable);
-                Character.ActionHandler.MoveToNextState();
             }
             else if (Arguments[0] is Transform)
             {
-                Transform transform = (Transform)Arguments[0];
-                IInteractable interactable = transform.GetComponent<IInteractable>();
+                IInteractable interactable = ((Transform)Arguments[0]).GetComponent<IInteractable>();
                 HandleInteraction(interactable);
-                Character.ActionHandler.MoveToNextState();
+                
             }
             else if (Arguments[0] is GameObject)
             {
-                GameObject gameObject = (GameObject)Arguments[0];
-                IInteractable interactable = gameObject.GetComponent<IInteractable>();
+                IInteractable interactable = ((GameObject)Arguments[0]).GetComponent<IInteractable>();
                 HandleInteraction(interactable);
-                Character.ActionHandler.MoveToNextState();
             }
             else
             {
@@ -56,6 +52,7 @@ namespace com.Halkyon.AI.Character.States
         {
             print($"Interacting with {interactable}");
             interactable.Interact(Character);
+            Character.ActionHandler.MoveToNextState();
         }
     }
 }

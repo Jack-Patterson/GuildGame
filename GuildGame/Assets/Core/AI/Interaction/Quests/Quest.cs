@@ -1,5 +1,7 @@
-﻿using com.Halkyon.AI.Character.Attributes;
+﻿using System;
+using com.Halkyon.AI.Character.Attributes;
 using com.Halkyon.Services.Locations;
+using com.Halkyon.Services.Logger;
 using UnityEngine;
 using LocationService = com.Halkyon.Services.Locations.LocationService;
 
@@ -14,6 +16,7 @@ namespace com.Halkyon.AI.Interaction.Quests
         public QuestType questType = QuestType.Fetch;
         public Vector3 locationCoordinates = Vector3.zero;
         private string _location;
+
 
         public string Location
         {
@@ -40,7 +43,7 @@ namespace com.Halkyon.AI.Interaction.Quests
         {
             _location = null;
         }
-        
+
         public override string ToString()
         {
             return $"{name} - {description} - {Location} - {requiredRank} - {questType}";

@@ -44,7 +44,9 @@ namespace com.Halkyon.AI.Interaction.Quests
 
         public void Interact(Character.Character character)
         {
-            print(GetAvailableQuest(character.Rank));
+            Quest availableQuest = GetAvailableQuest(character.Rank);
+            
+            character.ActionHandler.AssignQuest(availableQuest);
         }
 
         public void Register(IInteractable interactable)

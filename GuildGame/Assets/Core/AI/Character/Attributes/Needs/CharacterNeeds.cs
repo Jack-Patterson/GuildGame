@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace com.Halkyon.AI.Character.Attributes.Needs
@@ -16,6 +17,11 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             CharacterManager.OnNeedRemoved += OnNeedRemoved;
             
             StartCoroutine(DecayRoutine());
+        }
+
+        public Need GetLowestNeed()
+        {
+            return Needs.OrderBy(need => need.Value).FirstOrDefault();
         }
 
         protected override void OnUnsubscribeCharacterEvent()

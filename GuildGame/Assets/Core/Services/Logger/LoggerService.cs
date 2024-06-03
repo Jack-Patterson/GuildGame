@@ -19,6 +19,11 @@ namespace com.Halkyon.Services.Logger
             OnMessageLogged?.Invoke(message, logType);
         }
 
+        public static void Log(object message, LogType logType = LogType.Log, Exception? exception = null)
+        {
+            Log(message.ToString(), logType, exception);
+        }
+
         public static void LogException(Exception exception)
         {
             OnExceptionLogged?.Invoke(exception);
