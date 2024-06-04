@@ -2,10 +2,12 @@
 using System.Linq;
 using com.Halkyon.AI.Character.Attributes;
 using com.Halkyon.AI.Character.Attributes.Needs;
+using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.States;
 using com.Halkyon.AI.Interaction;
 using com.Halkyon.AI.Interaction.Quests;
 using com.Halkyon.AI.Interaction.Stations;
+using com.Halkyon.AI.Interaction.Stations.SkillStation;
 
 namespace com.Halkyon.AI.Character
 {
@@ -136,6 +138,9 @@ namespace com.Halkyon.AI.Character
 
         private void DetermineNextState(bool questNotFound = false)
         {
+            QueueStates(FindAndInteractWithInteractable<SkillStation>());
+            return;
+            
             Need lowestNeed = _character.Needs.GetLowestNeed();
             if (lowestNeed != null && lowestNeed.Value < (lowestNeed.MaxValue * 0.4f))
             {
@@ -152,10 +157,14 @@ namespace com.Halkyon.AI.Character
 
                 List<CharacterState> states = FindAndInteractWithInteractable<QuestBoard>();
                 QueueStates(states);
+                return;
             }
             
-            // if lacking in items, buy items
+            // if lacking in items, buy items. May also choose to buy certain upgrade items
             // if lacking money or doesn't need items train skills
+            
+            Skill lowestSkill = _character.Skills.GetLowestRequiredSkillForAspiredClass();
+            // Find appropriate station and train skill
         }
 
         private List<CharacterState> FindAndInteractWithInteractable<T>() where T : IInteractable

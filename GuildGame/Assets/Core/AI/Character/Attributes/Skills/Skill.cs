@@ -58,9 +58,14 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             return $"{_name} : {_level} : {_progress} : {_levelProgressIncrement}";
         }
 
+        public void ProgressSkill()
+        {
+            SetLevelProgress(LevelProgressIncrement);
+        }
+
         private void SetLevelProgress(float value)
         {
-            int levelProgressCeiling = CalculateLevelProgressAmount();
+            int levelProgressCeiling = CalculateLevelProgressCeiling();
 
             if (value >= levelProgressCeiling)
             {
@@ -73,7 +78,7 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             }
         }
 
-        private int CalculateLevelProgressAmount()
+        private int CalculateLevelProgressCeiling()
         {
             int levelProgressAmount = 100 + (_levelProgressIncrement * (_level - 1));
             return levelProgressAmount;

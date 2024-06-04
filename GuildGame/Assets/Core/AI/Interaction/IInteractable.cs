@@ -7,6 +7,6 @@ namespace com.Halkyon.AI.Interaction
         Vector3 Position { get; }
 
         void Interact(Character.Character character);
-        void Register(IInteractable interactable);
+        void Register();
     }
 }

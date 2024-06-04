@@ -4,7 +4,7 @@ using com.Halkyon.AI.Character.Attributes;
 
 namespace com.Halkyon.AI.Interaction.Quests
 {
-    public class QuestBoard : ExtendedMonoBehaviour, IInteractable
+    public class QuestBoard : InteractableMonoBehaviour
     {
         private List<Quest> _availableQuests = new();
 
@@ -19,11 +19,6 @@ namespace com.Halkyon.AI.Interaction.Quests
 
                 return _availableQuests;
             }
-        }
-
-        private void Start()
-        {
-            Register(this);
         }
 
         public Quest GetAvailableQuest(CharacterRank requesterRank)
@@ -42,16 +37,11 @@ namespace com.Halkyon.AI.Interaction.Quests
             return null;
         }
 
-        public void Interact(Character.Character character)
+        public override void Interact(Character.Character character)
         {
             Quest availableQuest = GetAvailableQuest(character.Rank);
             
             character.ActionHandler.AssignQuest(availableQuest);
-        }
-
-        public void Register(IInteractable interactable)
-        {
-            InteractableManager.Instance.Register(this);
         }
 
         private bool IsAppropriateRank(CharacterRank requesterRank, CharacterRank questRank)

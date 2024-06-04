@@ -3,14 +3,9 @@ using com.Halkyon.AI.Interaction.Quests;
 
 namespace com.Halkyon.AI.Interaction.Stations
 {
-    public class GuildDesk : ExtendedMonoBehaviour, IInteractable
+    public class GuildDesk : InteractableMonoBehaviour
     {
-        private void Start()
-        {
-            Register(this);
-        }
-
-        public void Interact(Character.Character character)
+        public override void Interact(Character.Character character)
         {
             print(character.Rank);
             character.IncreaseRank();
@@ -20,11 +15,6 @@ namespace com.Halkyon.AI.Interaction.Stations
                 new object[] { FindObjectOfType<QuestBoard>().Position }));
             character.ActionHandler.QueueState(CharacterState.ConstructState<CharacterStateInteract>(character,
                 new object[] { FindObjectOfType<QuestBoard>() }));
-        }
-
-        public void Register(IInteractable interactable)
-        {
-            InteractableManager.Instance.Register(this);
         }
     }
 }

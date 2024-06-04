@@ -43,5 +43,10 @@
     "id": "9",
     "name": "Taming",
     "levelProgressIncrement": 20
+  },
+  {
+    "id": "10",
+    "name": "Spearmanship",
+    "levelProgressIncrement": 20
   }
 ]

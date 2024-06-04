@@ -388,11 +388,14 @@
 "Assets/Core/AI/Character/States/ICharacterState.cs"
 "Assets/Core/AI/Interaction/IInteractable.cs"
 "Assets/Core/AI/Interaction/InteractableManager.cs"
+"Assets/Core/AI/Interaction/InteractableMonoBehaviour.cs"
 "Assets/Core/AI/Interaction/Quests/Quest.cs"
 "Assets/Core/AI/Interaction/Quests/QuestBoard.cs"
 "Assets/Core/AI/Interaction/Quests/QuestManager.cs"
 "Assets/Core/AI/Interaction/Quests/QuestType.cs"
 "Assets/Core/AI/Interaction/Stations/GuildDesk.cs"
+"Assets/Core/AI/Interaction/Stations/SkillStation/SkillStation.cs"
+"Assets/Core/AI/Interaction/Stations/SkillStation/SkillStationTrainingDummy.cs"
 "Assets/Core/ExtendedMonoBehaviour.cs"
 "Assets/Core/GameManager.cs"
 "Assets/Core/Input/InputActions.cs"
@@ -401,6 +404,7 @@
 "Assets/Core/Items/ItemManager.cs"
 "Assets/Core/Items/ItemRank.cs"
 "Assets/Core/Player.cs"
+"Assets/Core/SceneExecuter.cs"
 "Assets/Core/Services/Locations/Location.cs"
 "Assets/Core/Services/Locations/LocationService.cs"
 "Assets/Core/Services/Logger/FileLoggerService.cs"
@@ -413,6 +417,7 @@
 "Assets/Core/Utils/ICopyable.cs"
 "Assets/Core/Utils/IDeepCopyable.cs"
 "Assets/Core/Utils/Polygon.cs"
+"Assets/PlayFromMenu.cs"
 -langversion:9.0
 
 /deterministic

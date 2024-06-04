@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,10 +14,17 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             CharacterManager.OnSkillRemoved += OnSkillRemoved;
         }
 
-        public Skill GetLowestSkillForClass()
+        public Skill GetLowestRequiredSkillForAspiredClass()
         {
-            return Character.AspiredClass.RequiredSkills.OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress)
+            return Character.AspiredClass?.RequiredSkills.OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress)
                 .FirstOrDefault();
+        }
+
+        public Skill GetLowestRequiredSkillForAspiredClass(List<Skill> skillsFilter)
+        {
+            return Character.AspiredClass?.RequiredSkills
+                .FindAll(skill => skillsFilter.Find(listSkill => listSkill.Id == skill.Id) != null)
+                .OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress).FirstOrDefault();
         }
 
         private void OnSkillAdded(Skill skill)

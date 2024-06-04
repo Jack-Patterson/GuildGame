@@ -51,10 +51,7 @@ namespace com.Halkyon.AI.Character
             }
 
             LoadNames();
-        }
-
-        private void Start()
-        {
+            
             LoadAttributes<Need>("Character/Attributes/Needs");
             LoadAttributes<Skill>("Character/Attributes/Skills");
             LoadAttributes<Stat>("Character/Attributes/Stats");
@@ -95,6 +92,11 @@ namespace com.Halkyon.AI.Character
                     OnStatAdded?.Invoke(stat);
                     break;
             }
+        }
+        
+        public Skill GetSkillById(string id)
+        {
+            return _skills.Find(skill => skill.Id == id);
         }
 
         public void RemoveAttribute<T>(T attribute) where T : IAttribute<T>

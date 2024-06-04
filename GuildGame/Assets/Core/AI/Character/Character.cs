@@ -32,8 +32,8 @@ namespace com.Halkyon.AI.Character
 
         public CharacterRank Rank => _rank;
         public CharacterNeeds Needs => _needs;
-        public List<Skill> Skills => _skills.Skills;
-        public List<Stat> Stats => _stats.Stats;
+        public CharacterSkills Skills => _skills;
+        public CharacterStats Stats => _stats;
         public NavMeshAgent Agent => _agent;
         public CharacterActionHandler ActionHandler => _actionHandler;
         public CharacterClass CurrentClass => _currentClass;
@@ -49,7 +49,10 @@ namespace com.Halkyon.AI.Character
             _actionHandler = GetComponent<CharacterActionHandler>();
 
             if (_currentClass == null)
+            {
                 _currentClass = CharacterManager.GetDefaultClass();
+                _aspiredClass = _currentClass.NextClasses[0];
+            }
         }
 
         public void Move(Vector3 target)

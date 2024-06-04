@@ -47,11 +47,14 @@ namespace com.Halkyon.AI.Character.States
             return "";
         }
 
-        private void HandleInteraction(IInteractable interactable)
+        private void HandleInteraction(IInteractable interactable, bool isInteractableHandlingState = false)
         {
             print($"Interacting with {interactable}");
             interactable.Interact(Character);
-            Character.ActionHandler.MoveToNextState();
+            print("Done interacting. Moving to next state.");
+            
+            if (!isInteractableHandlingState)
+                Character.ActionHandler.MoveToNextState();
         }
     }
 }
