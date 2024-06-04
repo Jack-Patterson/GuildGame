@@ -21,7 +21,6 @@ namespace com.Halkyon.AI.Character.States
             {
                 IInteractable interactable = ((Transform)Arguments[0]).GetComponent<IInteractable>();
                 HandleInteraction(interactable);
-                
             }
             else if (Arguments[0] is GameObject)
             {
@@ -47,7 +46,7 @@ namespace com.Halkyon.AI.Character.States
         {
             return "";
         }
-        
+
         private void HandleInteraction(IInteractable interactable)
         {
             print($"Interacting with {interactable}");

@@ -59,26 +59,6 @@ namespace com.Halkyon.AI.Character
             LoadAttributes<Skill>("Character/Attributes/Skills");
             LoadAttributes<Stat>("Character/Attributes/Stats");
             _classes = ReadFromJsonClasses("Character/Classes");
-            
-            foreach (var characterClass in _classes)
-            {
-                print(characterClass);
-            }
-
-            foreach (var skill in _classes[1].RequiredSkills)
-            {
-                print(skill);
-            }
-            
-            foreach (var item in _classes[1].RequiredItems)
-            {
-                print(item);
-            }
-            
-            foreach (var nextClass in _classes[1].NextClasses)
-            {
-                print(nextClass.Name);
-            }
         }
 
         public string GetRandomName(bool isMale, bool shouldHaveLastName)
@@ -136,6 +116,11 @@ namespace com.Halkyon.AI.Character
             }
         }
         
+        public CharacterClass GetDefaultClass()
+        {
+            return _classes.Find(characterClass => characterClass.Id == "class_basic");
+        }
+        
         private void LoadAttributes<T>(string path) where T : IAttribute<T>
         {
             List<T> attributes = ReadFromJson<T>(path);
@@ -176,18 +161,39 @@ namespace com.Halkyon.AI.Character
                 foreach (string requiredClass in characterClassModel.NextClasses)
                 {
                     CharacterClass nextClass = classes.Find(nextClass => nextClass.Id == requiredClass);
+                    
+                    if (nextClass == null)
+                    {
+                        print($"Class {requiredClass} not found for class {characterClass.Name}!", LogType.Error);
+                        continue;
+                    }
+                    
                     characterClass.NextClasses.Add(nextClass);
                 }
                 
                 foreach (RequiredSkillData requiredSkillData in characterClassModel.RequiredSkills)
                 {
                     Skill skill = _skills.Find(skill => skill.Id == requiredSkillData.Id);
+                    
+                    if (skill == null)
+                    {
+                        print($"Skill {requiredSkillData.Id} not found for class {characterClass.Name}!", LogType.Error);
+                        continue;
+                    }
+                    
                     characterClass.RequiredSkills.Add(skill);
                 }
                 
                 foreach (RequiredItemData requiredItemData in characterClassModel.RequiredItems)
                 {
                     Item item = ItemManager.Instance.GetItemById(requiredItemData.Id);
+                    
+                    if (item == null)
+                    {
+                        print($"Item {requiredItemData.Id} not found for class {characterClass.Name}!", LogType.Error);
+                        continue;
+                    }
+                    
                     characterClass.RequiredItems.Add((item, requiredItemData.Amount));
                 }
             }

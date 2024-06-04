@@ -53,7 +53,7 @@ namespace com.Halkyon.AI.Character.States
         {
             float distance = Vector3.Distance(Character.Position, _target);
             string message = $"Moving to target position. Distance: {distance:F1}";
-            
+
             return message;
         }
     }

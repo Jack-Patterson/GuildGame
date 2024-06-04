@@ -24,30 +24,30 @@ namespace com.Halkyon.Items
                 Destroy(gameObject);
                 return;
             }
-            
+
             LoadItems();
         }
-        
+
         public Item GetItemById(string itemId)
         {
             return _items.Find(item => item.Id == itemId);
         }
-        
+
         public Item GetItemByName(string itemName)
         {
             return _items.Find(item => item.Name == itemName);
         }
-        
+
         public List<Item> GetItemsByCategory(string category)
         {
             return _items.FindAll(item => item.Category == category);
         }
-        
+
         public List<Item> GetItemsByCategory(string category, string subCategory)
         {
             return _items.FindAll(item => item.Category == category && item.SubCategory == subCategory);
         }
-        
+
         public List<Item> GetItemsByCondition(Func<Item, bool> filter)
         {
             return _items.Where(filter).ToList();

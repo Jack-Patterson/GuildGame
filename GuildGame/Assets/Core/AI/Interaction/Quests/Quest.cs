@@ -1,7 +1,5 @@
-﻿using System;
-using com.Halkyon.AI.Character.Attributes;
+﻿using com.Halkyon.AI.Character.Attributes;
 using com.Halkyon.Services.Locations;
-using com.Halkyon.Services.Logger;
 using UnityEngine;
 using LocationService = com.Halkyon.Services.Locations.LocationService;
 

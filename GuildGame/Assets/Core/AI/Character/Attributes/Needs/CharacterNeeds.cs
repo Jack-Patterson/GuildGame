@@ -15,7 +15,7 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
         {
             CharacterManager.OnNeedAdded += OnNeedAdded;
             CharacterManager.OnNeedRemoved += OnNeedRemoved;
-            
+
             StartCoroutine(DecayRoutine());
         }
 
@@ -29,7 +29,6 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             _onNeedsDecay = null;
 
             Needs.ForEach(need => need.OnNeedDepleted = null);
-            print("Needs Unsubscribed!");
         }
 
         private IEnumerator DecayRoutine()

@@ -1,5 +1,4 @@
-﻿using System;
-using com.Halkyon.Input;
+﻿using com.Halkyon.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

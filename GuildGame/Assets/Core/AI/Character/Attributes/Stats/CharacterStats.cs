@@ -32,7 +32,6 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
         protected override void OnUnsubscribeCharacterEvent()
         {
             Stats.ForEach(stat => stat.OnStatDepleted = null);
-            print("Stats Unsubscribed!");
         }
     }
 }

@@ -11,8 +11,9 @@ namespace com.Halkyon.AI.Character.Classes
         public List<Skill> RequiredSkills { get; private set; }
         public List<CharacterClass> NextClasses { get; private set; }
         public List<(Item item, int amount)> RequiredItems { get; private set; }
-        
-        public CharacterClass(string id, string name, List<Skill> requiredSkills, List<CharacterClass> nextClasses, List<(Item, int)> requiredItems)
+
+        public CharacterClass(string id, string name, List<Skill> requiredSkills, List<CharacterClass> nextClasses,
+            List<(Item, int)> requiredItems)
         {
             Id = id;
             Name = name;

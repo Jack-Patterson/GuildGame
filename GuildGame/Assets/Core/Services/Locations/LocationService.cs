@@ -6,7 +6,7 @@ namespace com.Halkyon.Services.Locations
     public class LocationService : ExtendedMonoBehaviour
     {
         private static List<Location> _locations = new();
-        
+
         public static List<Location> Locations
         {
             get

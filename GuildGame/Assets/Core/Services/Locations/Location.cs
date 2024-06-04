@@ -9,11 +9,11 @@ namespace com.Halkyon.Services.Locations
     {
         public new string name;
         public List<Vector2> area;
-        
+
         public bool IsPointInArea(Vector2 point)
         {
             Polygon polygon = new Polygon(area);
-            
+
             return polygon.ContainsPoint(point);
         }
     }

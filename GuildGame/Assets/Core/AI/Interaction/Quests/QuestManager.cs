@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using com.Halkyon.AI.Character.Attributes;
 using UnityEngine;
+using Random = System.Random;
 
 namespace com.Halkyon.AI.Interaction.Quests
 {
@@ -33,8 +34,8 @@ namespace com.Halkyon.AI.Interaction.Quests
 
             if (_quests.Count == 0)
             {
-                int questsToGet = Random.Range(2, 5);
-                System.Random random = new System.Random();
+                int questsToGet = UnityEngine.Random.Range(2, 5);
+                Random random = new Random();
 
                 for (int i = 0; i < questsToGet; i++)
                 {
@@ -46,7 +47,7 @@ namespace com.Halkyon.AI.Interaction.Quests
             return quests;
         }
         
-        private static Quest GetRandomWeightedQuest(System.Random random)
+        private static Quest GetRandomWeightedQuest(Random random)
         {
             int totalWeight = 0;
             List<int> cumulativeWeights = new List<int>();

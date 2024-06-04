@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace com.Halkyon.AI.Character
+﻿namespace com.Halkyon.AI.Character
 {
     public abstract class CharacterSubscriber : ExtendedMonoBehaviour
     {
+        protected Character Character => GetComponent<Character>();
+
         protected void OnEnable()
         {
             SubscribeOnUnsubscribeCharacterEvent();
@@ -12,7 +12,7 @@ namespace com.Halkyon.AI.Character
         protected void SubscribeOnUnsubscribeCharacterEvent()
         {
             Character character = GetComponent<Character>();
-            
+
             character.OnUnsubscribeCharacterEvents += OnUnsubscribeCharacterEvent;
         }
 

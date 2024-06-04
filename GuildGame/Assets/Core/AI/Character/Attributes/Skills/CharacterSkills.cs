@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace com.Halkyon.AI.Character.Attributes.Skills
 {
@@ -13,9 +13,10 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             CharacterManager.OnSkillRemoved += OnSkillRemoved;
         }
 
-        protected override void OnUnsubscribeCharacterEvent()
+        public Skill GetLowestSkillForClass()
         {
-            print("Skills Unsubscribed!");
+            return Character.AspiredClass.RequiredSkills.OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress)
+                .FirstOrDefault();
         }
 
         private void OnSkillAdded(Skill skill)
@@ -26,6 +27,10 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
         private void OnSkillRemoved(Skill skill)
         {
             Skills.Remove(skill);
+        }
+
+        protected override void OnUnsubscribeCharacterEvent()
+        {
         }
     }
 }

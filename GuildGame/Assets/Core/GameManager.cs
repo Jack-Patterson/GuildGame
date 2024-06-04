@@ -33,10 +33,10 @@ namespace com.Halkyon
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-            
+
             CreateLoggersIfNotExists();
         }
-        
+
         private void CreateLoggersIfNotExists()
         {
             IEnumerable<Type> loggerTypes = Assembly.GetExecutingAssembly()

@@ -9,8 +9,9 @@
         public int Value { get; private set; }
         public ItemRank Rank { get; private set; }
         public bool IsStackable { get; private set; }
-        
-        public Item(string id, string name, string category, string subCategory, int value, ItemRank rank, bool isStackable)
+
+        public Item(string id, string name, string category, string subCategory, int value, ItemRank rank,
+            bool isStackable)
         {
             Id = id;
             Name = name;

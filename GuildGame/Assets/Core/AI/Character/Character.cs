@@ -6,8 +6,6 @@ using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.Attributes.Stats;
 using com.Halkyon.AI.Character.Classes;
 using com.Halkyon.AI.Character.States;
-using com.Halkyon.AI.Interaction;
-using com.Halkyon.AI.Interaction.Stations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,6 +47,9 @@ namespace com.Halkyon.AI.Character
             _stats = GetComponent<CharacterStats>();
             _agent = GetComponent<NavMeshAgent>();
             _actionHandler = GetComponent<CharacterActionHandler>();
+
+            if (_currentClass == null)
+                _currentClass = CharacterManager.GetDefaultClass();
         }
 
         public void Move(Vector3 target)

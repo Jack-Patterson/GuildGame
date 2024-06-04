@@ -1,11 +1,11 @@
 ﻿[
   {
-    "id": "1",
+    "id": "class_basic",
     "name": "Novice",
     "requiredSkills": [],
     "nextClasses": [
-      "2",
-      "5",
+      "class_soldier",
+      "class_archer",
       "7"
     ],
     "requiredItems": [
@@ -16,21 +16,21 @@
     ]
   },
   {
-    "id": "2",
+    "id": "class_soldier",
     "name": "Soldier",
     "requiredSkills": [
-        {
-            "id": "1",
-            "level": "2"
-        },
-        {
-            "id": "3",
-            "level": "1"
-        }
+      {
+        "id": "1",
+        "level": "2"
+      },
+      {
+        "id": "3",
+        "level": "1"
+      }
     ],
     "nextClasses": [
-      3,
-      14
+      "class_sergeant",
+      "14"
     ],
     "requiredItems": [
       {
@@ -48,11 +48,11 @@
     ]
   },
   {
-    "id": "3",
+    "id": "class_sergeant",
     "name": "Sergeant",
     "requiredSkills": [],
     "nextClasses": [
-      4
+      "class_knight"
     ],
     "requiredItems": [
       {
@@ -74,14 +74,14 @@
     ]
   },
   {
-    "id": "4",
+    "id": "class_knight",
     "name": "Knight",
     "requiredSkills": [],
     "nextClasses": [],
     "requiredItems": []
   },
   {
-    "id": "5",
+    "id": "class_archer",
     "name": "Archer",
     "requiredSkills": [],
     "nextClasses": [],

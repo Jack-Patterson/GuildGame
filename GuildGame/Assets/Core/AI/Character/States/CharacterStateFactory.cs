@@ -12,8 +12,8 @@ namespace com.Halkyon.AI.Character.States
             }
 
             CharacterState characterState = (CharacterState)Activator
-                .CreateInstance(typeof(T), 
-                    character, 
+                .CreateInstance(typeof(T),
+                    character,
                     arguments);
 
             return (T)characterState;
