@@ -51,7 +51,7 @@ namespace com.Halkyon.AI.Character
             }
 
             LoadNames();
-            
+
             LoadAttributes<Need>("Character/Attributes/Needs");
             LoadAttributes<Skill>("Character/Attributes/Skills");
             LoadAttributes<Stat>("Character/Attributes/Stats");
@@ -93,7 +93,7 @@ namespace com.Halkyon.AI.Character
                     break;
             }
         }
-        
+
         public Skill GetSkillById(string id)
         {
             return _skills.Find(skill => skill.Id == id);
@@ -117,12 +117,12 @@ namespace com.Halkyon.AI.Character
                     break;
             }
         }
-        
+
         public CharacterClass GetDefaultClass()
         {
             return _classes.Find(characterClass => characterClass.Id == "class_basic");
         }
-        
+
         private void LoadAttributes<T>(string path) where T : IAttribute<T>
         {
             List<T> attributes = ReadFromJson<T>(path);
@@ -132,21 +132,22 @@ namespace com.Halkyon.AI.Character
                 AddAttribute(attribute);
             }
         }
-        
+
         private List<T> ReadFromJson<T>(string path)
         {
             TextAsset file = Resources.Load<TextAsset>(path);
             return JsonConvert.DeserializeObject<List<T>>(file.text);
         }
-        
+
         private List<CharacterClass> ReadFromJsonClasses(string path)
         {
             TextAsset file = Resources.Load<TextAsset>(path);
-            List<CharacterClassSerializable> characterClassModels = JsonConvert.DeserializeObject<List<CharacterClassSerializable>>(file.text);
+            List<CharacterClassSerializable> characterClassModels =
+                JsonConvert.DeserializeObject<List<CharacterClassSerializable>>(file.text);
 
             return PopulateClassesData(characterClassModels);
         }
-        
+
         private List<CharacterClass> PopulateClassesData(List<CharacterClassSerializable> characterClassModels)
         {
             List<CharacterClass> classes = new();
@@ -158,44 +159,46 @@ namespace com.Halkyon.AI.Character
 
             foreach (CharacterClassSerializable characterClassModel in characterClassModels)
             {
-                CharacterClass characterClass = classes.Find(characterClass => characterClass.Id == characterClassModel.Id);
-                
+                CharacterClass characterClass =
+                    classes.Find(characterClass => characterClass.Id == characterClassModel.Id);
+
                 foreach (string requiredClass in characterClassModel.NextClasses)
                 {
                     CharacterClass nextClass = classes.Find(nextClass => nextClass.Id == requiredClass);
-                    
+
                     if (nextClass == null)
                     {
                         print($"Class {requiredClass} not found for class {characterClass.Name}!", LogType.Error);
                         continue;
                     }
-                    
+
                     characterClass.NextClasses.Add(nextClass);
                 }
-                
+
                 foreach (RequiredSkillData requiredSkillData in characterClassModel.RequiredSkills)
                 {
                     Skill skill = _skills.Find(skill => skill.Id == requiredSkillData.Id);
-                    
+
                     if (skill == null)
                     {
-                        print($"Skill {requiredSkillData.Id} not found for class {characterClass.Name}!", LogType.Error);
+                        print($"Skill {requiredSkillData.Id} not found for class {characterClass.Name}!",
+                            LogType.Error);
                         continue;
                     }
-                    
+
                     characterClass.RequiredSkills.Add(skill);
                 }
-                
+
                 foreach (RequiredItemData requiredItemData in characterClassModel.RequiredItems)
                 {
                     Item item = ItemManager.Instance.GetItemById(requiredItemData.Id);
-                    
+
                     if (item == null)
                     {
                         print($"Item {requiredItemData.Id} not found for class {characterClass.Name}!", LogType.Error);
                         continue;
                     }
-                    
+
                     characterClass.RequiredItems.Add((item, requiredItemData.Amount));
                 }
             }

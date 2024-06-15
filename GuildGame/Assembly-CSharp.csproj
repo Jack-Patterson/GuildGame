@@ -50,7 +50,6 @@
     <Compile Include="Assets\Core\AI\Character\CharacterActionHandler.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Stats\CharacterStats.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateMove.cs" />
-    <Compile Include="Assets\Core\Services\Logger\LoggerServiceUser.cs" />
     <Compile Include="Assets\Core\Services\Locations\Location.cs" />
     <Compile Include="Assets\Core\Utils\IDeepCopyable.cs" />
     <Compile Include="Assets\Core\Utils\Constants.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="Assets\Core\Services\Logger\FileLoggerService.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Skills\Skill.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\IAttribute.cs" />
-    <Compile Include="Assets\Core\Services\Logger\LoggerServiceUserMonoBehaviour.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestBoard.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateIdle.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\AttributeFactory.cs" />
@@ -91,17 +89,21 @@
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateFactory.cs" />
     <Compile Include="Assets\Core\Input\InputActions.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Needs\CharacterNeeds.cs" />
+    <Compile Include="Assets\Core\Services\Logger\LoggerUserMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\Services\Logger\LoggerUser.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterRank.cs" />
     <Compile Include="Assets\Core\AI\Interaction\IInteractable.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Stats\Stat.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterSubscriber.cs" />
+    <Compile Include="Assets\Core\GameState.cs" />
     <Compile Include="Assets\Core\Player.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Stations\SkillStation\SkillStation.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterState.cs" />
     <Compile Include="Assets\Core\Services\Logger\MessageLoggerService.cs" />
     <None Include="Assets\Resources\Quests\GenericQuests.json" />
     <None Include="Assets\Resources\Names\character_surnames_female.json" />
+    <None Include="Assets\TestJSON\Chance.json" />
     <None Include="Assets\Resources\Character\Classes.json" />
     <None Include="Assets\Resources\Character\Attributes\Stats.json" />
     <None Include="Assets\Resources\Character\Attributes\Skills.json" />

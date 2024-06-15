@@ -2,7 +2,7 @@
 
 namespace com.Halkyon.AI.Character.States
 {
-    public abstract class CharacterState : LoggerServiceUser, ICharacterState
+    public abstract class CharacterState : LoggerUser, ICharacterState
     {
         protected readonly Character Character;
         protected object[] Arguments;

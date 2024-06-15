@@ -10,22 +10,15 @@ namespace com.Halkyon
         {
             StartCoroutine(LoadSceneAsync("Game"));
         }
-        
+
         private IEnumerator LoadSceneAsync(string sceneName)
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
-            
             asyncOperation.allowSceneActivation = false;
             
-            while (!asyncOperation.isDone)
-            {
-                if (asyncOperation.progress >= 0.9f)
-                {
-                    asyncOperation.allowSceneActivation = true;
-                }
-                
-                yield return null;
-            }
+            yield return new WaitUntil(() => asyncOperation.progress >= 0.9f);
+
+            asyncOperation.allowSceneActivation = true;
         }
     }
 }

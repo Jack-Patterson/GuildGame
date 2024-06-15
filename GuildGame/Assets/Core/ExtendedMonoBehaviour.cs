@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.Halkyon
 {
-    public class ExtendedMonoBehaviour : LoggerServiceUserMonoBehaviour
+    public class ExtendedMonoBehaviour : LoggerUserMonoBehaviour
     {
         public GameManager GameManager => GameManager.Instance;
 

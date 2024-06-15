@@ -7,9 +7,12 @@ using UnityEngine;
 
 namespace com.Halkyon
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : ExtendedMonoBehaviour
     {
         private static GameManager _instance;
+        
+        public Action<GameState> OnGameStateChanged;
+        private GameState _currentState = GameState.Play;
 
         public static GameManager Instance
         {
@@ -25,6 +28,8 @@ namespace com.Halkyon
                 return _instance;
             }
         }
+        
+        public GameState CurrentState => _currentState;
 
         private void Awake()
         {
@@ -62,6 +67,16 @@ namespace com.Halkyon
                 loggerServiceObject = new GameObject("LoggerService");
 
             return loggerServiceObject;
+        }
+        
+        public void ChangeState(GameState newState)
+        {
+            if (_currentState == newState)
+                return;
+            
+            _currentState = newState;
+            OnGameStateChanged?.Invoke(newState);
+            Log($"Game state changed to {newState}");
         }
     }
 }
