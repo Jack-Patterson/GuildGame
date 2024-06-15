@@ -13,16 +13,19 @@ namespace com.Halkyon.AI.Interaction.Stations.SkillStation
 
             Skill swordsmanship = CharacterManager.Instance.GetSkillById("1");
             Skill spearmanship = CharacterManager.Instance.GetSkillById("10");
-            
+
             ImprovableSkills.Add(swordsmanship);
             ImprovableSkills.Add(spearmanship);
         }
-        
+
         public override void Interact(Character.Character character)
         {
-            Skill skillToImprove = character.Skills.GetLowestRequiredSkillForAspiredClass(ImprovableSkills);
+            if (character is Adventurer adventurer)
+            {
+                Skill skillToImprove = adventurer.Skills.GetLowestRequiredSkillForAspiredClass(ImprovableSkills);
 
-            StartCoroutine(ImproveSkill(skillToImprove));
+                StartCoroutine(ImproveSkill(skillToImprove));
+            }
         }
 
         private IEnumerator ImproveSkill(Skill skill)
@@ -30,7 +33,7 @@ namespace com.Halkyon.AI.Interaction.Stations.SkillStation
             yield return new WaitForSeconds(ImprovementTimeInSeconds);
 
             print($"{skill.Name} improved!");
-            
+
             skill.ProgressSkill();
         }
     }

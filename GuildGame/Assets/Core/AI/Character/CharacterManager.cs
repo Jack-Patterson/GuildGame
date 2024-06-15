@@ -58,6 +58,8 @@ namespace com.Halkyon.AI.Character
             _classes = ReadFromJsonClasses("Character/Classes");
         }
 
+        public string GetRandomName(bool isMale) => GetRandomName(isMale, false);
+
         public string GetRandomName(bool isMale, bool shouldHaveLastName)
         {
             string firstName = isMale

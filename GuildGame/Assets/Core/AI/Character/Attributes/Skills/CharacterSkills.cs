@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,13 +15,13 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
 
         public Skill GetLowestRequiredSkillForAspiredClass()
         {
-            return Character.AspiredClass?.RequiredSkills.OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress)
+            return ((Adventurer)Character).AspiredClass?.RequiredSkills.OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress)
                 .FirstOrDefault();
         }
 
         public Skill GetLowestRequiredSkillForAspiredClass(List<Skill> skillsFilter)
         {
-            return Character.AspiredClass?.RequiredSkills
+            return ((Adventurer)Character).AspiredClass?.RequiredSkills
                 .FindAll(skill => skillsFilter.Find(listSkill => listSkill.Id == skill.Id) != null)
                 .OrderBy(skill => skill.Level).ThenBy(skill => skill.Progress).FirstOrDefault();
         }

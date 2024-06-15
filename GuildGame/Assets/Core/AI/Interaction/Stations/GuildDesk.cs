@@ -1,4 +1,5 @@
-﻿using com.Halkyon.AI.Character.States;
+﻿using com.Halkyon.AI.Character;
+using com.Halkyon.AI.Character.States;
 using com.Halkyon.AI.Interaction.Quests;
 
 namespace com.Halkyon.AI.Interaction.Stations
@@ -7,14 +8,17 @@ namespace com.Halkyon.AI.Interaction.Stations
     {
         public override void Interact(Character.Character character)
         {
-            print(character.Rank);
-            character.IncreaseRank();
-            print(character.Rank);
-
-            character.ActionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(character,
-                new object[] { FindObjectOfType<QuestBoard>().Position }));
-            character.ActionHandler.QueueState(CharacterState.ConstructState<CharacterStateInteract>(character,
-                new object[] { FindObjectOfType<QuestBoard>() }));
+            if (character is Adventurer regularCharacter)
+            {
+                print(regularCharacter.Rank);
+                regularCharacter.IncreaseRank();
+                print(regularCharacter.Rank);
+                
+                character.ActionHandler.QueueState(CharacterState.ConstructState<CharacterStateMove>(character,
+                    new object[] { FindObjectOfType<QuestBoard>().Position }));
+                character.ActionHandler.QueueState(CharacterState.ConstructState<CharacterStateInteract>(character,
+                    new object[] { FindObjectOfType<QuestBoard>() }));
+            }
         }
     }
 }

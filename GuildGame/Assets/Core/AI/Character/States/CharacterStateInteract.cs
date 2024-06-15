@@ -44,7 +44,7 @@ namespace com.Halkyon.AI.Character.States
 
         public override string GetDescription()
         {
-            return "";
+            return "Interacting...";
         }
 
         private void HandleInteraction(IInteractable interactable, bool isInteractableHandlingState = false)

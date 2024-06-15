@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using com.Halkyon.AI.Character;
 using com.Halkyon.AI.Character.Attributes;
 
 namespace com.Halkyon.AI.Interaction.Quests
@@ -39,9 +40,12 @@ namespace com.Halkyon.AI.Interaction.Quests
 
         public override void Interact(Character.Character character)
         {
-            Quest availableQuest = GetAvailableQuest(character.Rank);
-            
-            character.ActionHandler.AssignQuest(availableQuest);
+            if (character is Adventurer adventurer)
+            {
+                Quest availableQuest = GetAvailableQuest(adventurer.Rank);
+
+                character.ActionHandler.AssignQuest(availableQuest);
+            }
         }
 
         private bool IsAppropriateRank(CharacterRank requesterRank, CharacterRank questRank)
