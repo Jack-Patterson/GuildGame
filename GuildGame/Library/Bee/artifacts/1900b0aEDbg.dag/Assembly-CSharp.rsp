@@ -421,6 +421,7 @@
 "Assets/Core/UI/CharacterInfoHandlerUI.cs"
 "Assets/Core/UI/GameUiManager.cs"
 "Assets/Core/Utils/Constants.cs"
+"Assets/Core/Utils/CoroutineRunner.cs"
 "Assets/Core/Utils/ICopyable.cs"
 "Assets/Core/Utils/IDeepCopyable.cs"
 "Assets/Core/Utils/Polygon.cs"

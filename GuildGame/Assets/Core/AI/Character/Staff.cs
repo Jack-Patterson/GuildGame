@@ -9,6 +9,11 @@ namespace com.Halkyon.AI.Character
         public new readonly string CharacterType = "Staff";
         public new StaffActionHandler ActionHandler => (StaffActionHandler) base.ActionHandler;
 
+        private new void Awake()
+        {
+            base.Awake();
+        }
+        
         private new void Start()
         {
             base.Start();

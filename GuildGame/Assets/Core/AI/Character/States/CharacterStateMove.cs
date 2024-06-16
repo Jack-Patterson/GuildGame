@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
+using com.Halkyon.Utils;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace com.Halkyon.AI.Character.States
 {
     public class CharacterStateMove : CharacterState
     {
         private Vector3 _target;
+        private bool _isCheckingDistance = false;
 
         public CharacterStateMove(Character character, object[] args) : base(character, args)
         {
@@ -13,27 +17,37 @@ namespace com.Halkyon.AI.Character.States
 
         public override void Enter()
         {
-            if (Arguments[0] is Vector3)
+            switch (Arguments[0])
             {
-                _target = (Vector3)Arguments[0];
-                print($"Moving to target {_target}");
-                Character.Agent.SetDestination(_target);
+                case Vector3 vector:
+                    SetTarget(vector);
+                    break;
+                case Transform transform:
+                    SetTarget(transform.position);
+                    break;
+                default:
+                    throw new ArgumentException("Invalid argument type. Expected Vector3 or Transform.");
             }
-            else if (Arguments[0] is Transform)
-            {
-                _target = ((Transform)Arguments[0]).position;
-                print($"Moving to target {_target}");
-                Character.Agent.SetDestination(_target);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid argument type. Expected Vector3 or Transform.");
-            }
+        }
+        
+        private IEnumerator CheckRemainingDistance()
+        {
+            yield return new WaitForSeconds(0.1f);
+            
+            _isCheckingDistance = true;
+        }
+        
+        private void SetTarget(Vector3 target)
+        {
+            print($"Moving to target {target}");
+            _target = target;
+            Character.Agent.SetDestination(target);
+            Object.FindObjectOfType<CoroutineRunner>().RunCoroutine(CheckRemainingDistance());
         }
 
         public override void Update()
         {
-            if (Character.Agent.remainingDistance <= Character.Agent.stoppingDistance)
+            if (_isCheckingDistance && Character.Agent.remainingDistance <= Character.Agent.stoppingDistance)
             {
                 Character.ActionHandler.MoveToNextState();
             }

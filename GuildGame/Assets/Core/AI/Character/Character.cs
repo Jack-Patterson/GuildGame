@@ -27,11 +27,15 @@ namespace com.Halkyon.AI.Character
         public CharacterActionHandler ActionHandler => _actionHandler;
         protected CharacterManager CharacterManager => CharacterManager.Instance;
 
-        protected void Start()
+        protected void Awake()
         {
             _stats = GetComponent<CharacterStats>();
             _agent = GetComponent<NavMeshAgent>();
             _actionHandler = GetComponent<CharacterActionHandler>();
+        }
+        
+        protected void Start()
+        {
             _name = CharacterManager.GetRandomName(true);
         }
 

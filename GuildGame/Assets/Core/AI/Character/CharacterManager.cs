@@ -58,24 +58,6 @@ namespace com.Halkyon.AI.Character
             _classes = ReadFromJsonClasses("Character/Classes");
         }
 
-        private void Start()
-        {
-            foreach (Need need in _needs)
-            {
-                print(need);
-            }
-
-            foreach (Skill skill in _skills)
-            {
-                print(skill);
-            }
-            
-            foreach (Stat stat in _stats)
-            {
-                print(stat);
-            }
-        }
-
         public void RequestAttributes(Character character)
         {
             if (character is Staff staff)

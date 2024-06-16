@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using com.Halkyon.Input;
 using com.Halkyon.Services.Logger;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace com.Halkyon
         
         public Action<GameState> OnGameStateChanged;
         private GameState _currentState = GameState.Play;
+
+        [SerializeField] private GameObject charPrefab;
 
         public static GameManager Instance
         {

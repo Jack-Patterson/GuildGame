@@ -78,6 +78,7 @@
     <Compile Include="Assets\Core\AI\Character\States\ICharacterState.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Skills\CharacterSkills.cs" />
     <Compile Include="Assets\Core\UI\CharacterInfoHandlerUI.cs" />
+    <Compile Include="Assets\Core\Utils\CoroutineRunner.cs" />
     <Compile Include="Assets\Core\Items\ItemManager.cs" />
     <Compile Include="Assets\Core\GameManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Needs\Need.cs" />

@@ -26,12 +26,17 @@ namespace com.Halkyon.AI.Character
         public CharacterClass CurrentClass => _currentClass;
         public CharacterClass AspiredClass => _aspiredClass;
         public new AdventurerActionHandler ActionHandler => (AdventurerActionHandler) base.ActionHandler;
+
+        private new void Awake()
+        {
+            base.Awake();
+            _needs = GetComponent<CharacterNeeds>();
+            _skills = GetComponent<CharacterSkills>();
+        }
         
         private new void Start()
         {
             base.Start();
-            _needs = GetComponent<CharacterNeeds>();
-            _skills = GetComponent<CharacterSkills>();
             
             if (_currentClass == null)
             {
