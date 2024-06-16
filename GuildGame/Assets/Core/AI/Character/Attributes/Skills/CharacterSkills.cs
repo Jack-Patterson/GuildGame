@@ -5,7 +5,7 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
 {
     public class CharacterSkills : CharacterSubscriber
     {
-        public List<Skill> Skills { get; } = new();
+        public List<Skill> Skills { get; protected internal set; } = new();
 
         private void Awake()
         {

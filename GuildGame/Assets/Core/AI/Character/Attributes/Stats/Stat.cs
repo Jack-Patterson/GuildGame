@@ -7,60 +7,60 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
     {
         public Action<Stat> OnStatDepleted;
         private string _name;
-        private int _amount = 100;
-        private int _maxAmount = 100;
+        private int _value = 100;
+        private int _maxValue = 100;
 
         public string Name => _name;
 
-        public int Amount
+        public int Value
         {
-            get => _amount;
+            get => _value;
             set => SetAmount(value);
         }
 
-        public int MaxAmount => _maxAmount;
+        public int MaxValue => _maxValue;
 
-        public Stat(string name, int maxAmount)
+        public Stat(string name, int maxValue)
         {
             _name = name;
-            _maxAmount = maxAmount;
-            _amount = maxAmount;
+            _maxValue = maxValue;
+            _value = maxValue;
         }
 
         private void SetAmount(int value)
         {
             if (value <= 0)
             {
-                _amount = 0;
+                _value = 0;
                 OnStatDepleted?.Invoke(this);
             }
             else
             {
-                _amount = Mathf.Min(100, value);
+                _value = Mathf.Min(100, value);
             }
         }
 
         public void Reset()
         {
-            _amount = _maxAmount;
+            _value = _maxValue;
         }
 
         public Stat Copy()
         {
-            return new Stat(Name, MaxAmount);
+            return new Stat(Name, MaxValue);
         }
 
         public Stat DeepCopy()
         {
             Stat stat = Copy();
-            stat._amount = _amount;
+            stat._value = _value;
 
             return stat;
         }
 
         public override string ToString()
         {
-            return $"{_name} : {_amount} : {_maxAmount}";
+            return $"{_name} : {_value} : {_maxValue}";
         }
     }
 }

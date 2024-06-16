@@ -25,6 +25,15 @@ namespace com.Halkyon.AI.Character.Attributes.Skills
             get => _progress;
             set => SetLevelProgress(value);
         }
+        
+        public float ProgressPercentage
+        {
+            get
+            {
+                int levelProgressAmount = CalculateLevelProgressCeiling();
+                return (_progress / levelProgressAmount) * 100;
+            }
+        }
 
         public Skill(string id, string name, int levelProgressIncrement)
         {

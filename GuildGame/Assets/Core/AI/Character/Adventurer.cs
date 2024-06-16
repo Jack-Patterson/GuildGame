@@ -38,6 +38,8 @@ namespace com.Halkyon.AI.Character
                 _currentClass = CharacterManager.GetDefaultClass();
                 _aspiredClass = _currentClass.NextClasses[0];
             }
+            
+            CharacterManager.RequestAttributes(this);
         }
         
         public void IncreaseRank()

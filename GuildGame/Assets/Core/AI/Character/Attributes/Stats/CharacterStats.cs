@@ -4,7 +4,7 @@ namespace com.Halkyon.AI.Character.Attributes.Stats
 {
     public class CharacterStats : CharacterSubscriber
     {
-        public List<Stat> Stats { get; } = new();
+        public List<Stat> Stats { get; protected internal set; } = new();
 
         private void Awake()
         {

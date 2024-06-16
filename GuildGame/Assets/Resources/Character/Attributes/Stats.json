@@ -1,14 +1,14 @@
 ﻿[
   {
     "name": "Health",
-    "maxAmount": 100
+    "maxValue": 100
   },
   {
     "name": "Stamina",
-    "maxAmount": 100
+    "maxValue": 100
   },
   {
     "name": "Mana",
-    "maxAmount": 100
+    "maxValue": 100
   }
 ]

@@ -9,7 +9,22 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
     public class CharacterNeeds : CharacterSubscriber
     {
         private Action _onNeedsDecay;
-        internal List<Need> Needs { get; } = new();
+        private List<Need> _needs = new();
+
+        public List<Need> Needs
+        {
+            get => _needs;
+            protected internal set {
+
+                foreach (Need need in value)
+                {
+                    need.OnNeedDepleted += OnNeedDepleted;
+                    _onNeedsDecay += need.Decay;
+                }
+                
+                _needs = value;
+            }
+        }
 
         private void Awake()
         {
@@ -41,7 +56,7 @@ namespace com.Halkyon.AI.Character.Attributes.Needs
             }
         }
 
-        private void OnNeedAdded(Need need)
+        internal void OnNeedAdded(Need need)
         {
             need.OnNeedDepleted += OnNeedDepleted;
             _onNeedsDecay += need.Decay;
