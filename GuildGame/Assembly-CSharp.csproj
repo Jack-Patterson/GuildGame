@@ -91,6 +91,7 @@
     <Compile Include="Assets\Core\SceneExecuter.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Character.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\CharacterStateWaiting.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Stations\StaffWorkstation.cs" />
     <Compile Include="Assets\Core\Time\Time.cs" />
     <Compile Include="Assets\Core\Services\Locations\LocationService.cs" />

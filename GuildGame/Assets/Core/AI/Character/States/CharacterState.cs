@@ -1,4 +1,6 @@
 ﻿using com.Halkyon.Services.Logger;
+using com.Halkyon.Utils;
+using UnityEngine;
 
 namespace com.Halkyon.AI.Character.States
 {
@@ -6,11 +8,13 @@ namespace com.Halkyon.AI.Character.States
     {
         protected readonly Character Character;
         protected object[] Arguments;
+        protected CoroutineRunner CoroutineRunner;
 
         public CharacterState(Character character, object[] args)
         {
             Character = character;
             Arguments = args;
+            CoroutineRunner = Object.FindObjectOfType<CoroutineRunner>();
         }
 
         public abstract void Enter();

@@ -19,7 +19,7 @@ namespace com.Halkyon.AI.Character.Actions
                 CharacterStateMove moveState =
                     CharacterState.ConstructState<CharacterStateMove>(Character, new object[] { guildDesk.Position });
                 CharacterStateInteract interactState =
-                    CharacterState.ConstructState<CharacterStateInteract>(Character, new object[] { guildDesk });
+                    CharacterState.ConstructState<CharacterStateInteract>(Character, new object[] { guildDesk, true });
             
                 QueueStates(
                     new List<(CharacterState state, object[] args)> { (moveState, null), (interactState, null) });

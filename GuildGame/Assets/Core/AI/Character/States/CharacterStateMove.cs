@@ -42,7 +42,7 @@ namespace com.Halkyon.AI.Character.States
             print($"Moving to target {target}");
             _target = target;
             Character.Agent.SetDestination(target);
-            Object.FindObjectOfType<CoroutineRunner>().RunCoroutine(CheckRemainingDistance());
+            CoroutineRunner.RunCoroutine(CheckRemainingDistance());
         }
 
         public override void Update()

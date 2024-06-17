@@ -1,4 +1,7 @@
-﻿using com.Halkyon.AI.Character.StaffJobs;
+﻿using System.Collections;
+using com.Halkyon.AI.Character.StaffJobs;
+using com.Halkyon.Utils;
+using UnityEngine;
 
 namespace com.Halkyon.AI.Character.States
 {
@@ -12,16 +15,16 @@ namespace com.Halkyon.AI.Character.States
         {
             Character.ActionHandler.IsPerformingTask = true;
 
-            if (Arguments[0] is string)
+            if (Arguments != null && Arguments.Length > 0 && Arguments[0] is string)
             {
                 // Trigger animation
             }
+            
+            CoroutineRunner.RunCoroutine(Character.PerformJob());
         }
 
         public override void Update()
         {
-            Character.ActionHandler.IsPerformingTask = false;
-            Character.ActionHandler.MoveToNextState();
         }
 
         public override void Exit()

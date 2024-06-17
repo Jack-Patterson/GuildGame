@@ -1,4 +1,5 @@
-﻿using com.Halkyon.AI.Character.Actions;
+﻿using System.Collections;
+using com.Halkyon.AI.Character.Actions;
 using com.Halkyon.AI.Interaction.Stations;
 using UnityEngine;
 
@@ -11,15 +12,17 @@ namespace com.Halkyon.AI.Character.StaffJobs
         public StaffWorkstation Workstation { get; set; }
         public bool IsPerformingTask => ActionHandler.IsPerformingTask;
 
-        private new void Awake()
+        protected new void Awake()
         {
             base.Awake();
         }
         
-        private new void Start()
+        protected new void Start()
         {
             base.Start();
             CharacterManager.RequestAttributes(this);
         }
+
+        public abstract IEnumerator PerformJob();
     }
 }

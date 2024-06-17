@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using com.Halkyon.AI.Character;
 using com.Halkyon.AI.Character.StaffJobs;
 using com.Halkyon.AI.Character.States;
@@ -10,10 +12,11 @@ namespace com.Halkyon.AI.Interaction.Stations
 {
     public class GuildDesk : StaffWorkstation
     {
+        protected override Dictionary<Type, int> requiredStaff { get; } = new() {{typeof(DeskStaff), 1}};
+        
         private new void Awake()
         {
             base.Awake();
-            AddRequiredStaffType<DeskStaff>(1);
         }
 
         public override void Interact(Character.Character character)
@@ -37,7 +40,7 @@ namespace com.Halkyon.AI.Interaction.Stations
             }
 
             deskStaff.ActionHandler.QueueState(StaffState.ConstructState<StaffStatePerform, Staff>(deskStaff));
-            yield return new WaitUntil(() => deskStaff.IsPerformingTask);
+            yield return new WaitUntil(() => !deskStaff.IsPerformingTask);
             
             adventurer.IncreaseRank();
             print(adventurer.Rank);
@@ -48,6 +51,7 @@ namespace com.Halkyon.AI.Interaction.Stations
                 new object[] { FindObjectOfType<QuestBoard>() });
             
             adventurer.ActionHandler.QueueStates(new List<CharacterState> {moveState, interactState});
+            adventurer.ActionHandler.MoveToNextState();
             yield return null;
         }
     }

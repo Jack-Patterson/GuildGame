@@ -7,27 +7,35 @@ namespace com.Halkyon.AI.Interaction.Stations
 {
     public abstract class StaffWorkstation : InteractableMonoBehaviour
     {
-        private readonly Dictionary<Type, int> _requiredStaff = new();
-        private readonly Dictionary<Type, List<Staff>> _assignedStaff = new();
+        protected virtual Dictionary<Type, int> requiredStaff { get; } = new();
+        protected virtual Dictionary<Type, List<Staff>> assignedStaff { get; } = new();
 
-        public Dictionary<Type, int> RequiredStaff => new(_requiredStaff);
-        public Dictionary<Type, List<Staff>> AssignedStaff => new(_assignedStaff);
+        public Dictionary<Type, int> RequiredStaff => new(requiredStaff);
+        public Dictionary<Type, List<Staff>> AssignedStaff => new(assignedStaff);
 
         public abstract override void Interact(Character.Character character);
 
         public void AddRequiredStaffType<T>(int spots) where T : Staff
         {
-            _requiredStaff[typeof(T)] = spots;
+            requiredStaff[typeof(T)] = spots;
         }
         
         public void AssignStaff<T>(T staff) where T : Staff
         {
-            if (_requiredStaff.TryGetValue(typeof(T), out int spots) &&
-                _assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList))
+            if (requiredStaff.TryGetValue(typeof(T), out int spots))
             {
-                if (staffList.Count < spots)
+                assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList);
+                
+                List<Staff> staffAssigned = staffList;
+                if (staffAssigned == null)
                 {
-                    staffList.Add(staff);
+                    staffAssigned = new List<Staff>();
+                    assignedStaff[typeof(T)] = staffAssigned;
+                }
+                
+                if (staffAssigned.Count < spots)
+                {
+                    staffAssigned.Add(staff);
                 }
                 else {
                     Log($"StaffWorkstation: {name} is full for {typeof(T).Name}", LogType.Warning);
@@ -41,7 +49,7 @@ namespace com.Halkyon.AI.Interaction.Stations
         
         public void UnassignStaff<T>(T staff) where T : Staff
         {
-            if (_assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList))
+            if (assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList))
             {
                 staffList.Remove(staff);
             }
@@ -53,7 +61,7 @@ namespace com.Halkyon.AI.Interaction.Stations
         
         public T GetFreeStaffMemberOfType<T>() where T : Staff
         {
-            if (_assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList))
+            if (assignedStaff.TryGetValue(typeof(T), out List<Staff> staffList))
             {
                 foreach (Staff staff in staffList)
                 {
