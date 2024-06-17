@@ -6,6 +6,7 @@ using com.Halkyon.AI.Character.Attributes.Needs;
 using com.Halkyon.AI.Character.Attributes.Skills;
 using com.Halkyon.AI.Character.Attributes.Stats;
 using com.Halkyon.AI.Character.Classes;
+using com.Halkyon.AI.Character.StaffJobs;
 using com.Halkyon.Items;
 using Newtonsoft.Json;
 using UnityEngine;

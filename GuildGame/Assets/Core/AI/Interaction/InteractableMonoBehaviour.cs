@@ -7,7 +7,7 @@ namespace com.Halkyon.AI.Interaction
         public new Vector3 Position => base.Position;
         public abstract void Interact(Character.Character character);
 
-        protected void Start()
+        protected void Awake()
         {
             Register();
         }
@@ -15,6 +15,16 @@ namespace com.Halkyon.AI.Interaction
         public void Register()
         {
             InteractableManager.Instance.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            InteractableManager.Instance.Register(this);
+        }
+
+        private void OnDestroy()
+        {
+            InteractableManager.Instance.Unregister(this);
         }
     }
 }

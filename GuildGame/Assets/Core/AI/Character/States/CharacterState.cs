@@ -30,11 +30,19 @@ namespace com.Halkyon.AI.Character.States
             Arguments = args;
         }
 
+        public static TState ConstructState<TState, TCharacter>(TCharacter character, object[] arguments)
+            where TState : CharacterState where TCharacter : Character =>
+            CharacterStateFactory.ConstructState<TState>(character, arguments);
+
+        public static TState ConstructState<TState, TCharacter>(TCharacter character) where TState : CharacterState where TCharacter : Character =>
+            ConstructState<TState, Character>(character, null);
+        
         public static T ConstructState<T>(Character character, object[] arguments)
             where T : CharacterState =>
-            CharacterStateFactory.ConstructState<T>(character, arguments);
-
-        public static T ConstructState<T>(Character character) where T : CharacterState =>
-            ConstructState<T>(character, null);
+            ConstructState<T, Character>(character, arguments);
+        
+        public static T ConstructState<T>(Character character)
+            where T : CharacterState =>
+            ConstructState<T, Character>(character, null);
     }
 }

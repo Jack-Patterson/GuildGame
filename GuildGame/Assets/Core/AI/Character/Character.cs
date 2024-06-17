@@ -20,7 +20,8 @@ namespace com.Halkyon.AI.Character
         private NavMeshAgent _agent;
         private CharacterActionHandler _actionHandler;
 
-        public readonly string CharacterType = "Character";
+        public abstract string CharacterId { get; }
+        public abstract string CharacterType { get; }
         public string Name => _name;
         public CharacterStats Stats => _stats;
         public NavMeshAgent Agent => _agent;

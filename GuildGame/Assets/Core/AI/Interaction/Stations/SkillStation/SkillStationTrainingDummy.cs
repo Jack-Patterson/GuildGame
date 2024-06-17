@@ -7,10 +7,8 @@ namespace com.Halkyon.AI.Interaction.Stations.SkillStation
 {
     public class SkillStationTrainingDummy : SkillStation
     {
-        private new void Start()
+        private void Start()
         {
-            base.Start();
-
             Skill swordsmanship = CharacterManager.Instance.GetSkillById("1");
             Skill spearmanship = CharacterManager.Instance.GetSkillById("10");
 

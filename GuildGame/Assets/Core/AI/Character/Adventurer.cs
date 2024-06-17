@@ -19,7 +19,8 @@ namespace com.Halkyon.AI.Character
         private CharacterClass _currentClass;
         private CharacterClass _aspiredClass;
 
-        public new readonly string CharacterType = "Adventurer";
+        public override string CharacterId => "npc_adventurer";
+        public override string CharacterType => "Adventurer";
         public CharacterRank Rank => _rank;
         public CharacterNeeds Needs => _needs;
         public CharacterSkills Skills => _skills;

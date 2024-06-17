@@ -45,7 +45,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Core\AI\Character\Staff.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Stations\SkillStation\SkillStationTrainingDummy.cs" />
     <Compile Include="Assets\Core\ExtendedMonoBehaviour.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Stats\CharacterStats.cs" />
@@ -57,6 +56,7 @@
     <Compile Include="Assets\Core\Services\Logger\LoggerService.cs" />
     <Compile Include="Assets\Core\Items\ItemRank.cs" />
     <Compile Include="Assets\Core\AI\Character\Classes\RequiredItemData.cs" />
+    <Compile Include="Assets\Core\UI\MoneyHandlerUI.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateInteract.cs" />
     <Compile Include="Assets\Core\Utils\ICopyable.cs" />
     <Compile Include="Assets\Core\AI\Character\CharacterManager.cs" />
@@ -67,12 +67,14 @@
     <Compile Include="Assets\Core\AI\Character\Attributes\IAttribute.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestBoard.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateIdle.cs" />
+    <Compile Include="Assets\Core\AI\Character\StaffJobs\Staff.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\AttributeFactory.cs" />
     <Compile Include="Assets\Core\AI\Character\Adventurer.cs" />
     <Compile Include="Assets\Core\Input\PlayerInputActions.cs" />
     <Compile Include="Assets\Core\AI\Interaction\InteractableManager.cs" />
     <Compile Include="Assets\Core\Utils\Polygon.cs" />
     <Compile Include="Assets\Core\AI\Character\Classes\CharacterClassSerializable.cs" />
+    <Compile Include="Assets\Core\Time\TimeHandler.cs" />
     <Compile Include="Assets\Core\Items\Item.cs" />
     <Compile Include="Assets\Core\AI\Character\Classes\RequiredSkillData.cs" />
     <Compile Include="Assets\Core\AI\Character\States\ICharacterState.cs" />
@@ -83,18 +85,24 @@
     <Compile Include="Assets\Core\GameManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Needs\Need.cs" />
     <Compile Include="Assets\Core\AI\Interaction\InteractableMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\AI\Character\StaffJobs\DeskStaff.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Stations\GuildDesk.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\Quest.cs" />
     <Compile Include="Assets\Core\SceneExecuter.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestManager.cs" />
     <Compile Include="Assets\Core\AI\Character\Character.cs" />
+    <Compile Include="Assets\Core\AI\Interaction\Stations\StaffWorkstation.cs" />
+    <Compile Include="Assets\Core\Time\Time.cs" />
     <Compile Include="Assets\Core\Services\Locations\LocationService.cs" />
     <Compile Include="Assets\Core\AI\Interaction\Quests\QuestType.cs" />
     <Compile Include="Assets\Core\AI\Character\States\CharacterStateFactory.cs" />
     <Compile Include="Assets\Core\UI\GameUiManager.cs" />
+    <Compile Include="Assets\Core\UI\TimeHandlerUI.cs" />
     <Compile Include="Assets\Core\Input\InputActions.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\Needs\CharacterNeeds.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\StaffStatePerform.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerUserMonoBehaviour.cs" />
+    <Compile Include="Assets\Core\AI\Character\States\StaffState.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerUser.cs" />
     <Compile Include="Assets\Core\Services\Logger\LoggerServiceBase.cs" />
     <Compile Include="Assets\Core\AI\Character\Attributes\CharacterRank.cs" />
@@ -111,7 +119,6 @@
     <None Include="Assets\Resources\Quests\GenericQuests.json" />
     <None Include="Assets\Resources\Names\character_surnames_female.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\TestJSON\Chance.json" />
     <None Include="Assets\Resources\Character\Classes.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Resources\Character\Attributes\Stats.json" />

@@ -5,6 +5,7 @@ using System.Reflection;
 using com.Halkyon.Input;
 using com.Halkyon.Services.Logger;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace com.Halkyon
 {
@@ -13,25 +14,24 @@ namespace com.Halkyon
         private static GameManager _instance;
         
         public Action<GameState> OnGameStateChanged;
+        public Action<int> OnMoneyChanged;
         private GameState _currentState = GameState.Play;
+        private int _money = 0;
 
         [SerializeField] private GameObject charPrefab;
-
-        public static GameManager Instance
+        
+        public int Money
         {
-            get
+            get => _money;
+            set
             {
-                if (_instance == null)
-                {
-                    GameObject gameManagerObject = new GameObject("GameManager");
-                    _instance = gameManagerObject.AddComponent<GameManager>();
-                    DontDestroyOnLoad(gameManagerObject);
-                }
-
-                return _instance;
+                _money = value;
+                OnMoneyChanged?.Invoke(_money);
             }
         }
-        
+
+        public static GameManager Instance => _instance;
+
         public GameState CurrentState => _currentState;
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace com.Halkyon
 
             CreateLoggersIfNotExists();
         }
-
+        
         private void CreateLoggersIfNotExists()
         {
             IEnumerable<Type> loggerTypes = Assembly.GetExecutingAssembly()
